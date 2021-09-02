@@ -8,7 +8,7 @@ Hello Future
 
 ### 개발환경
 * OS ( Windows )
-* Client ( UE4, C++ , Visual Studio)
+* Client ( UE4 4.26.2 version, C++ , Visual Studio)
 * Server ( UE4 Dedicated Server, Visual Studio, AWS 또는 로컬 서버 )
 * DB ( MySQL 등 )
 * Design ( Maya, Blender 등 )
