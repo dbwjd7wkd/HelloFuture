@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "InventorySystem/Items/YJ_InventoryComponent.h"
+#include "YJ_InventoryComponent.h"
 
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
