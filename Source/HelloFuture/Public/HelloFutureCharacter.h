@@ -18,6 +18,11 @@ class AHelloFutureCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	/** Inventory */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+		class UYJ_InventoryComponent* Inventory;
+
 public:
 	AHelloFutureCharacter();
 
@@ -68,5 +73,13 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	// 인벤토리시스템
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
+	float Health;
+
+	UFUNCTION(BlueprintCallable, Category = "Items")
+	void UseItem(class UYJ_Item* Item);
 };
 

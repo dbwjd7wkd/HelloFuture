@@ -8,6 +8,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "YJ_Item.h"
+#include "YJ_InventoryComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -45,6 +47,12 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+	// 인벤토리 시스템
+	Inventory = CreateDefaultSubobject<UYJ_InventoryComponent>(TEXT("Inventory"));
+	Inventory->Capacity = 20;
+
+	Health = 100.f;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -76,6 +84,15 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
 }
 
+// 인벤토리 시스템
+void AHelloFutureCharacter::UseItem(class UYJ_Item* Item)
+{
+	if (Item)
+	{
+		Item->Use(this);
+		Item->OnUse(this); // bp event
+	}
+}
 
 void AHelloFutureCharacter::OnResetVR()
 {
