@@ -25,6 +25,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "BodyMesh")
 	class UStaticMeshComponent* bodyMesh;
+	
 
 	UPROPERTY(VisibleAnywhere, Category = "Collision")
 	class UBoxComponent* collision;

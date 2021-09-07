@@ -17,29 +17,13 @@ AMinsu_NoticeBoard::AMinsu_NoticeBoard()
 	bodyMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	RootComponent = bodyMesh;
 
-	ConstructorHelpers::FObjectFinder<UStaticMesh>TempMesh(TEXT("StaticMesh'/Game/Minsu/Board/SM_MB.SM_MB'"));
+	ConstructorHelpers::FObjectFinder<UStaticMesh>TempMesh(TEXT("StaticMesh'/Game/Import/Village/Meshes/Props/TB_Prop_NoticeBoard_TB_Prop_NoticeBoard_226.TB_Prop_NoticeBoard_TB_Prop_NoticeBoard_226'"));
 	if (TempMesh.Succeeded())
 	{
 		bodyMesh->SetStaticMesh(TempMesh.Object);
 	}
 
-	ConstructorHelpers::FObjectFinder<UMaterial> TempMat0(TEXT("Material'/Game/StarterContent/Materials/M_Wood_Pine.M_Wood_Pine'"));
-	if (TempMat0.Succeeded())
-	{
-		bodyMesh->SetMaterial(0, TempMat0.Object);
-	}
 
-	ConstructorHelpers::FObjectFinder<UMaterial> TempMat1(TEXT("Material'/Game/StarterContent/Materials/M_Wood_Oak.M_Wood_Oak'"));
-	if (TempMat1.Succeeded())
-	{
-		bodyMesh->SetMaterial(1, TempMat1.Object);
-	}
-
-	ConstructorHelpers::FObjectFinder<UMaterial> TempMat2(TEXT("Material'/Game/StarterContent/Materials/M_Metal_Steel.M_Metal_Steel'"));
-	if (TempMat2.Succeeded())
-	{
-		bodyMesh->SetMaterial(2, TempMat2.Object);
-	}
 
 	collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
 	collision->SetupAttachment(bodyMesh);
