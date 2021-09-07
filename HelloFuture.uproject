@@ -17,6 +17,10 @@
 		{
 			"Name": "ExodusImport",
 			"Enabled": true
+		},
+		{
+			"Name": "WebBrowserWidget",
+			"Enabled": true
 		}
 	]
 }
