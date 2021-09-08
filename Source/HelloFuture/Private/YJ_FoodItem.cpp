@@ -8,6 +8,6 @@ void UYJ_FoodItem::Use(class AHelloFutureCharacter* Character)
 {
 	if (Character)
 	{
-		Character->Health += HealthToHeal;
+		//Character->Health += HealthToHeal;
 	}
 }

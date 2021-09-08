@@ -48,13 +48,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = FSM)
 		float idleDelayTime = 2;
 
-	UPROPERTY(EditAnywhere, Category = Stat)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		int32 Rate1 = 25;
 
-	UPROPERTY(EditAnywhere, Category = Stat)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		int32 Rate2 = 50;
 
-	UPROPERTY(EditAnywhere, Category = Stat)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		int32 Rate3 = 75;
 
 	UPROPERTY()
@@ -65,6 +65,10 @@ public:
 
 	UPROPERTY()
 		class UNavigationSystemV1* ns;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		class UTextRenderComponent* talk;
+
 
 	
 

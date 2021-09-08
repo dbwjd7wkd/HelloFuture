@@ -27,25 +27,41 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
-	//UPROPERTY(EditAnyWhere, Category = Collision)
-	//class UCapsuleComponent* collision;
+	UPROPERTY(EditAnyWhere, Category = Collision)
+	class UCapsuleComponent* collision;
 
 	//UPROPERTY(EditAnyWhere, Category = Body)
 	//class USkeletalMeshComponent* body;
 
 public:
-	UPROPERTY(EditAnywhere, Category = Time)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Time)
 	float currnetTime = 0;
 
 	UPROPERTY(EditAnywhere, Category = Time)
 	float createTime = 5;
 
-	UPROPERTY(EditAnywhere, Category = Stat)
-	int32 Rate1 = 25;
+	UPROPERTY(EditAnywhere, Category = Time)
+	float talkTime = 9;
 
-	UPROPERTY(EditAnywhere, Category = Stat)
-	int32 Rate2 = 50;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+	int32 Rate1 = 15;
 
-	UPROPERTY(EditAnywhere, Category = Stat)
-	int32 Rate3 = 75;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+	int32 Rate2 = 30;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+	int32 Rate3 = 45;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate4 = 60;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate5 = 75;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate6 = 90;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		class UTextRenderComponent* talk;
 };

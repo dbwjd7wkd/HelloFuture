@@ -6,8 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "YJ_InventoryComponent.generated.h"
 
-// Blueprints will bind to this to update the UI
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class HELLOFUTURE_API UYJ_InventoryComponent : public UActorComponent
@@ -18,22 +16,13 @@ public:
 	// Sets default values for this component's properties
 	UYJ_InventoryComponent();
 
+protected:
+	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	bool AddItem(class UYJ_Item* Item);
-	bool RemoveItem(class UYJ_Item* Item);
-
-	UPROPERTY(EditDefaultsOnly, Instanced)
-	TArray<class UYJ_Item*> DefaultItems;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
-	int32 Capacity;
-
-	UPROPERTY(BlueprintAssignable, Category = "Inventory")
-	FOnInventoryUpdated	OnInventoryUpdated;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	TArray<class UYJ_Item*> Items;
+public:	
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 		
 };
