@@ -16,7 +16,6 @@ AOh_NPC::AOh_NPC()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-
 	//collision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Collision"));
 	//RootComponent = collision;
 
@@ -24,7 +23,19 @@ AOh_NPC::AOh_NPC()
 	//body->SetupAttachment(collision);
 
 	talk = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Talk"));
-	talk->SetupAttachment(GetCapsuleComponent());
+	//talk->SetupAttachment(GetCapsuleComponent());
+	talk->SetTextRenderColor(FColor::Black);
+	
+	//ConstructorHelpers::FObjectFinder<UFont>UTTtalk(TEXT("Font'/Game/Oh/Font/OH_Font.OH_Font'"));
+	//ConstructorHelpers::FObjectFinder<UMaterial>talk(TEXT("Material'/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque'"));
+
+	//talk-> SetTextMaterial(Material'/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque'));
+	
+	//talk->TextMaterial(TEXT("Material'/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque'"));
+
+	//talk->SetTextMaterial(TEXT("Material'/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque'"));
+
+	//talk->SetFont(TEXT("Font'/Game/Oh/Font/OH_Font.OH_Font'"));
 	
 	talkWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Talk Widget"));
 	talkWidget->SetupAttachment(RootComponent);
@@ -38,14 +49,17 @@ void AOh_NPC::BeginPlay()
 	Super::BeginPlay();
 	
 	myTalk = Cast<UMyTalkWidget>(talkWidget->GetWidget());
+
+	
 }
 
 // Called every frame
 void AOh_NPC::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	talk->SetText(FText::FromString("안녕"));
 		myTalk->Text_Talk->SetText(FText::FromString("안녕"));
+	//talk ->SetText(FText::FromString("안녕"));
 	
 	// 시간이 흐른다.
 	//currnetTime += GetWorld()->DeltaTimeSeconds;
