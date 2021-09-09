@@ -41,7 +41,7 @@ public:
 	float createTime = 5;
 
 	UPROPERTY(EditAnywhere, Category = Time)
-	float talkTime = 9;
+	float delayTime = 9;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 	int32 Rate1 = 15;
@@ -53,7 +53,7 @@ public:
 	int32 Rate3 = 45;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
-		int32 Rate4 = 60;
+		int32 Rate4 = 100;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		int32 Rate5 = 75;
@@ -68,7 +68,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 	class UWidgetComponent* talkWidget;
 
-	
+	void RandomTalk();
+	void talkDelayFunc();
 	
 private:
 	class UMyTalkWidget* myTalk;

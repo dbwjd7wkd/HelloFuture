@@ -6,6 +6,10 @@
 #include <NavigationSystem.h>
 #include <GameFramework/CharacterMovementComponent.h>
 #include <GameFramework/Character.h>
+#include "Components/WidgetComponent.h"
+#include "Blueprint/UserWidget.h"
+#include "MyTalkWidget.h"
+#include "Components/TextBlock.h"
 
 // Sets default values
 AOh_MovingNPC::AOh_MovingNPC()
@@ -13,6 +17,8 @@ AOh_MovingNPC::AOh_MovingNPC()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	talkWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Talk Widget"));
+	talkWidget->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -26,6 +32,9 @@ void AOh_MovingNPC::BeginPlay()
 	ns = UNavigationSystemV1::GetNavigationSystem(GetWorld());
 
 	m_state = ENPCState::Idle;
+	
+	myTalk = Cast<UMyTalkWidget>(talkWidget->GetWidget());
+
 	
 
 }
@@ -46,35 +55,51 @@ void AOh_MovingNPC::Tick(float DeltaTime)
 	}
 
 
+	// 시간이 흐른다.
 	currnetTime2 += GetWorld()->DeltaTimeSeconds;
 
+
+	// 시간이 생성시간을 지나면
 	if (currnetTime2 > createTime)
 	{
-
+		// 랜덤 값을 구한다.
 		int32 Precent = FMath::RandRange(1, 100);
 
+		// 랜덤값에 맞게 문자 출력
 		if (Precent <= Rate1)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("시장에 물건이 정말 많은걸?"));
-			//FString chat = FString::Printf(TEXT("Hi"));
+			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" 좋은 물건이 많군")));
+
 		}
 		else if (Rate1 <= Precent && Precent <= Rate2)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("오 저건 맛있어 보이네"));
-			//FString chat2 = FString::Printf(TEXT("2"));
+			myTalk->Text_Talk->SetText(FText::FromString(TEXT("맛있어 보이는걸..")));
 		}
 		else if (Rate2 <= Precent && Precent <= Rate3)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("피곤해 죽겠네.."));
-			//FString chat3 = FString::Printf(TEXT("3"));
+			myTalk->Text_Talk->SetText(FText::FromString(TEXT("저 아가씨 이쁜걸?")));
+		}
+		else //if (Rate3 <= Precent && Precent <= Rate4)
+		{
+			myTalk->Text_Talk->SetText(FText::FromString(TEXT("바쁘다 바빠")));
+		}
+		/*else if (Rate4 <= Precent && Precent <= Rate5)
+		{
+			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" ")));
+		}
+		else if (Rate5 <= Precent && Precent <= Rate6)
+		{
+			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" ")));
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("오쌍은 멋쟁이야"));
-			//FString chat4 = FString::Printf(TEXT("4"));
-		}
+			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" ")));
 
+		}*/
+
+		// 문자 출력 후 현재시간 초기화
 		currnetTime2 = 0;
+
 		return;
 	}
 }
@@ -96,7 +121,7 @@ void AOh_MovingNPC::IdleState()
 		
 		currnetTime = 0;
 
-		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1500);
+		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1000);
 	}
 
 	
