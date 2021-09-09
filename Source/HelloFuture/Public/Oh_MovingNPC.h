@@ -69,7 +69,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		class UTextRenderComponent* talk;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		class UWidgetComponent* talkWidget;
 
+private:
+	class UMyTalkWidget* myTalk;
 	
 
 

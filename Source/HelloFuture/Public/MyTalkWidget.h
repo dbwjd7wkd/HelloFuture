@@ -17,4 +17,7 @@ class HELLOFUTURE_API UMyTalkWidget : public UUserWidget
 public:
 	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
 	class UTextBlock* Text_Talk;
+
+	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
+	class UTextBlock* Text_Talk2;
 };
