@@ -35,5 +35,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
 	TArray<class UYJ_Item*> Items;
 
-		
+	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
+	int32 accountBalance;
+
+	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
+	int32 cash;
 };

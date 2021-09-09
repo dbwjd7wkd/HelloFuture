@@ -7,9 +7,10 @@
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
 {
-	Capacity = 20;
+	Capacity = 8;
+	accountBalance = 0;
+	cash = 0;
 }
-
 
 // Called when the game starts
 void UYJ_InventoryComponent::BeginPlay()
