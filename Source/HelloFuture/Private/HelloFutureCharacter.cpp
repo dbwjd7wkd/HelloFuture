@@ -50,7 +50,6 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 
 	// 인벤토리 시스템
 	Inventory = CreateDefaultSubobject<UYJ_InventoryComponent>(TEXT("Inventory"));
-	Inventory->Capacity = 20;
 
 	Health = 100.f;
 }
