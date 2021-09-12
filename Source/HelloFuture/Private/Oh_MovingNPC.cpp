@@ -10,6 +10,9 @@
 #include "Blueprint/UserWidget.h"
 #include "MyTalkWidget.h"
 #include "Components/TextBlock.h"
+#include <Engine/EngineTypes.h>
+#include "Minsu_Character.h"
+#include <Kismet/GameplayStatics.h>
 
 // Sets default values
 AOh_MovingNPC::AOh_MovingNPC()
@@ -18,7 +21,9 @@ AOh_MovingNPC::AOh_MovingNPC()
 	PrimaryActorTick.bCanEverTick = true;
 
 	talkWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Talk Widget"));
-	talkWidget->SetupAttachment(RootComponent);
+	talkWidget->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
+
+	
 }
 
 // Called when the game starts or when spawned
@@ -33,9 +38,10 @@ void AOh_MovingNPC::BeginPlay()
 
 	m_state = ENPCState::Idle;
 	
-	myTalk = Cast<UMyTalkWidget>(talkWidget->GetWidget());
+	myTalk2 = Cast<UMyTalkWidget>(talkWidget->GetWidget());
 
-	
+	FTimerHandle randomTalkTimer;
+	GetWorld()->GetTimerManager().SetTimer(randomTalkTimer, this, &AOh_MovingNPC::RandomTalk, delayTime, true);
 
 }
 
@@ -54,54 +60,25 @@ void AOh_MovingNPC::Tick(float DeltaTime)
 		break;
 	}
 
+	TArray<AActor*>objs;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMinsu_Character::StaticClass(), objs);
+	for (AActor* actor : objs)
+	{
+		if (actor) target = actor;
+	}
+
 
 	// 시간이 흐른다.
 	currnetTime2 += GetWorld()->DeltaTimeSeconds;
 
+	FVector PlayerDir = target->GetActorLocation() - GetActorLocation();
+	FRotator rot = PlayerDir.Rotation();
+	talkWidget->SetWorldRotation(FRotator(GetActorRotation().Pitch, rot.Yaw, rot.Roll));
 
-	// 시간이 생성시간을 지나면
-	if (currnetTime2 > createTime)
-	{
-		// 랜덤 값을 구한다.
-		int32 Precent = FMath::RandRange(1, 100);
 
-		// 랜덤값에 맞게 문자 출력
-		if (Precent <= Rate1)
-		{
-			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" 좋은 물건이 많군")));
 
-		}
-		else if (Rate1 <= Precent && Precent <= Rate2)
-		{
-			myTalk->Text_Talk->SetText(FText::FromString(TEXT("맛있어 보이는걸..")));
-		}
-		else if (Rate2 <= Precent && Precent <= Rate3)
-		{
-			myTalk->Text_Talk->SetText(FText::FromString(TEXT("저 아가씨 이쁜걸?")));
-		}
-		else //if (Rate3 <= Precent && Precent <= Rate4)
-		{
-			myTalk->Text_Talk->SetText(FText::FromString(TEXT("바쁘다 바빠")));
-		}
-		/*else if (Rate4 <= Precent && Precent <= Rate5)
-		{
-			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" ")));
-		}
-		else if (Rate5 <= Precent && Precent <= Rate6)
-		{
-			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" ")));
-		}
-		else
-		{
-			myTalk->Text_Talk->SetText(FText::FromString(TEXT(" ")));
 
-		}*/
-
-		// 문자 출력 후 현재시간 초기화
-		currnetTime2 = 0;
-
-		return;
-	}
+	
 }
 
 // Called to bind functionality to input
@@ -148,12 +125,40 @@ void AOh_MovingNPC::WalkState()
 	}
 }
 
-//bool AOh_MovingNPC::GetTargetLocation(const AActor* targetActor, float radius, FVector& dest)
-//{
-//	FNavLocation loc;
-//	bool result = ns->GetRandomReachablePointInRadius(targetActor->GetActorLocation(), radius, loc);
-//	dest = loc.Location;
-//
-//	return result;
-//}
+void AOh_MovingNPC::RandomTalk()
+{
+	FTimerHandle talkdelayTimer;
+	GetWorld()->GetTimerManager().SetTimer(talkdelayTimer, this, &AOh_MovingNPC::talkDelayFunc, 1.f, false, 4.f);
+
+
+	// 랜덤 값을 구한다.
+	int32 Precent = FMath::RandRange(1, 100);
+
+
+	// 랜덤값에 맞게 문자 출력
+	if (Precent <= Rate1)
+	{
+		myTalk2->Text_Talk->SetText(FText::FromString(TEXT("맛있어 보인다..")));
+
+	}
+	else if (Rate1 <= Precent && Precent <= Rate2)
+	{
+		myTalk2->Text_Talk->SetText(FText::FromString(TEXT("바쁘다 바빠!!")));
+	}
+	else if (Rate2 <= Precent && Precent <= Rate3)
+	{
+		myTalk2->Text_Talk->SetText(FText::FromString(TEXT("저리비켜!")));
+	}
+	else if (Rate3 <= Precent && Precent <= Rate4)
+	{
+		myTalk2->Text_Talk->SetText(FText::FromString(TEXT("사람이 많네..")));
+	}
+}
+
+void AOh_MovingNPC::talkDelayFunc()
+{
+	myTalk2->Text_Talk->SetText(FText::FromString(TEXT("")));
+}
+
+
 

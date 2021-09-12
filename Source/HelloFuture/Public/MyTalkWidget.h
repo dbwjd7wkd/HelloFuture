@@ -18,6 +18,6 @@ public:
 	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
 	class UTextBlock* Text_Talk;
 
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	class UTextBlock* Text_Talk2;
+//	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
+	//class UTextBlock* Text_Talk2;
 };

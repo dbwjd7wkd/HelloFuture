@@ -48,6 +48,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = FSM)
 		float idleDelayTime = 2;
 
+	UPROPERTY(EditAnywhere, Category = Time)
+		float delayTime = 9;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		int32 Rate1 = 25;
 
@@ -56,6 +59,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		int32 Rate3 = 75;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate4 = 100;
 
 	UPROPERTY()
 		class AAIController* ai;
@@ -71,15 +77,19 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		class UWidgetComponent* talkWidget;
+	
+	UPROPERTY()
+	class AActor* target;
 
 private:
-	class UMyTalkWidget* myTalk;
+	class UMyTalkWidget* myTalk2;
 	
 
 
 private:
 	void IdleState();
 	void WalkState();
-
+	void RandomTalk();
+	void talkDelayFunc();
 	
 };
