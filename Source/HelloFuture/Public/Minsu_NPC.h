@@ -32,12 +32,40 @@ public:
 // 	UPROPERTY(VisibleAnywhere, Category = NPCSettings)
 // 		class AMinsu_Character* player;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
-		class UWidgetComponent* talkWidget;
 
-private:
-	class UMyTalkWidget* myTalk;
-	
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Time)
+		float currnetTime = 0;
+
+	UPROPERTY(EditAnywhere, Category = Time)
+		float createTime = 5;
+
+	UPROPERTY(EditAnywhere, Category = Time)
+		float delayTime = 9;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate1 = 25;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate2 = 50;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate3 = 75;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate4 = 100;
+
+
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+// 		class UTextRenderComponent* talkMinsu;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		class UWidgetComponent* talkWidgetMinsu;
+
+	void RandomTalk();
+	void talkDelayFunc();
+
+	class UMyTalkWidget* minsuTalk;
 
 // 	UFUNCTION()
 // 		void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

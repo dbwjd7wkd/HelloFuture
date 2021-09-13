@@ -5,6 +5,8 @@
 /*#include <Components/SkeletalMeshComponent.h>*/
 #include <Components/CapsuleComponent.h>
 #include <Components/SphereComponent.h>
+#include <Math/UnrealMathUtility.h>
+#include "Components/TextRenderComponent.h"
 /*#include <Minsu_Character.h>*/
 /*#include <Components/BoxComponent.h>*/
 #include "Components/TextBlock.h"
@@ -29,7 +31,8 @@ AMinsu_NPC::AMinsu_NPC()
 // 
 // 	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Component"));
 // 	boxComp->SetupAttachment(RootComponent);
-	talkWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Talk Widget"));
+	talkWidgetMinsu = CreateDefaultSubobject<UWidgetComponent>(TEXT("Talk Widget"));
+	talkWidgetMinsu->SetupAttachment(RootComponent);
 	/*talkWidget->SetupAttachment(RootComponent);*/
 }
 
@@ -38,7 +41,11 @@ void AMinsu_NPC::BeginPlay()
 {
 	Super::BeginPlay();
 
-	myTalk = Cast<UMyTalkWidget>(talkWidget->GetWidget());
+	minsuTalk = Cast<UMyTalkWidget>(talkWidgetMinsu->GetWidget());
+
+	FTimerHandle randomTalkTimer;
+	GetWorld()->GetTimerManager().SetTimer(randomTalkTimer, this, &AMinsu_NPC::RandomTalk, delayTime, true);
+
 	// myTalk->Text_Talk->SetText(FText::FromString(TEXT("안녕")));
 /*	player = Cast<AMinsu_Character>(GetOwner());*/
 
@@ -61,5 +68,13 @@ void AMinsu_NPC::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 }
 
+void AMinsu_NPC::RandomTalk()
+{
 
+}
+
+void AMinsu_NPC::talkDelayFunc()
+{
+
+}
 
