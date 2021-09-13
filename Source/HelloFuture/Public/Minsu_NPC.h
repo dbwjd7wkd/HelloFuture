@@ -34,8 +34,11 @@ public:
 
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Time)
+	UPROPERTY(EditAnywhere, Category = Time)
 		float currnetTime = 0;
+
+	UPROPERTY(EditAnywhere, Category = Time)
+		float currnetTime2 = 0;
 
 	UPROPERTY(EditAnywhere, Category = Time)
 		float createTime = 5;
@@ -54,6 +57,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 		int32 Rate4 = 100;
+
+	UPROPERTY()
+		class AActor* target;
 
 
 // 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)

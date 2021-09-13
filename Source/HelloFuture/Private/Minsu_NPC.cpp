@@ -13,6 +13,9 @@
 #include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "MyTalkWidget.h"
+#include <Kismet/GameplayStatics.h>
+#include <Minsu_Character.h>
+#include <Components/SceneComponent.h>
 
 // Sets default values
 AMinsu_NPC::AMinsu_NPC()
@@ -32,7 +35,7 @@ AMinsu_NPC::AMinsu_NPC()
 // 	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Component"));
 // 	boxComp->SetupAttachment(RootComponent);
 	talkWidgetMinsu = CreateDefaultSubobject<UWidgetComponent>(TEXT("Talk Widget"));
-	talkWidgetMinsu->SetupAttachment(RootComponent);
+	talkWidgetMinsu->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	/*talkWidget->SetupAttachment(RootComponent);*/
 }
 
@@ -56,7 +59,21 @@ void AMinsu_NPC::BeginPlay()
 void AMinsu_NPC::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	TArray<AActor*>objs;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMinsu_Character::StaticClass(), objs);
+	for (AActor* actor : objs)
+	{
+		if (actor) target = actor;
+	}
 
+
+	// 시간이 흐른다.
+	currnetTime2 += GetWorld()->DeltaTimeSeconds;
+
+	FVector PlayerDir = target->GetActorLocation() - GetActorLocation();
+	FRotator rot = PlayerDir.Rotation();
+	talkWidgetMinsu->SetWorldRotation(FRotator(GetActorRotation().Pitch, rot.Yaw, rot.Roll));
 
 
 }
@@ -70,11 +87,36 @@ void AMinsu_NPC::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 void AMinsu_NPC::RandomTalk()
 {
+	FTimerHandle talkdelayTimer;
+	GetWorld()->GetTimerManager().SetTimer(talkdelayTimer, this, &AMinsu_NPC::talkDelayFunc, 1.f, false, 4.f);
 
+
+	// 랜덤 값을 구한다.
+	int32 Precent = FMath::RandRange(1, 100);
+
+
+	// 랜덤값에 맞게 문자 출력
+	if (Precent <= Rate1)
+	{
+		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("구경하고 가세요~")));
+
+	}
+	else if (Rate1 <= Precent && Precent <= Rate2)
+	{
+		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("신문이 있어요!")));
+	}
+	else if (Rate2 <= Precent && Precent <= Rate3)
+	{
+		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("퀴즈도 있어요!")));
+	}
+	else if (Rate3 <= Precent && Precent <= Rate4)
+	{
+		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("신문 가져가요~")));
+	}
 }
 
 void AMinsu_NPC::talkDelayFunc()
 {
-
+	minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("")));
 }
 
