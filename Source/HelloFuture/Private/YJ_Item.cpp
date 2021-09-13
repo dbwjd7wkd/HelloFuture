@@ -5,7 +5,6 @@
 
 UYJ_Item::UYJ_Item()
 {
-	Weight = 1.f;
 	ItemDisplayName = FText::FromString("Item");
 	UseActionText = FText::FromString("Use");
 }

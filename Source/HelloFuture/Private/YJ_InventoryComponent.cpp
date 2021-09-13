@@ -3,6 +3,8 @@
 
 #include "YJ_InventoryComponent.h"
 #include "YJ_Item.h"
+#include "Kismet/GameplayStatics.h"
+#include "YJ_GameModeBase.h"
 
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
@@ -29,6 +31,13 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 	if (Items.Num() >= Capacity || !Item)
 	{
 		return false;
+	}
+
+	UWorld* const World = GetWorld();
+	AYJ_GameModeBase* GameMode;
+	if (World) {
+		GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
+		Item->ItemWaitingNumber = GameMode->waitingNumber;
 	}
 
 	Item->OwningInventory = this;

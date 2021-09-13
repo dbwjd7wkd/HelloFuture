@@ -45,7 +45,7 @@ public:
 
 	/**The weight of the item*/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0.0))
-		float Weight;
+		int32 ItemWaitingNumber;
 
 	/**The inventory that owns this item*/
 	UPROPERTY()

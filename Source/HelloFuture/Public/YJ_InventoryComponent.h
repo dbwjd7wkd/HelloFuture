@@ -20,7 +20,9 @@ public:
 
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
 	bool AddItem(class UYJ_Item* Item);
+	UFUNCTION(BlueprintCallable)
 	bool RemoveItem(class UYJ_Item* Item);
 
 	UPROPERTY(EditDefaultsOnly, Instanced)
