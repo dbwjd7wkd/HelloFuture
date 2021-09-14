@@ -5,6 +5,7 @@
 #include "YJ_Item.h"
 #include "Kismet/GameplayStatics.h"
 #include "YJ_GameModeBase.h"
+#include "YJ_WaitingTicketItem.h"
 
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
@@ -28,20 +29,32 @@ void UYJ_InventoryComponent::BeginPlay()
 
 bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 {
+	// 인벤토리 창이 다 차거나 들어오는 Item 이 유효하지 않으면 아래 내용 실행하지 않음.
 	if (Items.Num() >= Capacity || !Item)
 	{
 		return false;
 	}
 
+	// Items에 대기표가 있으면 아래 내용 실행하지 않음.
+	for (auto yjItem : Items)
+	{
+		if (Cast<UYJ_WaitingTicketItem>(yjItem) != nullptr)
+		{
+			return false;
+		}
+	}
+	
 	UWorld* const World = GetWorld();
 	AYJ_GameModeBase* GameMode;
 	if (World) {
 		GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
-		Item->ItemWaitingNumber = GameMode->waitingNumber;
+		Item->ItemWaitingNumber = GameMode->waitingNumber + 1;
 	}
-
+	
 	Item->OwningInventory = this;
 	Item->World = GetWorld();
+
+	// 인벤토리에 Item 추가
 	Items.Add(Item);
 	
 	// Update UI
