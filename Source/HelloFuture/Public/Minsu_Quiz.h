@@ -23,10 +23,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void Interact() PURE_VIRTUAL(AMinsu_Quiz::Interact, );
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = QuizSettings)
+		class UStaticMeshComponent* bodyMesh;
 
 	UPROPERTY(EditAnywhere, Category = QuizSettings)
 		class UCapsuleComponent* capsuleCollision;
-
-	UPROPERTY(VisibleAnywhere, Category = QuizSettings)
-		class AHelloFutureCharacter* player;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		class USceneComponent* _RootComponent;
+	
 };

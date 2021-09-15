@@ -10,6 +10,9 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "YJ_Item.h"
 #include "YJ_InventoryComponent.h"
+#include "Minsu_Quiz.h"
+#include <Components/SceneCaptureComponent2D.h>
+#include <Components/SceneComponent.h>
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -51,6 +54,16 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	// 인벤토리 시스템
 	Inventory = CreateDefaultSubobject<UYJ_InventoryComponent>(TEXT("Inventory"));
 
+// 	저축왕 
+// 		sceneComp = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Comp"));
+// 		sceneComp->SetupAttachment(RootComponent);
+// 	
+// 		springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+// 		springArm->SetupAttachment(sceneComp);
+// 	
+// 		JCKing = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("JCKing"));
+// 		JCKing->SetupAttachment(springArm);
+
 	Health = 100.f;
 }
 
@@ -86,6 +99,22 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
 }
 
+// void AHelloFutureCharacter::InteractBoard()
+// {
+// 	FHitResult OutHit;
+// 	FVector Start = GetCameraBoom()->GetComponentLocation();
+// 	FVector End = Start + GetCameraBoom()->GetForwardVector() * 10;
+// 
+// 	if (GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECC_Visibility))
+// 	{
+// 		AMinsu_Quiz* obj = Cast<AMinsu_Quiz>(OutHit.Actor);
+// 		if (obj)
+// 		{
+// 			obj->Interact();
+// 		}
+// 	}
+// }
+
 // 인벤토리 시스템
 void AHelloFutureCharacter::UseItem(class UYJ_Item* Item)
 {
@@ -94,11 +123,6 @@ void AHelloFutureCharacter::UseItem(class UYJ_Item* Item)
 		Item->Use(this);
 		Item->OnUse(this); // bp event
 	}
-}
-
-void AHelloFutureCharacter::InteractBoard()
-{
-	
 }
 
 

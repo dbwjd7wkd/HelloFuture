@@ -11,24 +11,25 @@ class AHelloFutureCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** Camera boom positioning the camera behind the character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
+
+		/** Camera boom positioning the camera behind the character */
+		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class USpringArmComponent* CameraBoom;
 
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FollowCamera;
+		class UCameraComponent* FollowCamera;
 
 public:
 	AHelloFutureCharacter();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseTurnRate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseTurnRate;
 
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseLookUpRate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseLookUpRate;
 
 protected:
 
@@ -41,14 +42,14 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
-	/** 
-	 * Called via input to turn at a given rate. 
+	/**
+	 * Called via input to turn at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void TurnAtRate(float Rate);
 
 	/**
-	 * Called via input to turn look up/down at a given rate. 
+	 * Called via input to turn look up/down at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void LookUpAtRate(float Rate);
@@ -64,6 +65,8 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
 
+	/*void InteractBoard();*/
+
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -76,13 +79,20 @@ public:
 	class UYJ_InventoryComponent* Inventory;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
-	float Health;
+		float Health;
 
 	UFUNCTION(BlueprintCallable, Category = "Items")
-	void UseItem(class UYJ_Item* Item);
+		void UseItem(class UYJ_Item* Item);
 
-	// 게시판 퀴즈풀기 상호작용
-	void InteractBoard();
-	class AMinsu_Quiz* quiz;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EPressed")
+		bool isEPressed;
+
+
+// 	UPROPERTY(VisibleAnywhere, Category = "SceneCapture2D")
+// 		class USceneComponent* sceneComp;
+// 	UPROPERTY(VisibleAnywhere, Category = "SceneCapture2D")
+// 		class USpringArmComponent* springArm;
+// 	UPROPERTY(VisibleAnywhere, Category = "SceneCapture2D")
+// 		class USceneCaptureComponent2D* JCKing;
 };
 
