@@ -19,11 +19,13 @@ public:
 		int32 waitingNumber = 0;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Numbering System")
-		int32 order = 0;
+		int32 order = 1;
 
 public:
 	UFUNCTION(BlueprintCallable)
 	void AddWaitingNumber();
 	UFUNCTION(BlueprintCallable)
 	void MinusWaitingNumber();
+	UFUNCTION(BlueprintCallable)
+	bool CheckMyOrder(class AHelloFutureCharacter* player);
 };

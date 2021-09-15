@@ -19,10 +19,6 @@ class AHelloFutureCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 
-	/** Inventory */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
-		class UYJ_InventoryComponent* Inventory;
-
 public:
 	AHelloFutureCharacter();
 
@@ -76,6 +72,9 @@ public:
 
 	// 인벤토리시스템
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+	class UYJ_InventoryComponent* Inventory;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
 	float Health;
 
