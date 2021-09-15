@@ -87,6 +87,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EPressed")
 		bool isEPressed;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
+	class AOH_PlayerController* ohController;
+
 
 // 	UPROPERTY(VisibleAnywhere, Category = "SceneCapture2D")
 // 		class USceneComponent* sceneComp;

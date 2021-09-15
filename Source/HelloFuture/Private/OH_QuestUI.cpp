@@ -82,3 +82,18 @@ void UOH_QuestUI::Interact2()
 		OnAinmationsHideMessageUI();
 	}
 }
+
+void UOH_QuestUI::InitializeDialogue(class UOH_DataTable* DialogueTable)
+{
+
+}
+
+void UOH_QuestUI::OnSelectUpOption()
+{
+
+}
+
+void UOH_QuestUI::OnSelectDownOption()
+{
+
+}

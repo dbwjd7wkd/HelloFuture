@@ -29,6 +29,18 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* CharacterNameText;
 
+	/*UPROPERTY(meta = (BindWidget))
+		class UTextBlock* OptionText_0;
+
+	UPROPERTY(meta = (BindWidget))
+		class UTextBlock* OptionText_1;
+
+	UPROPERTY(meta = (BindWidget))
+		class UTextBlock* OptionText_2;
+
+	UPROPERTY(meta = (BindWidget))
+		class UTextBlock* OptionText_3;*/
+
 public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Animation Events")
@@ -50,8 +62,8 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Animation Events")
 	void OnHighLightOption(int32 option);
 
-	//UFUNCTION(BlueprintImplementableEvent, Category = "Animation Events")
-	//void OnSetOption(int32, const FText& OptionText);
+	UFUNCTION(BlueprintImplementableEvent, Category = "Animation Events")
+	void OnSetOption(int32 Option, const FText& OptionText);
 
 
 
@@ -65,6 +77,16 @@ public:
 	void AnimateMessage(const FString& Name, const FString& Text);
 
 	void Interact2();
+
+	void InitializeDialogue(class UOH_DataTable* DialogueTable);
+		 
+	void OnSelectUpOption();
+
+	void OnSelectDownOption();
+
+
+
+
 
 
 private:
@@ -82,4 +104,18 @@ private:
 	FString OutputMessage;
 
 	int32 iLetter;
+
+
+private:
+	
+	int32 CurrentState = 0;
+
+	int32 SelectectedOption;
+
+	//TArray<FOh_NPC
+
+	int32 MessageIndex;
+
+	int32 RowIndex;
+
 };

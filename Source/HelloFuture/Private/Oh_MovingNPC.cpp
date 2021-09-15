@@ -12,6 +12,7 @@
 #include "Components/TextBlock.h"
 #include <Engine/EngineTypes.h>
 #include "Minsu_Character.h"
+#include "HelloFutureCharacter.h"
 #include <Kismet/GameplayStatics.h>
 
 // Sets default values
@@ -61,7 +62,7 @@ void AOh_MovingNPC::Tick(float DeltaTime)
 	}
 
 	TArray<AActor*>objs;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMinsu_Character::StaticClass(), objs);
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHelloFutureCharacter::StaticClass(), objs);
 	for (AActor* actor : objs)
 	{
 		if (actor) target = actor;

@@ -20,7 +20,7 @@ private:
 public:
 AOH_PlayerController();
 
-class AMinsu_Character* me;
+class AHelloFutureCharacter* me;
 
 UPROPERTY(BlueprintReadWrite, Category = "Player UI")
 class UOH_QuestUI* oh_QuestUI;
@@ -35,6 +35,18 @@ public:
 
 UFUNCTION(BlueprintCallable, Category = "Input")
 void Interact2();
+
+UFUNCTION(BlueprintCallable, Category = "Input")
+void OnKeyUp();
+
+UFUNCTION(BlueprintCallable, Category = "Input")
+void OnKeyDown();
+
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+	class UOH_DataTable* IntroDialogue;
 
 
 

@@ -21,7 +21,7 @@ struct FMessageOptions
 };
 
 USTRUCT(BlueprintType)
-struct FDialogue :public FTableRowBase
+struct FDialogueNPC :public FTableRowBase
 {
 
 	GENERATED_BODY()
