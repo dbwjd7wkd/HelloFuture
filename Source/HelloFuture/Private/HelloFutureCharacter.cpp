@@ -95,8 +95,8 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
 
-	// 게시판 상호작용
-	PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
+// 	게시판 상호작용
+// 		PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
 }
 
 // void AHelloFutureCharacter::InteractBoard()
