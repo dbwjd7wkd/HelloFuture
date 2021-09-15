@@ -30,7 +30,7 @@ bool AYJ_GameModeBase::CheckMyOrder(AHelloFutureCharacter* player)
 			{
 				// 만약 대기 아이템 번호가 번호판 순서와 같다면 true 반환 (대화시작)
 				if (item->ItemWaitingNumber == order) return true;
-				// 그게 아니라면 false 반환
+				// 순서가 다르다면 false 반환
 				else return false;
 			}
 		}
@@ -39,5 +39,5 @@ bool AYJ_GameModeBase::CheckMyOrder(AHelloFutureCharacter* player)
 		return false;
 	}
 
-	return true;
+	return false;
 }
