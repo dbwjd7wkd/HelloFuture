@@ -81,6 +81,9 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
+
+	// 게시판 상호작용
+	PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
 }
 
 // 인벤토리 시스템
@@ -92,6 +95,12 @@ void AHelloFutureCharacter::UseItem(class UYJ_Item* Item)
 		Item->OnUse(this); // bp event
 	}
 }
+
+void AHelloFutureCharacter::InteractBoard()
+{
+	
+}
+
 
 void AHelloFutureCharacter::OnResetVR()
 {

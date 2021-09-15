@@ -16,6 +16,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <Minsu_Character.h>
 #include <Components/SceneComponent.h>
+#include <HelloFutureCharacter.h>
 
 // Sets default values
 AMinsu_NPC::AMinsu_NPC()
@@ -61,7 +62,7 @@ void AMinsu_NPC::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	TArray<AActor*>objs;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMinsu_Character::StaticClass(), objs);
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHelloFutureCharacter::StaticClass(), objs);
 	for (AActor* actor : objs)
 	{
 		if (actor) target = actor;

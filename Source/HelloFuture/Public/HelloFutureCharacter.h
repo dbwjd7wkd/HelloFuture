@@ -81,5 +81,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Items")
 	void UseItem(class UYJ_Item* Item);
+
+	// 게시판 퀴즈풀기 상호작용
+	void InteractBoard();
+	class AMinsu_Quiz* quiz;
 };
 
