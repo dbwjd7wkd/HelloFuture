@@ -35,20 +35,23 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 		return false;
 	}
 
-	// Items에 대기표가 있으면 아래 내용 실행하지 않음.
-	for (auto yjItem : Items)
+	// Item이 은행 대기표일 때, Items에 대기표가 있으면 아래 내용 실행하지 않음.
+	if (Cast<UYJ_WaitingTicketItem>(Item))
 	{
-		if (Cast<UYJ_WaitingTicketItem>(yjItem) != nullptr)
+		for (auto yjItem : Items)
 		{
-			return false;
+			if (Cast<UYJ_WaitingTicketItem>(yjItem) != nullptr)
+			{
+				return false;
+			}
 		}
-	}
-	
-	UWorld* const World = GetWorld();
-	AYJ_GameModeBase* GameMode;
-	if (World) {
-		GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
-		Item->ItemWaitingNumber = GameMode->waitingNumber + 1;
+
+		UWorld* const World = GetWorld();
+		AYJ_GameModeBase* GameMode;
+		if (World) {
+			GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
+			Item->ItemWaitingNumber = GameMode->waitingNumber + 1;
+		}
 	}
 	
 	Item->OwningInventory = this;
