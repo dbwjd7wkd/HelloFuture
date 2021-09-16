@@ -4,13 +4,15 @@
 #include "OH_PlayerController.h"
 #include "OH_QuestUI.h"
 #include "UObject/ConstructorHelpers.h"
-#include "Minsu_Character.h"
 #include "HelloFutureCharacter.h"
+#include "HelloFutureGameMode.h"
 
 
 AOH_PlayerController::AOH_PlayerController()
 {
+	
 static ConstructorHelpers::FClassFinder<UUserWidget> oh_QuestUIBPclass(TEXT("/Game/Oh/BP/WBP_OH_QuestUI"));
+
 
 	if (oh_QuestUIBPclass.Class != nullptr)
 	{
@@ -20,11 +22,11 @@ static ConstructorHelpers::FClassFinder<UUserWidget> oh_QuestUIBPclass(TEXT("/Ga
 
 }
 
-void AOH_PlayerController::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+void AOH_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	InputComponent->BindAction("Interact",IE_Pressed, this, &AOH_PlayerController::Interact2);
+	InputComponent->BindAction("ohInteract",IE_Pressed, this, &AOH_PlayerController::Interact2);
 
 	InputComponent->BindAction("KeyUp",IE_Pressed, this, &AOH_PlayerController::OnKeyUp).bConsumeInput =false;
 
@@ -60,13 +62,20 @@ void AOH_PlayerController::OnKeyDown()
 	}
 }
 
+
+
 void AOH_PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	APawn* const pawn = GetPawn();
+
+	if (pawn != nullptr)
+	{
+		me = Cast<AHelloFutureCharacter>(pawn);
+	}
 	
 	
-		me = Cast<AHelloFutureCharacter>(GetOwner());
 	
 
 	if (oh_QuestUIclass != nullptr)

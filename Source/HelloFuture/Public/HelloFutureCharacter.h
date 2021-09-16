@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "HelloFutureCharacter.generated.h"
 
+
+//DECLARE_MULTICAST_DELEGATE_OneParam(FPlayerInputDelegate, class UInputComponent*)
+
 UCLASS(config=Game)
 class AHelloFutureCharacter : public ACharacter
 {
@@ -87,8 +90,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EPressed")
 		bool isEPressed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
-	class AOH_PlayerController* ohController;
+	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
+	class AOH_PlayerController* ohController;*/
 
 
 // 	UPROPERTY(VisibleAnywhere, Category = "SceneCapture2D")
@@ -97,5 +100,9 @@ public:
 // 		class USpringArmComponent* springArm;
 // 	UPROPERTY(VisibleAnywhere, Category = "SceneCapture2D")
 // 		class USceneCaptureComponent2D* JCKing;
+
+
+//FPlayerInputDelegate OninputDelegate;
+
 };
 

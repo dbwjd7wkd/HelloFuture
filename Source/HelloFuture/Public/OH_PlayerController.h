@@ -9,13 +9,26 @@
 /**
  * 
  */
+
 UCLASS()
 class HELLOFUTURE_API AOH_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+
+	/*virtual void InitializeComponent() override;*/
 	
 private:
+
+
 	virtual void BeginPlay() override;
+
+	/*UFUNCTION(BlueprintCallable, Category = "Input")
+	void LockInput;
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void ULockInput;*/
+
 
 public:
 AOH_PlayerController();
@@ -29,7 +42,8 @@ TSubclassOf<class UUserWidget> oh_QuestUIclass;
 
 FORCEINLINE UOH_QuestUI* GetUI() {return oh_QuestUI; };
 
-void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
+void SetupInputComponent();
+
 
 public:
 
@@ -46,7 +60,10 @@ void OnKeyDown();
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
-	class UOH_DataTable* IntroDialogue;
+	class AOH_DialogueCharacter* IntroDialogue;
+
+
+	
 
 
 

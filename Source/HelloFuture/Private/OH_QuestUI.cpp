@@ -83,7 +83,7 @@ void UOH_QuestUI::Interact2()
 	}
 }
 
-void UOH_QuestUI::InitializeDialogue(class UOH_DataTable* DialogueTable)
+void UOH_QuestUI::InitializeDialogue(class AOH_DialogueCharacter* DialogueTable)
 {
 
 }

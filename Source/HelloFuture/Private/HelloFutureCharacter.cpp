@@ -14,6 +14,7 @@
 #include "Minsu_Quiz.h"
 #include <Components/SceneCaptureComponent2D.h>
 #include <Components/SceneComponent.h>
+#include "HelloFutureGameMode.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -67,7 +68,7 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 
 	Health = 100.f;
 
-	ohController = CreateDefaultSubobject<AOH_PlayerController>(TEXT("OH_PlayerController"));
+	/*ohController = CreateDefaultSubobject<AOH_PlayerController>(TEXT("OH_PlayerController"));*/
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -98,7 +99,9 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
 
-	ohController->SetupPlayerInputComponent(PlayerInputComponent);
+
+
+	/*ohController->SetupPlayerInputComponent(PlayerInputComponent);*/
 
 // <<<<<<< HEAD
 // // 	게시판 상호작용

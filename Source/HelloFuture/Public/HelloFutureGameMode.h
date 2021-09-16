@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "HelloFutureGameMode.generated.h"
 
+
+
 UCLASS(minimalapi)
 class AHelloFutureGameMode : public AGameModeBase
 {
@@ -13,6 +15,14 @@ class AHelloFutureGameMode : public AGameModeBase
 
 public:
 	AHelloFutureGameMode();
+
+
+
+public:
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
+		//class AOH_PlayerController* ohController;
+
 };
 
 

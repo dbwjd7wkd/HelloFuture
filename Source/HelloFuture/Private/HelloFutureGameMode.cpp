@@ -12,4 +12,10 @@ AHelloFutureGameMode::AHelloFutureGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+
+
+
+	//ohController = CreateDefaultSubobject<AOH_PlayerController>(TEXT("OH_PlayerController"));
+
 }
+

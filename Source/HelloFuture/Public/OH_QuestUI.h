@@ -78,7 +78,7 @@ public:
 
 	void Interact2();
 
-	void InitializeDialogue(class UOH_DataTable* DialogueTable);
+	void InitializeDialogue(class AOH_DialogueCharacter* DialogueTable);
 		 
 	void OnSelectUpOption();
 
