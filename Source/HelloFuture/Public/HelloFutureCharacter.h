@@ -89,9 +89,15 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EPressed")
 		bool isEPressed;
+<<<<<<< Updated upstream
 
 	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
 	class AOH_PlayerController* ohController;*/
+=======
+// 
+// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
+//  	class AOH_PlayerController* ohController;
+>>>>>>> Stashed changes
 
 
 // 	UPROPERTY(VisibleAnywhere, Category = "SceneCapture2D")
@@ -102,7 +108,21 @@ public:
 // 		class USceneCaptureComponent2D* JCKing;
 
 
+<<<<<<< Updated upstream
 //FPlayerInputDelegate OninputDelegate;
+=======
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
+		FText Name;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Name)
+		class UMinsu_NameInputUserWidget* nameWidget;
+
+	UFUNCTION(BlueprintCallable, Category = Name)
+		void CreatePlayerHUD(FText playerName);
+
+	UPROPERTY(EditDefaultsOnly, Category = Name)
+		TSubclassOf<UUserWidget> nameWidgetClass;
+>>>>>>> Stashed changes
 
 };
 

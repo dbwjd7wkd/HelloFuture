@@ -14,7 +14,14 @@
 #include "Minsu_Quiz.h"
 #include <Components/SceneCaptureComponent2D.h>
 #include <Components/SceneComponent.h>
+<<<<<<< Updated upstream
 #include "HelloFutureGameMode.h"
+=======
+#include <Minsu_NameInputUserWidget.h>
+#include <Internationalization/Text.h>
+#include "HelloFuture.h"
+#include <Logging/LogMacros.h>
+>>>>>>> Stashed changes
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -68,7 +75,11 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 
 	Health = 100.f;
 
+<<<<<<< Updated upstream
 	/*ohController = CreateDefaultSubobject<AOH_PlayerController>(TEXT("OH_PlayerController"));*/
+=======
+	
+>>>>>>> Stashed changes
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -98,10 +109,6 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
-
-
-
-	/*ohController->SetupPlayerInputComponent(PlayerInputComponent);*/
 
 // <<<<<<< HEAD
 // // 	게시판 상호작용
@@ -138,6 +145,18 @@ void AHelloFutureCharacter::UseItem(class UYJ_Item* Item)
 	}
 }
 
+
+void AHelloFutureCharacter::CreatePlayerHUD(FText playerName)
+{
+	if (nameWidgetClass)
+	{
+		nameWidget = CreateWidget<UMinsu_NameInputUserWidget>(GetWorld(), nameWidgetClass);
+		if (nameWidget)
+		{
+			nameWidget->AddToViewport();
+		}
+	}
+}
 
 void AHelloFutureCharacter::OnResetVR()
 {
