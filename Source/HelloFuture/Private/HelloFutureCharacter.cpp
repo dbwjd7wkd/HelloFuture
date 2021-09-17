@@ -10,7 +10,6 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "YJ_Item.h"
 #include "YJ_InventoryComponent.h"
-#include "Oh_PlayerController.h"
 #include "Minsu_Quiz.h"
 #include <Components/SceneCaptureComponent2D.h>
 #include <Components/SceneComponent.h>

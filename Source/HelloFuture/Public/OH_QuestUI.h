@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include <OH_DataTable.cpp>
+#include <HelloFuture/Public/OH_DataTable.h>
 #include "OH_QuestUI.generated.h"
+
 
 /**
  * 
@@ -74,11 +77,11 @@ public:
 
 	void SetCharacterName(const FString& Text);
 
-	void AnimateMessage(const FString& Name, const FString& Text);
+	void AnimateMessage(const FString& Text);
 
 	void Interact2();
 
-	void InitializeDialogue(class AOH_DialogueCharacter* DialogueTable);
+	void InitializeDialogue(class UDataTable* DialogueTable);
 		 
 	void OnSelectUpOption();
 
@@ -94,6 +97,9 @@ private:
 
 	UFUNCTION()
 	void OnTimerCompleted();
+
+	UFUNCTION()
+		void OnAnimationTimerCompleted();
 
 	bool bAnimating = false;
 
@@ -112,7 +118,10 @@ private:
 
 	int32 SelectectedOption;
 
-	//TArray<FOh_NPC
+	
+	TArray<FDialogueNPC*> dialogue;
+
+
 
 	int32 MessageIndex;
 

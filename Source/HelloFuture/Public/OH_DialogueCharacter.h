@@ -9,7 +9,7 @@
 
 
 USTRUCT(BlueprintType)
-struct FMessageOptions
+struct FMessageOption2
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -21,7 +21,7 @@ struct FMessageOptions
 };
 
 USTRUCT(BlueprintType)
-struct FDialogueNPC :public FTableRowBase
+struct FDialogueNPCs :public FTableRowBase
 {
 
 	GENERATED_BODY()
@@ -41,7 +41,7 @@ public:
 	TArray<FText> Message;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FMessageOptions> MessageOptions;
+	TArray<FMessageOption2> MessageOptions;
 
 };
 

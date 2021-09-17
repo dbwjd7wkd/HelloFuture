@@ -49,7 +49,7 @@ void AOH_PlayerController::OnKeyUp()
 
 	if (oh_QuestUI != nullptr)
 	{
-		//oh_QuestUI->OnSelectUpOption();
+		oh_QuestUI->OnSelectUpOption();
 	}
 }
 
@@ -58,7 +58,7 @@ void AOH_PlayerController::OnKeyDown()
 
 	if (oh_QuestUI != nullptr)
 	{
-		//oh_QuestUI->OnSelectDownOption();
+		oh_QuestUI->OnSelectDownOption();
 	}
 }
 
