@@ -60,7 +60,7 @@ void OnKeyDown();
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
-	class AOH_DialogueCharacter* IntroDialogue;
+	class UDataTable* IntroDialogue;
 
 
 	
