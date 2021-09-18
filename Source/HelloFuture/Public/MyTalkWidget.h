@@ -15,7 +15,7 @@ class HELLOFUTURE_API UMyTalkWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* Text_Talk;
 
 //	UPROPERTY(VisibleAnywhere, meta = (BindWidget))

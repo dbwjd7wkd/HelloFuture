@@ -70,7 +70,9 @@ public:
 
 	void RandomTalk();
 	void talkDelayFunc();
+	
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
 	class UMyTalkWidget* minsuTalk;
 
 // 	UFUNCTION()
