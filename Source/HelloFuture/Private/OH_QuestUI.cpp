@@ -50,7 +50,9 @@ void UOH_QuestUI::InitializeDialogue(class UDataTable* DialogueTable)
 		if (dialogue[RowIndex]->Message.Num() > 0)
 		{
 			MessageIndex = 0;
+
 			OnAinmationsShowMessageUI();
+
 			GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UOH_QuestUI::OnTimerCompleted, 0.5f, false);
 		}
 	}
