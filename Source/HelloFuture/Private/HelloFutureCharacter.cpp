@@ -18,6 +18,7 @@
 #include <Internationalization/Text.h>
 #include "HelloFuture.h"
 #include <Logging/LogMacros.h>
+#include <GameFramework/Actor.h>
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -75,6 +76,82 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 
 	/*ohController = CreateDefaultSubobject<AOH_PlayerController>(TEXT("OH_PlayerController"));*/
 
+	// 채팅 시스템
+	ChatText = CreateDefaultSubobject<UTextRenderComponent>("ChatText");
+	ChatText->SetRelativeLocation(FVector(0, 0, 100));
+	ChatText->SetHorizontalAlignment(EHTA_Center);
+	ChatText->SetupAttachment(RootComponent);
+
+
+}
+
+void AHelloFutureCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CurrentMessage = "";
+}
+
+void AHelloFutureCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AHelloFutureCharacter, CurrentMessage);
+
+}
+
+void AHelloFutureCharacter::AttemptToSendChatMessage(const FString& Message)
+{
+
+	// 만약 서버가 없다면 ServersendChat message를 보내고
+	// 아니라면, send chat message를 이용
+	if (Role < ROLE_Authority)
+	{
+		ServerSendChatMessage(Message);
+	}
+	else
+	{
+		SendChatMessage(Message);
+	}
+}
+
+void AHelloFutureCharacter::SendChatMessage(const FString& Message)
+{
+	CurrentMessage = Message;
+	UpdateChatText();
+
+	FTimerHandle DummyHandle;
+	GetWorldTimerManager().SetTimer(DummyHandle, this, &AHelloFutureCharacter::ClearChatMessage, 5.f);
+}
+
+void AHelloFutureCharacter::ClearChatMessage()
+{
+	CurrentMessage = "";
+	UpdateChatText();
+}
+
+void AHelloFutureCharacter::ServerSendChatMessage_Implementation(const FString& Message)
+{
+	SendChatMessage(Message);
+}
+
+bool AHelloFutureCharacter::ServerSendChatMessage_Validate(const FString& Message)
+{
+	if (Message.Len() < 255)
+	{
+		return true;
+	}
+	else return false;
+}
+
+void AHelloFutureCharacter::OnRep_CurrentMessage()
+{
+	UpdateChatText();
+}
+
+void AHelloFutureCharacter::UpdateChatText()
+{
+	ChatText->SetText(FText::FromString(CurrentMessage));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -104,6 +181,7 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
+
 
 // <<<<<<< HEAD
 // // 	게시판 상호작용

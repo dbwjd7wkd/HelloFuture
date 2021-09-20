@@ -34,6 +34,39 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
 
+
+	// 채팅 시스템
+public:
+	class UTextRenderComponent* ChatText;
+
+	virtual void BeginPlay() override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+
+	UFUNCTION(BlueprintCallable, Category = Chat)
+	void AttemptToSendChatMessage(const FString& Message);
+
+private:
+	
+	// 채팅 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendChatMessage 실행
+	void SendChatMessage(const FString& Message);
+	
+	// 현재 메세지 지우기 (채팅 보내고 5초 후)
+	void ClearChatMessage();
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerSendChatMessage(const FString& Message);
+	void ServerSendChatMessage_Implementation(const FString& Message);
+	bool ServerSendChatMessage_Validate(const FString& Message);
+
+	UFUNCTION()
+		void OnRep_CurrentMessage();
+
+	void UpdateChatText();
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentMessage, Category = "Chat")
+		FString CurrentMessage;
+
 protected:
 
 	/** Resets HMD orientation in VR. */
