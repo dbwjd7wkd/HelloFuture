@@ -8,7 +8,7 @@
 #include <HelloFuture/Public/OH_DataTable.h>
 #include "OH_QuestUI.generated.h"
 
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDialogueCompletedDelegate);
 /**
  * 
  */
@@ -121,10 +121,13 @@ private:
 	
 	TArray<FDialogueNPC*> dialogue;
 
-
-
 	int32 MessageIndex;
 
 	int32 RowIndex;
 
+
+public:
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FDialogueCompletedDelegate OnDialogueCompleted;
+	
 };

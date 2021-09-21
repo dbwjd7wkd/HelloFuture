@@ -208,8 +208,11 @@ void UOH_QuestUI::Interact2()
 			{
 				CurrentState = 0;
 				OnAinmationsHideMessageUI();
+
+				OnDialogueCompleted.Broadcast();
 			}
 		}
+		
 	}
 	else if (CurrentState == 3)
 	{
@@ -227,6 +230,8 @@ void UOH_QuestUI::Interact2()
 		{
 			CurrentState = 0;
 			OnAinmationsHideMessageUI();
+
+			OnDialogueCompleted.Broadcast();
 		}
 	}
 }

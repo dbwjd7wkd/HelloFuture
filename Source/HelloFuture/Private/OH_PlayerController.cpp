@@ -22,45 +22,6 @@ static ConstructorHelpers::FClassFinder<UUserWidget> oh_QuestUIBPclass(TEXT("/Ga
 
 }
 
-void AOH_PlayerController::SetupInputComponent()
-{
-	Super::SetupInputComponent();
-
-	InputComponent->BindAction("ohInteract",IE_Pressed, this, &AOH_PlayerController::Interact2);
-
-	InputComponent->BindAction("KeyUp",IE_Pressed, this, &AOH_PlayerController::OnKeyUp).bConsumeInput =false;
-
-	InputComponent->BindAction("KeyDown",IE_Pressed, this, &AOH_PlayerController::OnKeyDown).bConsumeInput =false;
-
-
-
-}
-
-void AOH_PlayerController::Interact2()
-{
-	if (oh_QuestUI != nullptr)
-	{
-		oh_QuestUI-> Interact2();
-	}
-}
-
-void AOH_PlayerController::OnKeyUp()
-{
-
-	if (oh_QuestUI != nullptr)
-	{
-		oh_QuestUI->OnSelectUpOption();
-	}
-}
-
-void AOH_PlayerController::OnKeyDown()
-{
-
-	if (oh_QuestUI != nullptr)
-	{
-		oh_QuestUI->OnSelectDownOption();
-	}
-}
 
 
 
@@ -97,8 +58,64 @@ void AOH_PlayerController::BeginPlay()
 		{
 			SetCinematicMode(true,true,true);
 			oh_QuestUI->InitializeDialogue(IntroDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 		}
 
 	}
 
+}
+
+void AOH_PlayerController::OnintroDialogueCompleted()
+{
+	if (oh_QuestUI != nullptr)
+	{
+		oh_QuestUI->OnDialogueCompleted.RemoveDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+	}
+	SetCinematicMode(false, true, true);
+}
+
+void AOH_PlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	InputComponent->BindAction("ohInteract",IE_Pressed, this, &AOH_PlayerController::Interact2);
+
+	InputComponent->BindAction("KeyUp",IE_Pressed, this, &AOH_PlayerController::OnKeyUp).bConsumeInput =false;
+
+	InputComponent->BindAction("KeyDown",IE_Pressed, this, &AOH_PlayerController::OnKeyDown).bConsumeInput =false;
+
+
+
+}
+
+void AOH_PlayerController::Interact2()
+{
+	//OnActionPressed.Broadcast();
+
+	if (oh_QuestUI != nullptr)
+	{
+		oh_QuestUI-> Interact2();
+	}
+
+
+	
+}
+
+void AOH_PlayerController::OnKeyUp()
+{
+
+	if (oh_QuestUI != nullptr)
+	{
+		oh_QuestUI->OnSelectUpOption();
+	}
+}
+
+void AOH_PlayerController::OnKeyDown()
+{
+
+	if (oh_QuestUI != nullptr)
+	{
+		oh_QuestUI->OnSelectDownOption();
+	}
 }
