@@ -37,6 +37,7 @@ public:
 
 	// 채팅 시스템
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Chat)
 	class UTextRenderComponent* ChatText;
 
 	virtual void BeginPlay() override;
@@ -45,26 +46,27 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Chat)
 	void AttemptToSendChatMessage(const FString& Message);
-
-private:
 	
 	// 채팅 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendChatMessage 실행
+	UFUNCTION(BlueprintCallable, Category = Chat)
 	void SendChatMessage(const FString& Message);
 	
 	// 현재 메세지 지우기 (채팅 보내고 5초 후)
+	UFUNCTION(BlueprintCallable, Category = Chat)
 	void ClearChatMessage();
 
-	UFUNCTION(Server, Reliable, WithValidation)
+	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = Chat)
 	void ServerSendChatMessage(const FString& Message);
 	void ServerSendChatMessage_Implementation(const FString& Message);
 	bool ServerSendChatMessage_Validate(const FString& Message);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = Chat)
 		void OnRep_CurrentMessage();
 
+	UFUNCTION(BlueprintCallable, Category = Chat)
 	void UpdateChatText();
-protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentMessage, Category = "Chat")
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentMessage, Category = Chat)
 		FString CurrentMessage;
 
 protected:

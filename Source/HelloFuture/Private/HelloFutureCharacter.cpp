@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "HelloFutureCharacter.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -58,10 +58,10 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
-	// ÀÎº¥Åä¸® ½Ã½ºÅÛ
+	// ì¸ë²¤í† ë¦¬ ì‹œìŠ¤í…œ
 	Inventory = CreateDefaultSubobject<UYJ_InventoryComponent>(TEXT("Inventory"));
 
-// 	ÀúÃà¿Õ 
+// 	ì €ì¶•ì™• 
 // 		sceneComp = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Comp"));
 // 		sceneComp->SetupAttachment(RootComponent);
 // 	
@@ -76,12 +76,12 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 
 	/*ohController = CreateDefaultSubobject<AOH_PlayerController>(TEXT("OH_PlayerController"));*/
 
-	// Ã¤ÆÃ ½Ã½ºÅÛ
+	// ì±„íŒ… ì‹œìŠ¤í…œ
 	ChatText = CreateDefaultSubobject<UTextRenderComponent>("ChatText");
 	ChatText->SetRelativeLocation(FVector(0, 0, 100));
 	ChatText->SetHorizontalAlignment(EHTA_Center);
 	ChatText->SetupAttachment(RootComponent);
-
+	
 
 }
 
@@ -90,6 +90,7 @@ void AHelloFutureCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	CurrentMessage = "";
+
 }
 
 void AHelloFutureCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -103,8 +104,8 @@ void AHelloFutureCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 void AHelloFutureCharacter::AttemptToSendChatMessage(const FString& Message)
 {
 
-	// ¸¸¾à ¼­¹ö°¡ ¾ø´Ù¸é ServersendChat message¸¦ º¸³»°í
-	// ¾Æ´Ï¶ó¸é, send chat message¸¦ ÀÌ¿ë
+	// ë§Œì•½ ì„œë²„ê°€ ì—†ë‹¤ë©´ ServersendChat messageë¥¼ ë³´ë‚´ê³ 
+	// ì•„ë‹ˆë¼ë©´, send chat messageë¥¼ ì´ìš©
 	if (GetLocalRole() < ROLE_Authority)
 	{
 		ServerSendChatMessage(Message);
@@ -184,10 +185,10 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 
 // <<<<<<< HEAD
-// // 	°Ô½ÃÆÇ »óÈ£ÀÛ¿ë
+// // 	ê²Œì‹œíŒ ìƒí˜¸ì‘ìš©
 // // 		PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
 // =======
-// 	// °Ô½ÃÆÇ »óÈ£ÀÛ¿ë
+// 	// ê²Œì‹œíŒ ìƒí˜¸ì‘ìš©
 // 	//PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
 // >>>>>>> afa7f2c5c76e763b45e92371270dd7ed4ced38fe
 }
@@ -208,7 +209,7 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 // 	}
 // }
 
-// ÀÎº¥Åä¸® ½Ã½ºÅÛ
+// ì¸ë²¤í† ë¦¬ ì‹œìŠ¤í…œ
 void AHelloFutureCharacter::UseItem(class UYJ_Item* Item)
 {
 	if (Item)
