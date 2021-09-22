@@ -105,7 +105,7 @@ void AHelloFutureCharacter::AttemptToSendChatMessage(const FString& Message)
 
 	// 만약 서버가 없다면 ServersendChat message를 보내고
 	// 아니라면, send chat message를 이용
-	if (Role < ROLE_Authority)
+	if (GetLocalRole() < ROLE_Authority)
 	{
 		ServerSendChatMessage(Message);
 	}
