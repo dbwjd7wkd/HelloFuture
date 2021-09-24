@@ -27,6 +27,4 @@ protected:
 	void OnDialogueCompleted();
 
 	bool bIsInteracting = false;
-
-
 };

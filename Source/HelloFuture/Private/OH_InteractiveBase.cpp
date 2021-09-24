@@ -43,13 +43,7 @@ void AOH_InteractiveBase::BeginPlay()
 void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult)
 {
 
-	UE_LOG(LogTemp, Warning ,TEXT("DDD"));
-	oh_QuestUI->AddToViewport();
-	currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);
-	
-	
-	
-	/*if(!bIsEnabled) return;
+	if(!bIsEnabled) return;
 
 	currentCharacter = Cast<AHelloFutureCharacter>(OtherActor);
 
@@ -57,9 +51,11 @@ void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	{
 		currentPlayerController = Cast<AOH_PlayerController>(currentCharacter->GetController());
 
+		UE_LOG(LogTemp, Warning ,TEXT("DDD"));
+		oh_QuestUI->AddToViewport();
+		//currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);
 
-
-	}*/
+	}
 }
 
 void AOH_InteractiveBase::EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
