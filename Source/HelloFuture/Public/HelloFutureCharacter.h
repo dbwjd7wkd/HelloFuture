@@ -155,5 +155,11 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Name)
 		TSubclassOf<UUserWidget> nameWidgetClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Quiz)
+		int32 quizScore;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Quiz)
+		bool isQuiz = false;
 };
 
