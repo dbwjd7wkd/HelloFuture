@@ -40,7 +40,7 @@ class UOH_QuestUI* oh_QuestUI;
 
 TSubclassOf<class UUserWidget> oh_QuestUIclass;
 
-FORCEINLINE UOH_QuestUI* GetUI() {return oh_QuestUI; };
+FORCEINLINE UOH_QuestUI* GetUI() {return Cast<UOH_QuestUI>(oh_QuestUI); };
 
 void SetupInputComponent();
 

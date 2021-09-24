@@ -10,6 +10,8 @@ void AOH_InteractiveDialogue::Interact()
 {
 	Super::Interact();
 
+	//currentPlayerController->oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+
 	//if (bIsInteracting)
 	//{
 	//	return;
@@ -28,6 +30,7 @@ void AOH_InteractiveDialogue::Interact()
 	//	// 다이얼로그 완료
 	//	currentPlayerController->GetUI()->OnDialogueCompleted.AddDynamic(this, &AOH_InteractiveDialogue::OnDialogueCompleted);
 	//}
+
 }
 
 void AOH_InteractiveDialogue::OnDialogueCompleted()
