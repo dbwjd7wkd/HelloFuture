@@ -15,17 +15,15 @@ class HELLOFUTURE_API AYJ_GameModeBase : public AGameModeBase
 	GENERATED_BODY()
 	
 public:
+	// 대기번호
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Numbering System")
 		int32 waitingNumber = 0;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Numbering System")
-		int32 order = 1;
-
 public:
 	UFUNCTION(BlueprintCallable)
-	void AddWaitingNumber();
+		void AddWaitingNumber();
 	UFUNCTION(BlueprintCallable)
-	void MinusWaitingNumber();
+		void MinusWaitingNumber();
 	UFUNCTION(BlueprintCallable)
-	bool CheckMyOrder(class AHelloFutureCharacter* player);
+		bool CheckMyOrder(class AHelloFutureCharacter* player);
 };
