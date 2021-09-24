@@ -104,15 +104,15 @@ void AMinsu_NPC::RandomTalk()
 	}
 	else if (Rate1 <= Precent && Precent <= Rate2)
 	{
-		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("신문이 있어요!")));
+		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("저축왕은 누구일까요?")));
 	}
 	else if (Rate2 <= Precent && Precent <= Rate3)
 	{
-		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("퀴즈도 있어요!")));
+		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("퀴즈도 참여해봐요!")));
 	}
 	else if (Rate3 <= Precent && Precent <= Rate4)
 	{
-		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("신문 가져가요~")));
+		minsuTalk->Text_Talk->SetText(FText::FromString(TEXT("신문 보고가세요~")));
 	}
 }
 
