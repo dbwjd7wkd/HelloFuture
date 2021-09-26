@@ -8,6 +8,7 @@
 #include <HelloFuture/Public/OH_DataTable.h>
 #include "OH_QuestUI.generated.h"
 
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDialogueCompletedDelegate);
 /**
  * 
@@ -79,7 +80,7 @@ public:
 
 	void AnimateMessage(const FString& Text);
 
-	void Interact2();
+	void Interact();
 
 	void InitializeDialogue(class UDataTable* DialogueTable);
 		 

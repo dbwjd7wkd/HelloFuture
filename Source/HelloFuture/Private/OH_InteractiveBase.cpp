@@ -7,6 +7,7 @@
 #include "OH_QuestUI.h"
 #include <Components/StaticMeshComponent.h>
 #include <Components/BoxComponent.h>
+#include "OH_InteractiveDialogue.h"
 
 
 // Sets default values
@@ -35,13 +36,17 @@ void AOH_InteractiveBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	//bIsEnabled =true;
+	bIsEnabled =true;
 }
 
 
 
 void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult)
 {
+	UE_LOG(LogTemp, Warning, TEXT("WWW"));
+
+
+
 
 	if(!bIsEnabled) return;
 
@@ -51,30 +56,34 @@ void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	{
 		currentPlayerController = Cast<AOH_PlayerController>(currentCharacter->GetController());
 
-		UE_LOG(LogTemp, Warning ,TEXT("DDD"));
+
+		currentCharacter->SetInteractiveInRange(this);
+		/*UE_LOG(LogTemp, Warning ,TEXT("DDD"));
 		oh_QuestUI->AddToViewport();
-		//currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);
+		currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);*/
 
 	}
+
 }
 
 void AOH_InteractiveBase::EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	/*if(bIsEnabled) return;
+	if(bIsEnabled) return;
 
 	currentCharacter = Cast<AHelloFutureCharacter>(OtherActor);
 
 	if (currentCharacter)
 	{
-		
+		currentCharacter->ClearInteractiveInRange(this);
+
 		currentPlayerController =nullptr;
-	}*/
+	}
 }
 
 
 void AOH_InteractiveBase::SetEnable(bool Enable)
 {
-	/*bIsEnabled =Enable;
+	bIsEnabled =Enable;
 	
 	if (bIsEnabled)
 	{
@@ -83,12 +92,12 @@ void AOH_InteractiveBase::SetEnable(bool Enable)
 	else
 	{
 		collision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	}*/
+	}
 }
 
 void AOH_InteractiveBase::Interact()
 {
-	//if(!bIsEnabled) return;
+	if(!bIsEnabled) return;
 }
 
 // Called every frame
@@ -96,5 +105,6 @@ void AOH_InteractiveBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	
 }
 

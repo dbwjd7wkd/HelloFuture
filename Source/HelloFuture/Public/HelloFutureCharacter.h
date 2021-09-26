@@ -161,5 +161,17 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Quiz)
 		bool isQuiz = false;
+
+
+	///////////// Interactive //////////////////
+
+protected :
+	class AOH_InteractiveBase* currentInteractive;
+
+public:
+	FORCEINLINE class AOH_InteractiveBase* GetInteractive() {return currentInteractive; }
+
+	void SetInteractiveInRange(class AOH_InteractiveBase* Interactive);
+	void ClearInteractiveInRange(class AOH_InteractiveBase* Interactive);
 };
 

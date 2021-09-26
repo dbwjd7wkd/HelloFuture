@@ -79,7 +79,7 @@ void AOH_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	InputComponent->BindAction("ohInteract",IE_Pressed, this, &AOH_PlayerController::Interact2);
+	InputComponent->BindAction("ohInteract",IE_Pressed, this, &AOH_PlayerController::Interact);
 
 	InputComponent->BindAction("KeyUp",IE_Pressed, this, &AOH_PlayerController::OnKeyUp).bConsumeInput =false;
 
@@ -89,13 +89,18 @@ void AOH_PlayerController::SetupInputComponent()
 
 }
 
-void AOH_PlayerController::Interact2()
+void AOH_PlayerController::Interact()
 {
 	//OnActionPressed.Broadcast();
+	if ((me != nullptr) && (me->GetInteractive() != nullptr))
+	{
+		me->GetInteractive()->Interact();
+	}
+
 
 	if (oh_QuestUI != nullptr)
 	{
-		oh_QuestUI-> Interact2();
+		oh_QuestUI-> Interact();
 	}
 
 

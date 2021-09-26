@@ -293,3 +293,22 @@ void AHelloFutureCharacter::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
+void AHelloFutureCharacter::SetInteractiveInRange(class AOH_InteractiveBase* Interactive)
+{
+	if (Interactive != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("WWWw"));
+		currentInteractive = Interactive;
+		
+		
+	}
+}
+
+void AHelloFutureCharacter::ClearInteractiveInRange(class AOH_InteractiveBase* Interactive)
+{
+	
+	currentInteractive = nullptr;
+	
+}
+

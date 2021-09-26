@@ -148,7 +148,7 @@ void UOH_QuestUI::OnAnimationTimerCompleted()
 
 }
 
-void UOH_QuestUI::Interact2()
+void UOH_QuestUI::Interact()
 {
 	/*if (!bAnimating)
 	{

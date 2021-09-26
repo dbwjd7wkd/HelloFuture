@@ -6,41 +6,43 @@
 #include "OH_QuestUI.h"
 
 
+
 void AOH_InteractiveDialogue::Interact()
 {
 	Super::Interact();
 
-	//currentPlayerController->oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+	UE_LOG(LogTemp, Warning, TEXT("222"));
 
-	//if (bIsInteracting)
-	//{
-	//	return;
-	//}
+	if (bIsInteracting)
+	{
+		return;
+	}
 
-	//if ((currentPlayerController != nullptr) && (Dialogue != nullptr))
-	//{
-	//	bIsInteracting = true;
+	if ((currentPlayerController != nullptr) && (Dialogue != nullptr))
+	{
+		
+		bIsInteracting = true;
 
-	//	// 플레이어 인풋 잠금
-	//	currentPlayerController->SetCinematicMode(true,true,true);
+		// 플레이어 인풋 잠금
+		currentPlayerController->SetCinematicMode(true,true,true);
 
-	//	// 다이얼로그 가져오기
-	//	currentPlayerController->GetUI()->InitializeDialogue(Dialogue);
+		// 다이얼로그 가져오기
+		currentPlayerController->GetUI()->InitializeDialogue(Dialogue);
 
-	//	// 다이얼로그 완료
-	//	currentPlayerController->GetUI()->OnDialogueCompleted.AddDynamic(this, &AOH_InteractiveDialogue::OnDialogueCompleted);
-	//}
+		// 다이얼로그 완료
+		currentPlayerController->GetUI()->OnDialogueCompleted.AddDynamic(this,&AOH_InteractiveDialogue::OnDialogueCompleted);
+	}
 
 }
 
 void AOH_InteractiveDialogue::OnDialogueCompleted()
 {
-	/*if (currentPlayerController != nullptr)
+	if (currentPlayerController != nullptr)
 	{
 		currentPlayerController->SetCinematicMode(false, true, true);
 
 		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue::OnDialogueCompleted);
 	}
 
-	bIsInteracting = false;*/
+	bIsInteracting = false;
 }

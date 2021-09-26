@@ -48,7 +48,7 @@ void SetupInputComponent();
 public:
 
 UFUNCTION(BlueprintCallable, Category = "Input")
-void Interact2();
+void Interact();
 
 UFUNCTION(BlueprintCallable, Category = "Input")
 void OnKeyUp();
