@@ -57,6 +57,9 @@ void OnKeyUp();
 UFUNCTION(BlueprintCallable, Category = "Input")
 void OnKeyDown();
 
+
+protected:
+
 UFUNCTION()
 void OnintroDialogueCompleted();
 
@@ -64,10 +67,8 @@ void OnintroDialogueCompleted();
 //FOnActionPress OnActionPressed;
 
 
-public:
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
-	class UDataTable* IntroDialogue;
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* IntroDialogue;
 
 
 	

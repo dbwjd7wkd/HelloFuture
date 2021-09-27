@@ -11,7 +11,7 @@ void AOH_InteractiveDialogue::Interact()
 {
 	Super::Interact();
 
-	UE_LOG(LogTemp, Warning, TEXT("222"));
+	
 
 	if (bIsInteracting)
 	{
@@ -29,7 +29,7 @@ void AOH_InteractiveDialogue::Interact()
 		
 		// 다이얼로그 가져오기
 		currentPlayerController->GetUI()->InitializeDialogue(Dialogue);
-		UE_LOG(LogTemp, Warning, TEXT("333"));
+		
 		
 
 		// 다이얼로그 완료
