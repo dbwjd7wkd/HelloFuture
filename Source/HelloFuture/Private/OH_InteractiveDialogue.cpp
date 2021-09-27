@@ -31,7 +31,6 @@ void AOH_InteractiveDialogue::Interact()
 		currentPlayerController->GetUI()->InitializeDialogue(Dialogue);
 		
 		
-
 		// 다이얼로그 완료
 		currentPlayerController->GetUI()->OnDialogueCompleted.AddDynamic(this,&AOH_InteractiveDialogue::OnDialogueCompleted);
 	}
