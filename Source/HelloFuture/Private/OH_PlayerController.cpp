@@ -57,6 +57,7 @@ void AOH_PlayerController::BeginPlay()
 		if(IntroDialogue  != nullptr)
 		{
 			SetCinematicMode(true,true,true);
+
 			oh_QuestUI->InitializeDialogue(IntroDialogue);
 
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);

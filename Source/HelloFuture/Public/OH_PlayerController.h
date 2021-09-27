@@ -41,6 +41,7 @@ class UOH_QuestUI* oh_QuestUI;
 TSubclassOf<class UUserWidget> oh_QuestUIclass;
 
 FORCEINLINE UOH_QuestUI* GetUI() {return Cast<UOH_QuestUI>(oh_QuestUI); };
+//FORCEINLINE UOH_QuestUI* GetUI() {return  oh_QuestUI;}
 
 void SetupInputComponent();
 
@@ -56,6 +57,9 @@ void OnKeyUp();
 UFUNCTION(BlueprintCallable, Category = "Input")
 void OnKeyDown();
 
+
+protected:
+
 UFUNCTION()
 void OnintroDialogueCompleted();
 
@@ -63,10 +67,8 @@ void OnintroDialogueCompleted();
 //FOnActionPress OnActionPressed;
 
 
-public:
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
-	class UDataTable* IntroDialogue;
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* IntroDialogue;
 
 
 	

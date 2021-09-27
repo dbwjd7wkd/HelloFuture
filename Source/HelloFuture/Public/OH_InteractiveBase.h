@@ -56,8 +56,8 @@ public:
 
 	FORCEINLINE UOH_QuestUI* GetUI() { return oh_QuestUI; };
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
-		class UDataTable* Dialogue2;
+	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+		class UDataTable* Dialogue2;*/
 
 private:
 	UFUNCTION()

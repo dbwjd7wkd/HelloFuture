@@ -24,6 +24,8 @@ void UOH_QuestUI::InitializeDialogue(class UDataTable* DialogueTable)
 {
 	CurrentState = 0;
 
+	dialogue.Empty();
+
 	CharacterNameText->SetText(FText::FromString(""));
 	PlayerDialogTextBlock->SetText(FText::FromString(""));
 
@@ -38,12 +40,14 @@ void UOH_QuestUI::InitializeDialogue(class UDataTable* DialogueTable)
 	}
 
 	RowIndex = 0;
+		
 
 	if (dialogue.Num() > 0)
 	{
 		CurrentState = 0;
 
 		RowIndex = 0;
+
 
 		CharacterNameText->SetText(FText::FromString(dialogue[RowIndex]->CharacterName.ToString()));
 

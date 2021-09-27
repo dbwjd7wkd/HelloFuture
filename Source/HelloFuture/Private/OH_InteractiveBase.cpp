@@ -46,7 +46,7 @@ void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	UE_LOG(LogTemp, Warning, TEXT("WWW"));
 
 
-
+	
 
 	if(!bIsEnabled) return;
 
@@ -61,6 +61,7 @@ void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 		/*UE_LOG(LogTemp, Warning ,TEXT("DDD"));
 		oh_QuestUI->AddToViewport();
 		currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);*/
+		//currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);
 
 	}
 
