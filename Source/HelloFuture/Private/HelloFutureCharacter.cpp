@@ -199,8 +199,8 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("PlantSeed", IE_Pressed, this, &AHelloFutureCharacter::PlantSeed);
 
 	// 씨앗개수 조절
-// 	PlayerInputComponent->BindKey(EKeys::MouseScrollUp, IE_Pressed, this, &AHelloFutureCharacter::UpSeed);
-// 	PlayerInputComponent->BindKey(EKeys::MouseScrollDown, IE_Pressed, this, &AHelloFutureCharacter::DownSeed);
+	PlayerInputComponent->BindAction("SeedUp", IE_Pressed, this, &AHelloFutureCharacter::UpSeed);
+	PlayerInputComponent->BindAction("SeedDown", IE_Pressed, this, &AHelloFutureCharacter::DownSeed);
 
 }
 
@@ -366,11 +366,11 @@ void AHelloFutureCharacter::PlantActivate()
 
 void AHelloFutureCharacter::UpSeed()
 {
-	Seed += Seed;
+	Seed = FMath::Clamp(Seed++, 0, 2);
 }
 
 void AHelloFutureCharacter::DownSeed()
 {
-	Seed -= Seed;
+	Seed = FMath::Clamp(Seed++, 0, 2);
 }
 

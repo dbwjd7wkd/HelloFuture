@@ -203,5 +203,19 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Farm)
 		int32 Seed = 0;
+
+	UPROPERTY(EditAnywhere, Category = Farm)
+		int32 AmountWheatSeed = 0;
+	UPROPERTY(EditAnywhere, Category = Farm)
+		int32 AmountCornSeed = 0;
+	UPROPERTY(EditAnywhere, Category = Farm)
+		int32 AmountBushSeed = 0;
+
+	UPROPERTY(EditAnywhere, Category = Farm)
+		int32 AmountWheat = 0;
+	UPROPERTY(EditAnywhere, Category = Farm)
+		int32 AmountCorn = 0;
+	UPROPERTY(EditAnywhere, Category = Farm)
+		int32 AmountBush = 0;
 };
 
