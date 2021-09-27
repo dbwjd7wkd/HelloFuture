@@ -26,10 +26,11 @@ bool AYJ_GameModeBase::CheckMyOrder(AHelloFutureCharacter* player)
 		for (auto item : player->Inventory->Items)
 		{
 			// 2. 만약 대기 아이템이 있다면
-			if (Cast<UYJ_WaitingTicketItem>(item))
+			UYJ_WaitingTicketItem* waitingTicketItem = Cast<UYJ_WaitingTicketItem>(item);
+			if (waitingTicketItem)
 			{
 				// 만약 대기 아이템 번호가 번호판 순서와 같다면 true 반환 (대화시작)
-				if (item->ItemWaitingNumber == waitingNumber) return true;
+				if (waitingTicketItem->ItemWaitingNumber == waitingNumber) return true;
 				// 순서가 다르다면 false 반환
 				else return false;
 			}

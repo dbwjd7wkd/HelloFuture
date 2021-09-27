@@ -14,4 +14,8 @@ class HELLOFUTURE_API UYJ_WaitingTicketItem : public UYJ_Item
 {
 	GENERATED_BODY()
 	
+public:
+	/**The WaitingNumber of the item*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0.0))
+	int32 ItemWaitingNumber;
 };

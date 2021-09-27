@@ -11,8 +11,8 @@
 UYJ_InventoryComponent::UYJ_InventoryComponent()
 {
 	Capacity = 8;
-	accountBalance = 0;
-	cash = 0;
+	accountBalance = 10000;
+	cash = 1000;
 }
 
 // Called when the game starts
@@ -36,7 +36,8 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 	}
 
 	// Item이 은행 대기표일 때, Items에 대기표가 있으면 아래 내용 실행하지 않음.
-	if (Cast<UYJ_WaitingTicketItem>(Item))
+	UYJ_WaitingTicketItem* waitingTicketItem = Cast<UYJ_WaitingTicketItem>(Item);
+	if (waitingTicketItem)
 	{
 		for (auto yjItem : Items)
 		{
@@ -50,7 +51,7 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 		AYJ_GameModeBase* GameMode;
 		if (World) {
 			GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
-			Item->ItemWaitingNumber = GameMode->waitingNumber + 1;
+			waitingTicketItem->ItemWaitingNumber = GameMode->waitingNumber + 1;
 		}
 	}
 	

@@ -23,13 +23,13 @@ public:
 	UPROPERTY(Transient)
 	class UWorld* World;
 
-	/**The text for using the item. (Equip, Eat, etc)*/
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-		FText UseActionText;
+	///**The text for using the item. (Equip, Eat, etc)*/
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+	//	FText UseActionText;
 
-	/**The mesh to display for this items pickup*/
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-		class UStaticMesh* PickupMesh;
+	///**The mesh to display for this items pickup*/
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+	//	class UStaticMesh* PickupMesh;
 
 	/**The thumbnail for this item*/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
@@ -42,10 +42,6 @@ public:
 	/**An optional description for the item*/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (MultiLine = true))
 		FText ItemDescription;
-
-	/**The weight of the item*/
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0.0))
-		int32 ItemWaitingNumber;
 
 	/**The inventory that owns this item*/
 	UPROPERTY()
