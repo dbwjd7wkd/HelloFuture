@@ -19,6 +19,9 @@
 #include "HelloFuture.h"
 #include <Logging/LogMacros.h>
 #include <GameFramework/Actor.h>
+#include <Blueprint/UserWidget.h>
+#include <Materials/MaterialInterface.h>
+#include <Minsu_ChatWidget.h>
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -55,33 +58,32 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
-	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-
 	// 인벤토리 시스템
 	Inventory = CreateDefaultSubobject<UYJ_InventoryComponent>(TEXT("Inventory"));
 
-// 	저축왕 
-// 		sceneComp = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Comp"));
-// 		sceneComp->SetupAttachment(RootComponent);
-// 	
-// 		springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-// 		springArm->SetupAttachment(sceneComp);
-// 	
-// 		JCKing = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("JCKing"));
-// 		JCKing->SetupAttachment(springArm);
-
 	Health = 100.f;
-
-
-	/*ohController = CreateDefaultSubobject<AOH_PlayerController>(TEXT("OH_PlayerController"));*/
 
 	// 채팅 시스템
 	ChatText = CreateDefaultSubobject<UTextRenderComponent>("ChatText");
 	ChatText->SetRelativeLocation(FVector(0, 0, 100));
 	ChatText->SetHorizontalAlignment(EHTA_Center);
 	ChatText->SetupAttachment(RootComponent);
+	ChatText->SetVerticalAlignment(EVRTA_TextCenter);
+	ChatText->SetTextRenderColor(FColor::Black);
+	ChatText->SetText(TEXT(""));
 	
+	ConstructorHelpers::FObjectFinder<UMaterial> MatFinder(TEXT("Material'/Game/Minsu/Minsu_TextMat.Minsu_TextMat'"));
+	if (MatFinder.Succeeded())
+	{
+		ChatText->SetTextMaterial(MatFinder.Object);
+	}
+	
+	ConstructorHelpers::FObjectFinder<UFont> FontFinder(TEXT("Font'/Game/Oh/Font/OH_Font.OH_Font'"));
+	if (FontFinder.Succeeded())
+	{
+		ChatText->SetFont(FontFinder.Object);
+	}
+
 
 }
 
@@ -155,6 +157,7 @@ void AHelloFutureCharacter::UpdateChatText()
 	ChatText->SetText(FText::FromString(CurrentMessage));
 }
 
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -183,31 +186,23 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
 
+	////////////// 채팅 ////////////////
+	PlayerInputComponent->BindAction("Chatting", IE_Pressed, this, &AHelloFutureCharacter::Chatting);
 
-// <<<<<<< HEAD
-// // 	게시판 상호작용
-// // 		PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
-// =======
-// 	// 게시판 상호작용
-// 	//PlayerInputComponent->BindAction("InteractBoard", IE_Pressed, this, &AHelloFutureCharacter::InteractBoard);
-// >>>>>>> afa7f2c5c76e763b45e92371270dd7ed4ced38fe
+
+	//////////// 농장 꾸미기 ///////////////
+	
+	// 농작물 활성화 O키
+	PlayerInputComponent->BindAction("PlantActivate", IE_Pressed, this, &AHelloFutureCharacter::PlantActivate);
+	
+	// 농작물 씨앗뿌리기 P키
+	PlayerInputComponent->BindAction("PlantSeed", IE_Pressed, this, &AHelloFutureCharacter::PlantSeed);
+
+	// 씨앗개수 조절
+// 	PlayerInputComponent->BindKey(EKeys::MouseScrollUp, IE_Pressed, this, &AHelloFutureCharacter::UpSeed);
+// 	PlayerInputComponent->BindKey(EKeys::MouseScrollDown, IE_Pressed, this, &AHelloFutureCharacter::DownSeed);
+
 }
-
-// void AHelloFutureCharacter::InteractBoard()
-// {
-// 	FHitResult OutHit;
-// 	FVector Start = GetCameraBoom()->GetComponentLocation();
-// 	FVector End = Start + GetCameraBoom()->GetForwardVector() * 10;
-// 
-// 	if (GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECC_Visibility))
-// 	{
-// 		AMinsu_Quiz* obj = Cast<AMinsu_Quiz>(OutHit.Actor);
-// 		if (obj)
-// 		{
-// 			obj->Interact();
-// 		}
-// 	}
-// }
 
 // 인벤토리 시스템
 void AHelloFutureCharacter::UseItem(class UYJ_Item* Item)
@@ -310,5 +305,72 @@ void AHelloFutureCharacter::ClearInteractiveInRange(class AOH_InteractiveBase* I
 	
 	currentInteractive = nullptr;
 	
+}
+
+void AHelloFutureCharacter::Chatting()
+{
+	if (ChatWidgetClass)
+	{
+		ChatWidget = CreateWidget<UMinsu_ChatWidget>(UGameplayStatics::GetPlayerController(GetWorld(), 0), ChatWidgetClass);
+		if (ChatWidget)
+		{
+			ChatWidget->AddToViewport();
+		}
+	}
+}
+
+void AHelloFutureCharacter::PlantSeed()
+{
+	FHitResult HitResult;
+	FVector CamLoc;
+	FRotator CamRot;
+
+	GetController()->GetPlayerViewPoint(CamLoc, CamRot);
+
+	FVector StartTrace = CamLoc;
+	FVector EndTrace = StartTrace + (CamRot.Vector() * TraceDistance);
+
+	FCollisionQueryParams TraceParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, TraceParams);
+
+	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Green, false, 2.0f);
+
+	if (bHit)
+	{
+		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Green, false, 2.0f);
+	}
+}
+
+void AHelloFutureCharacter::PlantActivate()
+{
+	FHitResult HitResult;
+	FVector CamLoc;
+	FRotator CamRot;
+
+	GetController()->GetPlayerViewPoint(CamLoc, CamRot);
+
+	FVector StartTrace = CamLoc;
+	FVector EndTrace = StartTrace + (CamRot.Vector() * TraceDistance);
+
+	FCollisionQueryParams TraceParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, TraceParams);
+
+	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Red, false, 2.0f);
+
+	if (bHit)
+	{
+		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
+	}
+	
+}
+
+void AHelloFutureCharacter::UpSeed()
+{
+	Seed += Seed;
+}
+
+void AHelloFutureCharacter::DownSeed()
+{
+	Seed -= Seed;
 }
 

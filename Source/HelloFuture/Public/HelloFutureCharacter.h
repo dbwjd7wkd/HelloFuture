@@ -35,39 +35,7 @@ public:
 		float BaseLookUpRate;
 
 
-	// 채팅 시스템
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Chat)
-	class UTextRenderComponent* ChatText;
 
-	virtual void BeginPlay() override;
-
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
-
-	UFUNCTION(BlueprintCallable, Category = Chat)
-	void AttemptToSendChatMessage(const FString& Message);
-	
-	// 채팅 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendChatMessage 실행
-	UFUNCTION(BlueprintCallable, Category = Chat)
-	void SendChatMessage(const FString& Message);
-	
-	// 현재 메세지 지우기 (채팅 보내고 5초 후)
-	UFUNCTION(BlueprintCallable, Category = Chat)
-	void ClearChatMessage();
-
-	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = Chat)
-	void ServerSendChatMessage(const FString& Message);
-	void ServerSendChatMessage_Implementation(const FString& Message);
-	bool ServerSendChatMessage_Validate(const FString& Message);
-
-	UFUNCTION(BlueprintCallable, Category = Chat)
-		void OnRep_CurrentMessage();
-
-	UFUNCTION(BlueprintCallable, Category = Chat)
-	void UpdateChatText();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentMessage, Category = Chat)
-		FString CurrentMessage;
 
 protected:
 
@@ -173,5 +141,67 @@ public:
 
 	void SetInteractiveInRange(class AOH_InteractiveBase* Interactive);
 	void ClearInteractiveInRange(class AOH_InteractiveBase* Interactive);
+
+
+	//////////// 채팅 ///////////////
+public:
+	void Chatting();
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Chat)
+			class UTextRenderComponent* ChatText;
+
+		virtual void BeginPlay() override;
+
+		virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+
+		UFUNCTION(BlueprintCallable, Category = Chat)
+			void AttemptToSendChatMessage(const FString& Message);
+
+		// 채팅 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendChatMessage 실행
+		UFUNCTION(BlueprintCallable, Category = Chat)
+			void SendChatMessage(const FString& Message);
+
+		// 현재 메세지 지우기 (채팅 보내고 5초 후)
+		UFUNCTION(BlueprintCallable, Category = Chat)
+			void ClearChatMessage();
+
+		UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = Chat)
+			void ServerSendChatMessage(const FString& Message);
+		void ServerSendChatMessage_Implementation(const FString& Message);
+		bool ServerSendChatMessage_Validate(const FString& Message);
+
+		UFUNCTION(BlueprintCallable, Category = Chat)
+			void OnRep_CurrentMessage();
+
+		UFUNCTION(BlueprintCallable, Category = Chat)
+			void UpdateChatText();
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentMessage, Category = Chat)
+			FString CurrentMessage;
+	
+		UPROPERTY(EditDefaultsOnly, Category = Chat)
+			TSubclassOf<UUserWidget> ChatWidgetClass;
+
+		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Chat)
+			class UMinsu_ChatWidget* ChatWidget;
+
+	//////////// 농장 꾸미기 ///////////////
+
+	// 농작물 활성화 O키
+	void PlantSeed();
+
+	// 농작물 씨앗뿌리기 P키
+	void PlantActivate();
+
+	// 라인트레이스 거리
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+	float TraceDistance = 2000.f;
+
+	// 씨앗 개수 조절
+	void UpSeed();
+	void DownSeed();
+
+	UPROPERTY(EditAnywhere, Category = Farm)
+		int32 Seed = 0;
 };
 
