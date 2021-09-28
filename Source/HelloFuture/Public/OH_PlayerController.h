@@ -45,6 +45,10 @@ FORCEINLINE UOH_QuestUI* GetUI() {return Cast<UOH_QuestUI>(oh_QuestUI); };
 
 void SetupInputComponent();
 
+UPROPERTY()
+class AApple* apple;
+
+
 
 public:
 
@@ -56,6 +60,8 @@ void OnKeyUp();
 
 UFUNCTION(BlueprintCallable, Category = "Input")
 void OnKeyDown();
+
+
 
 
 protected:

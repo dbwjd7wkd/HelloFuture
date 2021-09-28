@@ -44,6 +44,8 @@ void AOH_InteractiveDialogue::OnDialogueCompleted()
 		currentPlayerController->SetCinematicMode(false, true, true);
 
 		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue::OnDialogueCompleted);
+
+
 	}
 
 	bIsInteracting = false;

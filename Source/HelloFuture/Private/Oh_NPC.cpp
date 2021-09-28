@@ -31,7 +31,7 @@ AOh_NPC::AOh_NPC()
 	talkWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Talk Widget"));
 	talkWidget->SetupAttachment(RootComponent);
 
-
+	
 }
 
 // Called when the game starts or when spawned

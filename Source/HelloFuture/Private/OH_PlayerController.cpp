@@ -6,6 +6,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "HelloFutureCharacter.h"
 #include "HelloFutureGameMode.h"
+#include "Apple.h"
 
 
 AOH_PlayerController::AOH_PlayerController()
@@ -81,10 +82,11 @@ void AOH_PlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	InputComponent->BindAction("ohInteract",IE_Pressed, this, &AOH_PlayerController::Interact);
-
+	
 	InputComponent->BindAction("KeyUp",IE_Pressed, this, &AOH_PlayerController::OnKeyUp).bConsumeInput =false;
 
 	InputComponent->BindAction("KeyDown",IE_Pressed, this, &AOH_PlayerController::OnKeyDown).bConsumeInput =false;
+
 
 
 
@@ -125,3 +127,5 @@ void AOH_PlayerController::OnKeyDown()
 		oh_QuestUI->OnSelectDownOption();
 	}
 }
+
+

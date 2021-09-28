@@ -23,11 +23,47 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	
+
+
+
 	UPROPERTY(EditAnyWhere, Category = Collision)
 	class UCapsuleComponent* collision;
+
+
 
 	UPROPERTY(EditAnyWhere, Category = Body)
 	class UStaticMeshComponent* body;
 
+
+private:
+
+	UFUNCTION()
+		virtual void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+		virtual void EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+
+public:
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		class UTextRenderComponent* price;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = " UI")
+	TSubclassOf <UUserWidget> ui;	
+
+	UPROPERTY()
+	class UUserWidget* purchaseUI;
+
+	UPROPERTY()
+	class AOH_PlayerController* playercontroller;
+
+	UPROPERTY()
+	class AHelloFutureCharacter* character;
+
+	
+	void Interact();
+	bool beginoverlaped;
 
 };
