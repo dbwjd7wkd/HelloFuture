@@ -23,9 +23,9 @@ public:
 	UPROPERTY(Transient)
 	class UWorld* World;
 
-	///**The text for using the item. (Equip, Eat, etc)*/
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-	//	FText UseActionText;
+	/**The text for using the item. (Equip, Eat, etc)*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+		FText UseActionText;
 
 	///**The mesh to display for this items pickup*/
 	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")

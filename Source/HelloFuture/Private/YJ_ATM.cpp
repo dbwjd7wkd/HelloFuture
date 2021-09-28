@@ -4,13 +4,21 @@
 #include "YJ_ATM.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "HelloFutureCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
+
+#include "HelloFutureCharacter.h"
+#include "Kismet/GameplayStatics.h"
+#include "YJ_InventoryComponent.h"
 
 // Sets default values
 AYJ_ATM::AYJ_ATM()
 {
+	//UYJ_Item* item = CreateDefaultSubobject<UYJ_Item>(TEXT("Item"));
+	//AHelloFutureCharacter* myCharacter = Cast<AHelloFutureCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	//myCharacter->Inventory->AddItem();
+	//UYJ_Item* MyObject = NewObject<UYJ_Item>(UYJ_Item::StaticClass());
+
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 

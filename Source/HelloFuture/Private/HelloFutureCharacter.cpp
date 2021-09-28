@@ -93,6 +93,13 @@ void AHelloFutureCharacter::BeginPlay()
 
 	CurrentMessage = "";
 
+	APlayerController* playerController = Cast<APlayerController>(GetController());
+	if (playerController) {
+		playerController->bShowMouseCursor = true;
+		playerController->bEnableClickEvents = true;
+		playerController->bEnableMouseOverEvents = true;
+	}
+
 }
 
 void AHelloFutureCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
