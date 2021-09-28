@@ -25,7 +25,7 @@ public:
 
 	/**The text for using the item. (Equip, Eat, etc)*/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-		FText UseActionText;
+		FText Category;
 
 	///**The mesh to display for this items pickup*/
 	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
@@ -42,6 +42,10 @@ public:
 	/**An optional description for the item*/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (MultiLine = true))
 		FText ItemDescription;
+
+	/**The price for this item*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+		int32 Price;
 
 	/**The inventory that owns this item*/
 	UPROPERTY()

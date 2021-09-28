@@ -130,5 +130,8 @@ private:
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FDialogueCompletedDelegate OnDialogueCompleted;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UDataTable* curDialog;
 	
 };

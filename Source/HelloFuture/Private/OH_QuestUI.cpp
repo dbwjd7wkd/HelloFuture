@@ -22,6 +22,7 @@ void UOH_QuestUI::SetCharacterName(const FString& Text)
 
 void UOH_QuestUI::InitializeDialogue(class UDataTable* DialogueTable)
 {
+	curDialog = DialogueTable;
 	CurrentState = 0;
 
 	dialogue.Empty();

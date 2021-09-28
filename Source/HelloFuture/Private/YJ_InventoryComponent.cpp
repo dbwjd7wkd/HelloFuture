@@ -10,7 +10,7 @@
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
 {
-	Capacity = 8;
+	Capacity = 20;
 	accountBalance = 10000;
 	cash = 1000;
 }
