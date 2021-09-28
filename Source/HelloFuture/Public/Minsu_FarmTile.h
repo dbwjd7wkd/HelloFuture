@@ -52,7 +52,7 @@ public:
 		void PlantApple();
 
 	UPROPERTY(EditDefaultsOnly, Category = Farm)
-		TSubclassOf<class AApple> appleFactory;
+		TSubclassOf<class AMinsu_AppleSeed> appleFactory;
 
 	UFUNCTION(BlueprintCallable, Category = Farm)
 		void GrowTime(int growTime);

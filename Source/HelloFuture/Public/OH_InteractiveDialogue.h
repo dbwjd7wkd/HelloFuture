@@ -23,7 +23,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 	class UDataTable* Dialogue;
 
-	UFUNCTION(Blue. Category = Event)
+	UFUNCTION(BlueprintCallable, Category = Event)
 	void OnDialogueCompleted();
 
 	bool bIsInteracting = false;

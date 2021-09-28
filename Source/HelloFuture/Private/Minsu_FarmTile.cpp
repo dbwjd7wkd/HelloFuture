@@ -9,6 +9,7 @@
 #include <Apple.h>
 #include <Kismet/KismetTextLibrary.h>
 #include <Components/SceneComponent.h>
+#include <Minsu_AppleSeed.h>
 
 // Sets default values
 AMinsu_FarmTile::AMinsu_FarmTile()
@@ -53,6 +54,11 @@ void AMinsu_FarmTile::Tick(float DeltaTime)
 
 void AMinsu_FarmTile::Activate_Implementation()
 {
+
+}
+
+void AMinsu_FarmTile::PlantSeed_Implementation()
+{
 	player = Cast<AHelloFutureCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 
 	if (IsSomethingPlanted == false)
@@ -67,14 +73,9 @@ void AMinsu_FarmTile::Activate_Implementation()
 	}
 }
 
-void AMinsu_FarmTile::PlantSeed_Implementation()
-{
-
-}
-
 void AMinsu_FarmTile::PlantApple()
 {
-	auto appleSeed = GetWorld()->SpawnActor<AApple>(appleFactory);
+	auto appleSeed = GetWorld()->SpawnActor<AMinsu_AppleSeed>(appleFactory);
 	
 	// ÃÊ±â
 	if (appleSeed)
@@ -96,15 +97,15 @@ void AMinsu_FarmTile::GrowTime(int growTime)
 	FText timeText = UKismetTextLibrary::Conv_IntToText(time);
 	countMesh->SetText(timeText);
 	countMesh->USceneComponent::SetVisibility(true);
-
+	
 	FTimerHandle DelayTimeHandle;
 	float DelayTime = 1.0f;
 
 	GetWorld()->GetTimerManager().SetTimer(DelayTimeHandle, FTimerDelegate::CreateLambda([&]()
 	{
-		time = time - 1;
+		time = time -1;
+		
 	}), DelayTime, false);
-
 	countMesh->SetText(timeText);
 
 	if (time == 0)
@@ -116,11 +117,10 @@ void AMinsu_FarmTile::GrowTime(int growTime)
 	{
 		GetWorld()->GetTimerManager().SetTimer(DelayTimeHandle, FTimerDelegate::CreateLambda([&]()
 		{
-			time = time - 1;
+			time = time-1;
+
 		}), DelayTime, false);
-
 		countMesh->SetText(timeText);
-
 		return;
 	}
 }

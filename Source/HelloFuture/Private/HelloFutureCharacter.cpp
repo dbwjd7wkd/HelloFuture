@@ -352,7 +352,12 @@ void AHelloFutureCharacter::KeySeed()
 	if (bHit)
 	{
 		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Green, false, 2.0f);
-		IMinsu_PlantSeed::PlantSeed();
+		
+		if (HitResult.GetActor()->GetClass()->ImplementsInterface(UMinsu_PlantSeed::StaticClass()))
+		{
+			IMinsu_PlantSeed::Execute_PlantSeed(HitResult.GetActor());
+		}
+
 	}
 }
 
@@ -381,9 +386,10 @@ void AHelloFutureCharacter::KeyActivate()
 	{
 		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
 		
-// 		AHelloFutureCharacter* player = new AHelloFutureCharacter<AHelloFutureCharacter>();
-// 
-// 		IMinsu_Activate* playerActivate = Cast<IMinsu_Activate>(AHelloFutureCharacter);
+		if (HitResult.GetActor()->GetClass()->ImplementsInterface(UMinsu_Activate::StaticClass()))
+		{
+			IMinsu_Activate::Execute_Activate(HitResult.GetActor());
+		}
 	}
 	
 }
