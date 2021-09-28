@@ -4,13 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Minsu_Activate.h"
+#include "Minsu_PlantSeed.h"
 #include "HelloFutureCharacter.generated.h"
 
 
 //DECLARE_MULTICAST_DELEGATE_OneParam(FPlayerInputDelegate, class UInputComponent*)
 
 UCLASS(config=Game)
-class AHelloFutureCharacter : public ACharacter
+class AHelloFutureCharacter : public ACharacter, public IMinsu_Activate, public IMinsu_PlantSeed
 {
 	GENERATED_BODY()
 
@@ -33,6 +35,7 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
+
 
 
 
@@ -142,8 +145,8 @@ public:
 	void SetInteractiveInRange(class AOH_InteractiveBase* Interactive);
 	void ClearInteractiveInRange(class AOH_InteractiveBase* Interactive);
 
-
-	//////////// 채팅 ///////////////
+	
+	//////////// 채팅 ////////////////////////////
 public:
 	void Chatting();
 
@@ -184,14 +187,25 @@ public:
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Chat)
 			class UMinsu_ChatWidget* ChatWidget;
+		/////////////////////////////////////////////////////////////////////
 
-	//////////// 농장 꾸미기 ///////////////
+	//////////// 농장 꾸미기 ////////////////////////////////////////
+			
+	////////////// 인터페이스 사용 //////////////////////
+public:
+	void KeySeed();
+	void KeyActivate();
 
-	// 농작물 활성화 O키
-	void PlantSeed();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
+		void Activate();
+	virtual void Activate_Implementation() override;
 
-	// 농작물 씨앗뿌리기 P키
-	void PlantActivate();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
+		void PlantSeed();
+	virtual void PlantSeed_Implementation() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+		TScriptInterface<IMinsu_Activate> minsuActive;
 
 	// 라인트레이스 거리
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
@@ -201,21 +215,23 @@ public:
 	void UpSeed();
 	void DownSeed();
 
-	UPROPERTY(EditAnywhere, Category = Farm)
-		int32 Seed = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+		int Seed = 0;
 
 	UPROPERTY(EditAnywhere, Category = Farm)
-		int32 AmountWheatSeed = 0;
+		int AmountWheatSeed = 0;
 	UPROPERTY(EditAnywhere, Category = Farm)
-		int32 AmountCornSeed = 0;
+		int AmountCornSeed = 0;
 	UPROPERTY(EditAnywhere, Category = Farm)
-		int32 AmountBushSeed = 0;
+		int AmountBushSeed = 0;
 
 	UPROPERTY(EditAnywhere, Category = Farm)
-		int32 AmountWheat = 0;
+		int AmountWheat = 0;
 	UPROPERTY(EditAnywhere, Category = Farm)
-		int32 AmountCorn = 0;
+		int AmountCorn = 0;
 	UPROPERTY(EditAnywhere, Category = Farm)
-		int32 AmountBush = 0;
+		int AmountBush = 0;
+
+	/////////////////////////////////////////////////////////////
 };
 

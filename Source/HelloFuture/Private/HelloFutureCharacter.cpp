@@ -20,6 +20,8 @@
 #include <Logging/LogMacros.h>
 #include <GameFramework/Actor.h>
 #include <Blueprint/UserWidget.h>
+#include "Minsu_Activate.h"
+#include "Minsu_PlantSeed.h"
 #include <Materials/MaterialInterface.h>
 #include <Minsu_ChatWidget.h>
 
@@ -200,10 +202,10 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	//////////// 농장 꾸미기 ///////////////
 	
 	// 농작물 활성화 O키
-	PlayerInputComponent->BindAction("PlantActivate", IE_Pressed, this, &AHelloFutureCharacter::PlantActivate);
+	PlayerInputComponent->BindAction("PlantActivate", IE_Pressed, this, &AHelloFutureCharacter::KeyActivate);
 	
 	// 농작물 씨앗뿌리기 P키
-	PlayerInputComponent->BindAction("PlantSeed", IE_Pressed, this, &AHelloFutureCharacter::PlantSeed);
+	PlayerInputComponent->BindAction("PlantSeed", IE_Pressed, this, &AHelloFutureCharacter::KeySeed);
 
 	// 씨앗개수 조절
 	PlayerInputComponent->BindAction("SeedUp", IE_Pressed, this, &AHelloFutureCharacter::UpSeed);
@@ -326,7 +328,12 @@ void AHelloFutureCharacter::Chatting()
 	}
 }
 
-void AHelloFutureCharacter::PlantSeed()
+void AHelloFutureCharacter::Activate_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Activate"));
+}
+
+void AHelloFutureCharacter::KeySeed()
 {
 	FHitResult HitResult;
 	FVector CamLoc;
@@ -345,10 +352,16 @@ void AHelloFutureCharacter::PlantSeed()
 	if (bHit)
 	{
 		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Green, false, 2.0f);
+		IMinsu_PlantSeed::PlantSeed();
 	}
 }
 
-void AHelloFutureCharacter::PlantActivate()
+void AHelloFutureCharacter::PlantSeed_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("PlantSeed"));
+}
+
+void AHelloFutureCharacter::KeyActivate()
 {
 	FHitResult HitResult;
 	FVector CamLoc;
@@ -367,17 +380,21 @@ void AHelloFutureCharacter::PlantActivate()
 	if (bHit)
 	{
 		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
+		
+// 		AHelloFutureCharacter* player = new AHelloFutureCharacter<AHelloFutureCharacter>();
+// 
+// 		IMinsu_Activate* playerActivate = Cast<IMinsu_Activate>(AHelloFutureCharacter);
 	}
 	
 }
 
 void AHelloFutureCharacter::UpSeed()
 {
-	Seed = FMath::Clamp(Seed++, 0, 2);
+	Seed = FMath::Clamp(Seed + 1, 0, 2);
 }
 
 void AHelloFutureCharacter::DownSeed()
 {
-	Seed = FMath::Clamp(Seed++, 0, 2);
+	Seed = FMath::Clamp(Seed - 1, 0, 2);
 }
 

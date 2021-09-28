@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Minsu_Activate.h"
+#include "Minsu_PlantSeed.h"
 #include "Minsu_FarmTile.generated.h"
 
 UCLASS()
-class HELLOFUTURE_API AMinsu_FarmTile : public AActor
+class HELLOFUTURE_API AMinsu_FarmTile : public AActor, public IMinsu_Activate, public IMinsu_PlantSeed
 {
 	GENERATED_BODY()
 	
@@ -29,6 +31,32 @@ public:
 	UPROPERTY(EditAnywhere, Category = Mesh)
 		class UTextRenderComponent* countMesh;
 
-	UPROPERTY(VisibleAnywhere, Category = Stat)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Stat)
 		bool IsSomethingPlanted = false;
+
+	UPROPERTY(VisibleAnywhere, Category = Stat)
+		FVector RelativeTransformLocation;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
+		void Activate();
+	virtual void Activate_Implementation() override;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
+		void PlantSeed();
+	virtual void PlantSeed_Implementation() override;
+
+	UPROPERTY()
+		class AHelloFutureCharacter* player;
+
+	UFUNCTION(BlueprintCallable, Category = Farm)
+		void PlantApple();
+
+	UPROPERTY(EditDefaultsOnly, Category = Farm)
+		TSubclassOf<class AApple> appleFactory;
+
+	UFUNCTION(BlueprintCallable, Category = Farm)
+		void GrowTime(int growTime);
+
+	UPROPERTY(EditAnywhere, Category = Farm)
+		FText value;
 };
