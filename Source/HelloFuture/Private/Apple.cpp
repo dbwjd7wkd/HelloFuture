@@ -36,7 +36,7 @@ AApple::AApple()
 	price->SetupAttachment(body);
 
 
-	beginoverlaped = false;
+	//beginoverlaped = false;
 
 
 }
@@ -70,9 +70,9 @@ void AApple::Tick(float DeltaTime)
 
 void AApple::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult)
 {
-	beginoverlaped =true;
+	//beginoverlaped =true;
 
-	price -> SetVisibility(true);
+	//price -> SetVisibility(true);
 
 	//if(purchaseUI)
 	//{ 
@@ -88,7 +88,7 @@ void AApple::EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor,
 {
 	//beginoverlaped = false;
 
-	price->SetVisibility(false);
+	//price->SetVisibility(false);
 
 	//purchaseUI->RemoveFromParent();
 
