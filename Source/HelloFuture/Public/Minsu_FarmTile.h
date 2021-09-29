@@ -62,4 +62,14 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Farm)
 		FText value;
+
+	FTimerHandle DelayTimeHandle;
+
+	void AdvanceTimer();
+
+	int32 time;
+
+	FText timeText;
+
+	/*auto appleSeed = GetWorld()->SpawnActor<AApple>(appleFactory);*/
 };
