@@ -31,6 +31,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Mesh)
 		class UTextRenderComponent* countMesh;
 
+	UPROPERTY()
+		class AMinsu_FarmTile* me;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Stat)
 		bool IsSomethingPlanted = false;
 
@@ -52,11 +55,21 @@ public:
 		void PlantApple();
 
 	UPROPERTY(EditDefaultsOnly, Category = Farm)
-		TSubclassOf<class AMinsu_AppleSeed> appleFactory;
+		TSubclassOf<class AApple> appleFactory;
 
 	UFUNCTION(BlueprintCallable, Category = Farm)
 		void GrowTime(int growTime);
 
 	UPROPERTY(EditAnywhere, Category = Farm)
 		FText value;
+
+	FTimerHandle DelayTimeHandle;
+
+	void AdvanceTimer();
+
+	int32 time;
+
+	FText timeText;
+
+	/*auto appleSeed = GetWorld()->SpawnActor<AApple>(appleFactory);*/
 };

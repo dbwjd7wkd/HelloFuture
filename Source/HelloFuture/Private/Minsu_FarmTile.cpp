@@ -6,10 +6,10 @@
 #include <Components/StaticMeshComponent.h>
 #include <Kismet/GameplayStatics.h>
 #include <HelloFutureCharacter.h>
-#include <Apple.h>
 #include <Kismet/KismetTextLibrary.h>
 #include <Components/SceneComponent.h>
 #include <Minsu_AppleSeed.h>
+#include <Apple.h>
 
 // Sets default values
 AMinsu_FarmTile::AMinsu_FarmTile()
@@ -67,6 +67,7 @@ void AMinsu_FarmTile::PlantSeed_Implementation()
 		{
 		case 0:
 			PlantApple();
+			UE_LOG(LogTemp, Warning, TEXT("PlantApple"));
 			IsSomethingPlanted = true;
 			break;
 		}
@@ -75,8 +76,10 @@ void AMinsu_FarmTile::PlantSeed_Implementation()
 
 void AMinsu_FarmTile::PlantApple()
 {
-	auto appleSeed = GetWorld()->SpawnActor<AMinsu_AppleSeed>(appleFactory);
+	auto appleSeed = GetWorld()->SpawnActor<AApple>(appleFactory);
 	
+	/*RelativeTransformLocation = me->GetActorLocation() + FVector(0, 0, 0);*/
+
 	// ÃÊ±â
 	if (appleSeed)
 	{
@@ -84,44 +87,68 @@ void AMinsu_FarmTile::PlantApple()
 		GrowTime(5);
 	
 		appleSeed->SetActorLocation(RelativeTransformLocation + FVector(0, 0, 100));
-		GrowTime(5);
 
-		appleSeed->SetActorLocation(RelativeTransformLocation + FVector(0, 0, 200));
+// 		appleSeed->SetActorLocation(me-> GetActorLocation + FVector(0, 0, 100));
+// 		GrowTime(5);
+// 
+// 		appleSeed->SetActorLocation(me-> GetActorLocation + FVector(0, 0, 200));
 	}
 }
 
-void AMinsu_FarmTile::GrowTime(int growTime)
+void AMinsu_FarmTile::GrowTime(int32 growTime)
 {
-	int time = growTime;
+	time = growTime;
 
-	FText timeText = UKismetTextLibrary::Conv_IntToText(time);
+	timeText = UKismetTextLibrary::Conv_IntToText(time);
 	countMesh->SetText(timeText);
 	countMesh->USceneComponent::SetVisibility(true);
 	
-	FTimerHandle DelayTimeHandle;
-	float DelayTime = 1.0f;
+	GetWorldTimerManager().SetTimer(DelayTimeHandle, this, &AMinsu_FarmTile::AdvanceTimer, 1.0f, true);
+	
+	/*appleSeed->SetActorLocation(RelativeTransformLocation) + FVector(0, 0, 100);*/
 
-	GetWorld()->GetTimerManager().SetTimer(DelayTimeHandle, FTimerDelegate::CreateLambda([&]()
-	{
-		time = time -1;
-		
-	}), DelayTime, false);
+
+// 	
+// 	float DelayTime = 1.0f;
+// 
+// 	GetWorld()->GetTimerManager().SetTimer(DelayTimeHandle, FTimerDelegate::CreateLambda([&]()
+// 	{
+// 		--time;
+// 		countMesh->SetText(timeText);
+// 		
+// 	}), DelayTime, false);
+// 
+// 	
+// 
+// 
+// 
+// 
+// 	if (time == 1)
+// 	{
+// 		countMesh->SetText(value);
+// 		return;
+// 	}
+// 	else 
+// 	{
+// 		GetWorld()->GetTimerManager().SetTimer(DelayTimeHandle, FTimerDelegate::CreateLambda([&]()
+// 		{
+// 			time = time-1;
+// 
+// 		}), DelayTime, false);
+// 		countMesh->SetText(timeText);
+// 		return;
+// 	}
+}
+
+void AMinsu_FarmTile::AdvanceTimer()
+{
+	--time;
 	countMesh->SetText(timeText);
-
 	if (time == 0)
 	{
+		GetWorldTimerManager().ClearTimer(DelayTimeHandle);
 		countMesh->SetText(value);
-		return;
 	}
-	else
-	{
-		GetWorld()->GetTimerManager().SetTimer(DelayTimeHandle, FTimerDelegate::CreateLambda([&]()
-		{
-			time = time-1;
 
-		}), DelayTime, false);
-		countMesh->SetText(timeText);
-		return;
-	}
 }
 
