@@ -34,4 +34,39 @@ public:
 	UPROPERTY(EditAnyWhere, Category = Collision)
 		class UCapsuleComponent* collision;
 
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Time)
+		float currnetTime = 0;
+
+	UPROPERTY(EditAnywhere, Category = Time)
+		float createTime = 5;
+
+	UPROPERTY(EditAnywhere, Category = Time)
+		float delayTime = 9;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate1 = 25;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate2 = 50;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate3 = 75;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		int32 Rate4 = 100;
+
+
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		class UTextRenderComponent* talk;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
+		class UWidgetComponent* talkWidget;
+
+	void RandomTalk();
+	void talkDelayFunc();
+
+	class UMyTalkWidget* myTalk;
 };
