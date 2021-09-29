@@ -94,6 +94,7 @@ void AYJ_ATM::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 
 		// UI 창 없애기 (입금하기, 출금하기)
 		HideWidget();
+
 	}
 
 }

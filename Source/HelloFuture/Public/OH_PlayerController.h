@@ -76,8 +76,8 @@ void OnintroDialogueCompleted();
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 class UDataTable* IntroDialogue;
 
-
-	
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+	bool isPlaying = false;
 
 
 
