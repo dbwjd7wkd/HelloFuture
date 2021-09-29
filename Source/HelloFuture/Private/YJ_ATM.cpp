@@ -41,10 +41,6 @@ AYJ_ATM::AYJ_ATM()
 		mesh->SetMaterial(0, CubeMaterialAsset.Object);
 	}
 
-	// overlap 바인딩
-	mesh->OnComponentBeginOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapBegin);
-	mesh->OnComponentEndOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapEnd);
-
 	// UI
 	static ConstructorHelpers::FClassFinder<UUserWidget> MainMenuWidget (TEXT("WidgetBlueprint'/Game/YJ/UI/ATM/WBP_ATM'"));
 	if (MainMenuWidget.Succeeded())
@@ -66,6 +62,10 @@ void AYJ_ATM::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+	// overlap 바인딩
+	collision->OnComponentBeginOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapBegin);
+	collision->OnComponentEndOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapEnd);
 }
 
 void AYJ_ATM::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
