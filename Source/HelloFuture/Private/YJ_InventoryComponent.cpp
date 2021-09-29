@@ -13,7 +13,7 @@ UYJ_InventoryComponent::UYJ_InventoryComponent()
 {
 	Capacity = 20;
 	accountBalance = 10000;
-	cash = 1000;
+	cash = 5000;
 }
 
 // Called when the game starts

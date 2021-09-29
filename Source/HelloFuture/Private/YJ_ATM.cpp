@@ -55,6 +55,10 @@ void AYJ_ATM::BeginPlay()
 	Super::BeginPlay();
 	
 	isAvailable = true;
+
+	// overlap 바인딩
+	collision->OnComponentBeginOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapBegin);
+	collision->OnComponentEndOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapEnd);
 }
 
 // Called every frame
@@ -62,10 +66,6 @@ void AYJ_ATM::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
-	// overlap 바인딩
-	collision->OnComponentBeginOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapBegin);
-	collision->OnComponentEndOverlap.AddDynamic(this, &AYJ_ATM::OnOverlapEnd);
 }
 
 void AYJ_ATM::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
