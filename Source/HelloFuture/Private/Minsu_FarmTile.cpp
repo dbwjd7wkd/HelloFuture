@@ -6,10 +6,10 @@
 #include <Components/StaticMeshComponent.h>
 #include <Kismet/GameplayStatics.h>
 #include <HelloFutureCharacter.h>
-#include <Apple.h>
 #include <Kismet/KismetTextLibrary.h>
 #include <Components/SceneComponent.h>
 #include <Minsu_AppleSeed.h>
+#include <Apple.h>
 
 // Sets default values
 AMinsu_FarmTile::AMinsu_FarmTile()
@@ -67,6 +67,7 @@ void AMinsu_FarmTile::PlantSeed_Implementation()
 		{
 		case 0:
 			PlantApple();
+			UE_LOG(LogTemp, Warning, TEXT("PlantApple"));
 			IsSomethingPlanted = true;
 			break;
 		}
@@ -75,8 +76,10 @@ void AMinsu_FarmTile::PlantSeed_Implementation()
 
 void AMinsu_FarmTile::PlantApple()
 {
-	auto appleSeed = GetWorld()->SpawnActor<AMinsu_AppleSeed>(appleFactory);
+	auto appleSeed = GetWorld()->SpawnActor<AApple>(appleFactory);
 	
+	/*RelativeTransformLocation = me->GetActorLocation() + FVector(0, 0, 0);*/
+
 	// √ ±‚
 	if (appleSeed)
 	{

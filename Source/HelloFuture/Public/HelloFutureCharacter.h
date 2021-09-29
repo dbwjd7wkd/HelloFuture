@@ -211,7 +211,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
 	float TraceDistance = 2000.f;
 
-	// ¾¾¾Ñ °³¼ö Á¶Àý
+	// ¾¾¾Ñ Á¾·ù Á¶Àý
 	void UpSeed();
 	void DownSeed();
 
