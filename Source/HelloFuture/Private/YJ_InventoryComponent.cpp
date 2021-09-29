@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "YJ_GameModeBase.h"
 #include "YJ_WaitingTicketItem.h"
+#include "YJ_GameModeBase.h"
 
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
