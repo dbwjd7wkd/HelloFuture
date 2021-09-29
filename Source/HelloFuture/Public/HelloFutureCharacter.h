@@ -192,45 +192,45 @@ public:
 	//////////// 농장 꾸미기 ////////////////////////////////////////
 			
 	////////////// 인터페이스 사용 //////////////////////
-public:
-	void KeySeed();
-	void KeyActivate();
+// public:
+// 	void KeySeed();
+// 	void KeyActivate();
+// 
+// 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
+// 		void Activate();
+// 	virtual void Activate_Implementation() override;
+// 
+// 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
+// 		void PlantSeed();
+// 	virtual void PlantSeed_Implementation() override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
-		void Activate();
-	virtual void Activate_Implementation() override;
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+// 		TScriptInterface<IMinsu_Activate> minsuActive;
+// 
+// 	// 라인트레이스 거리
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+// 	float TraceDistance = 2000.f;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
-		void PlantSeed();
-	virtual void PlantSeed_Implementation() override;
+// 	// 씨앗 종류 조절
+// 	void UpSeed();
+// 	void DownSeed();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
-		TScriptInterface<IMinsu_Activate> minsuActive;
-
-	// 라인트레이스 거리
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
-	float TraceDistance = 2000.f;
-
-	// 씨앗 종류 조절
-	void UpSeed();
-	void DownSeed();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
-		int Seed = 0;
-
-	UPROPERTY(EditAnywhere, Category = Farm)
-		int AmountWheatSeed = 0;
-	UPROPERTY(EditAnywhere, Category = Farm)
-		int AmountCornSeed = 0;
-	UPROPERTY(EditAnywhere, Category = Farm)
-		int AmountBushSeed = 0;
-
-	UPROPERTY(EditAnywhere, Category = Farm)
-		int AmountWheat = 0;
-	UPROPERTY(EditAnywhere, Category = Farm)
-		int AmountCorn = 0;
-	UPROPERTY(EditAnywhere, Category = Farm)
-		int AmountBush = 0;
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+// 		int Seed = 0;
+// 
+// 	UPROPERTY(EditAnywhere, Category = Farm)
+// 		int AmountWheatSeed = 0;
+// 	UPROPERTY(EditAnywhere, Category = Farm)
+// 		int AmountCornSeed = 0;
+// 	UPROPERTY(EditAnywhere, Category = Farm)
+// 		int AmountBushSeed = 0;
+// 
+// 	UPROPERTY(EditAnywhere, Category = Farm)
+// 		int AmountWheat = 0;
+// 	UPROPERTY(EditAnywhere, Category = Farm)
+// 		int AmountCorn = 0;
+// 	UPROPERTY(EditAnywhere, Category = Farm)
+// 		int AmountBush = 0;
 
 	/////////////////////////////////////////////////////////////
 };

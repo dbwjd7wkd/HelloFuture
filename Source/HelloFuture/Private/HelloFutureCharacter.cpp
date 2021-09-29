@@ -201,15 +201,15 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 	//////////// 농장 꾸미기 ///////////////
 	
-	// 농작물 활성화 O키
-	PlayerInputComponent->BindAction("PlantActivate", IE_Pressed, this, &AHelloFutureCharacter::KeyActivate);
-	
-	// 농작물 씨앗뿌리기 P키
-	PlayerInputComponent->BindAction("PlantSeed", IE_Pressed, this, &AHelloFutureCharacter::KeySeed);
-
-	// 씨앗개수 조절
-	PlayerInputComponent->BindAction("SeedUp", IE_Pressed, this, &AHelloFutureCharacter::UpSeed);
-	PlayerInputComponent->BindAction("SeedDown", IE_Pressed, this, &AHelloFutureCharacter::DownSeed);
+// 	농작물 활성화 O키
+// 	PlayerInputComponent->BindAction("PlantActivate", IE_Pressed, this, &AHelloFutureCharacter::KeyActivate);
+// 	
+// 	// 농작물 씨앗뿌리기 P키
+// 	PlayerInputComponent->BindAction("PlantSeed", IE_Pressed, this, &AHelloFutureCharacter::KeySeed);
+// 
+// 	// 씨앗개수 조절
+// 	PlayerInputComponent->BindAction("SeedUp", IE_Pressed, this, &AHelloFutureCharacter::UpSeed);
+// 	PlayerInputComponent->BindAction("SeedDown", IE_Pressed, this, &AHelloFutureCharacter::DownSeed);
 
 }
 
@@ -328,79 +328,79 @@ void AHelloFutureCharacter::Chatting()
 	}
 }
 
-void AHelloFutureCharacter::Activate_Implementation()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Activate"));
-}
-
-void AHelloFutureCharacter::KeySeed()
-{
-	FHitResult HitResult;
-	FVector CamLoc;
-	FRotator CamRot;
-
-	GetController()->GetPlayerViewPoint(CamLoc, CamRot);
-
-	FVector StartTrace = CamLoc;
-	FVector EndTrace = StartTrace + (CamRot.Vector() * TraceDistance);
-
-	FCollisionQueryParams TraceParams;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, TraceParams);
-
-	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Green, false, 2.0f);
-
-	if (bHit)
-	{
-		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Green, false, 2.0f);
-		
-		if (HitResult.GetActor()->GetClass()->ImplementsInterface(UMinsu_PlantSeed::StaticClass()))
-		{
-			IMinsu_PlantSeed::Execute_PlantSeed(HitResult.GetActor());
-		}
-
-	}
-}
-
-void AHelloFutureCharacter::PlantSeed_Implementation()
-{
-	UE_LOG(LogTemp, Warning, TEXT("PlantSeed"));
-}
-
-void AHelloFutureCharacter::KeyActivate()
-{
-	FHitResult HitResult;
-	FVector CamLoc;
-	FRotator CamRot;
-
-	GetController()->GetPlayerViewPoint(CamLoc, CamRot);
-
-	FVector StartTrace = CamLoc;
-	FVector EndTrace = StartTrace + (CamRot.Vector() * TraceDistance);
-
-	FCollisionQueryParams TraceParams;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, TraceParams);
-
-	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Red, false, 2.0f);
-
-	if (bHit)
-	{
-		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
-		
-		if (HitResult.GetActor()->GetClass()->ImplementsInterface(UMinsu_Activate::StaticClass()))
-		{
-			IMinsu_Activate::Execute_Activate(HitResult.GetActor());
-		}
-	}
-	
-}
-
-void AHelloFutureCharacter::UpSeed()
-{
-	Seed = FMath::Clamp(Seed + 1, 0, 2);
-}
-
-void AHelloFutureCharacter::DownSeed()
-{
-	Seed = FMath::Clamp(Seed - 1, 0, 2);
-}
+// void AHelloFutureCharacter::Activate_Implementation()
+// {
+// 	/*UE_LOG(LogTemp, Warning, TEXT("Activate"));*/
+// }
+// 
+// void AHelloFutureCharacter::KeySeed()
+// {
+// // 	FHitResult HitResult;
+// // 	FVector CamLoc;
+// // 	FRotator CamRot;
+// // 
+// // 	GetController()->GetPlayerViewPoint(CamLoc, CamRot);
+// // 
+// // 	FVector StartTrace = CamLoc;
+// // 	FVector EndTrace = StartTrace + (CamRot.Vector() * TraceDistance);
+// // 
+// // 	FCollisionQueryParams TraceParams;
+// // 	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, TraceParams);
+// // 
+// // 	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Green, false, 2.0f);
+// // 
+// // 	if (bHit)
+// // 	{
+// // 		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Green, false, 2.0f);
+// // 		
+// // 		if (HitResult.GetActor()->GetClass()->ImplementsInterface(UMinsu_PlantSeed::StaticClass()))
+// // 		{
+// // 			IMinsu_PlantSeed::Execute_PlantSeed(HitResult.GetActor());
+// // 		}
+// // 
+// // 	}
+// }
+// 
+// void AHelloFutureCharacter::PlantSeed_Implementation()
+// {
+// 	/*UE_LOG(LogTemp, Warning, TEXT("PlantSeed"));*/
+// }
+// 
+// void AHelloFutureCharacter::KeyActivate()
+// {
+// // 	FHitResult HitResult;
+// // 	FVector CamLoc;
+// // 	FRotator CamRot;
+// // 
+// // 	GetController()->GetPlayerViewPoint(CamLoc, CamRot);
+// // 
+// // 	FVector StartTrace = CamLoc;
+// // 	FVector EndTrace = StartTrace + (CamRot.Vector() * TraceDistance);
+// // 
+// // 	FCollisionQueryParams TraceParams;
+// // 	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, TraceParams);
+// // 
+// // 	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Red, false, 2.0f);
+// // 
+// // 	if (bHit)
+// // 	{
+// // 		DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
+// // 		
+// // 		if (HitResult.GetActor()->GetClass()->ImplementsInterface(UMinsu_Activate::StaticClass()))
+// // 		{
+// // 			IMinsu_Activate::Execute_Activate(HitResult.GetActor());
+// // 		}
+// // 	}
+// 	
+// }
+// 
+// void AHelloFutureCharacter::UpSeed()
+// {
+// 	/*Seed = FMath::Clamp(Seed + 1, 0, 2);*/
+// }
+// 
+// void AHelloFutureCharacter::DownSeed()
+// {
+// 	/*Seed = FMath::Clamp(Seed - 1, 0, 2);*/
+// }
 
