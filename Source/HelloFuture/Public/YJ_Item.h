@@ -47,6 +47,13 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
 		int32 Price;
 
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+		int32 MinPrice;
+		
+		UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+		int32 MaxPrice;
+
 	/**The inventory that owns this item*/
 	UPROPERTY()
 		class UYJ_InventoryComponent* OwningInventory;
