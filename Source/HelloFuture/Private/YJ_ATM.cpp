@@ -121,6 +121,6 @@ void AYJ_ATM::ShowWidget()
 void AYJ_ATM::HideWidget()
 {
 	MainMenu->RemoveFromViewport();
-	PlayerController->bShowMouseCursor = false;
+	PlayerController->bShowMouseCursor = true;
 }
 

@@ -81,3 +81,35 @@ bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 
 	return false;
 }
+
+bool UYJ_InventoryComponent::MinusCash(int32 minusPrice)
+{
+	if (cash - minusPrice >= 0)
+	{
+		cash = cash - minusPrice;
+		return true;
+	}
+	else return false;
+}
+
+bool UYJ_InventoryComponent::PlusCash(int32 plusPrice)
+{
+	cash = cash + plusPrice;
+	return true;
+}
+
+bool UYJ_InventoryComponent::MinusAccountBalance(int32 minusPrice)
+{
+	if (accountBalance - minusPrice >= 0)
+	{
+		accountBalance = accountBalance - minusPrice;
+		return true;
+	}
+	else return false;
+}
+
+bool UYJ_InventoryComponent::PlusAccountBalance(int32 plusPrice)
+{
+	accountBalance = accountBalance + plusPrice;
+	return true;
+}

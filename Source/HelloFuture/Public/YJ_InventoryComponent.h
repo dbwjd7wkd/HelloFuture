@@ -21,10 +21,20 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
-	bool AddItem(class UYJ_Item* Item);
+		bool AddItem(class UYJ_Item* Item);
 	UFUNCTION(BlueprintCallable)
-	bool RemoveItem(class UYJ_Item* Item);
+		bool RemoveItem(class UYJ_Item* Item);
 
+	UFUNCTION(BlueprintCallable)
+		bool MinusCash(int32 minusPrice);
+	UFUNCTION(BlueprintCallable)
+		bool PlusCash(int32 plusPrice);
+	UFUNCTION(BlueprintCallable)
+		bool MinusAccountBalance(int32 minusPrice);
+	UFUNCTION(BlueprintCallable)
+		bool PlusAccountBalance(int32 plusPrice);
+
+public:
 	UPROPERTY(EditDefaultsOnly, Instanced)
 	TArray<class UYJ_Item*> DefaultItems;
 
