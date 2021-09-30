@@ -311,7 +311,7 @@ void AHelloFutureCharacter::SetInteractiveInRange(class AOH_InteractiveBase* Int
 
 void AHelloFutureCharacter::ClearInteractiveInRange(class AOH_InteractiveBase* Interactive)
 {
-	
+	UE_LOG(LogTemp, Warning, TEXT("WWWww"));
 	currentInteractive = nullptr;
 	
 }

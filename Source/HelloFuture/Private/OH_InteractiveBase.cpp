@@ -69,17 +69,19 @@ void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 
 void AOH_InteractiveBase::EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	UE_LOG(LogTemp, Warning, TEXT("222222"));
 	
-	if(bIsEnabled) return;
+	//if(bIsEnabled) return;
+
+	UE_LOG(LogTemp, Warning, TEXT("222222"));
 
 	currentCharacter = Cast<AHelloFutureCharacter>(OtherActor);
+
 
 	if (currentCharacter)
 	{
 		currentCharacter->ClearInteractiveInRange(this);
 
-		currentPlayerController =nullptr;
+		currentPlayerController = nullptr;
 	}
 }
 
