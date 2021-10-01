@@ -191,6 +191,26 @@ public:
 
 	//////////// 농장 꾸미기 ////////////////////////////////////////
 			
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+			int SeedCPP;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+			int AmountOfWheatSeedCPP;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+			int AmountOfPumpkinSeedCPP;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+			int AmountOfWheatCPP;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+			int AmountOfCornSeedCPP;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+			int AmountOfPumpkinCPP;
+
+
+
 	////////////// 인터페이스 사용 //////////////////////
 // public:
 // 	void KeySeed();
