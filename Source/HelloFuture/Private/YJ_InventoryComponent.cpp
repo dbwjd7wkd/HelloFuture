@@ -14,6 +14,9 @@ UYJ_InventoryComponent::UYJ_InventoryComponent()
 	Capacity = 20;
 	accountBalance = 10000;
 	cash = 5000;
+
+	columnLength = 10;
+	rowLength = 2;
 }
 
 // Called when the game starts
@@ -61,6 +64,8 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 
 	// 인벤토리에 Item 추가
 	Items.Add(Item);
+
+	state = "add";
 	
 	// Update UI
 	OnInventoryUpdated.Broadcast();
@@ -75,6 +80,7 @@ bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 		Item->OwningInventory = nullptr;
 		Item->World = nullptr;
 		Items.RemoveSingle(Item);
+		state = "remove";
 		OnInventoryUpdated.Broadcast();
 		return true;
 	}

@@ -52,4 +52,13 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
 	int32 cash;
+
+	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
+	FName state; // add, remove
+
+	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
+	int32 columnLength;
+	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
+	int32 rowLength;
+	
 };
