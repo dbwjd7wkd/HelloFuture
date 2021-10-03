@@ -11,12 +11,12 @@
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
 {
-	Capacity = 20;
 	accountBalance = 10000;
 	cash = 5000;
 
 	columnLength = 10;
 	rowLength = 2;
+	Capacity = columnLength * rowLength; // 20
 }
 
 // Called when the game starts
