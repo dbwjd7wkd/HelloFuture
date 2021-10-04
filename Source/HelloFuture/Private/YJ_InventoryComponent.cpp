@@ -11,12 +11,15 @@
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
 {
+
 	accountBalance = 10000;
 	cash = 5000;
 
 	columnLength = 10;
 	rowLength = 2;
 	Capacity = columnLength * rowLength; // 20
+
+
 }
 
 // Called when the game starts
@@ -24,10 +27,10 @@ void UYJ_InventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	for (auto& Item : DefaultItems)
-	{
-		AddItem(Item);
-	}
+	//for (auto& Item : DefaultItems)
+	//{
+	//	AddItem(Item);
+	//}
 	
 }
 
@@ -58,7 +61,7 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 			waitingTicketItem->ItemWaitingNumber = GameMode->waitingNumber + 1;
 		}
 	}
-	
+
 	Item->OwningInventory = this;
 	Item->World = GetWorld();
 

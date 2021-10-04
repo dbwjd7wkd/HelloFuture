@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "Minsu_Activate.h"
 #include "Minsu_PlantSeed.h"
+#include "YJ_SaveGame.h" // save game
+#include "Kismet/GameplayStatics.h" // save game
 #include "HelloFutureCharacter.generated.h"
 
 
@@ -36,9 +38,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
 
-
-
-
+	/** save game**/
+public:
+	UFUNCTION(BlueprintCallable)
+	void SaveGame();
+	UFUNCTION(BlueprintCallable)
+	void LoadGame();
 
 protected:
 
@@ -87,15 +92,13 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 	class UYJ_InventoryComponent* Inventory;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
-		float Health;
-
 	UFUNCTION(BlueprintCallable, Category = "Items")
 		void UseItem(class UYJ_Item* Item);
 
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EPressed")
 		bool isEPressed;
-
 
 	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
 	class AOH_PlayerController* ohController;*/
@@ -115,6 +118,9 @@ public:
 
 
 //FPlayerInputDelegate OninputDelegate;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
+		float time;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
 		FText Name;
 

@@ -63,8 +63,6 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	// 인벤토리 시스템
 	Inventory = CreateDefaultSubobject<UYJ_InventoryComponent>(TEXT("Inventory"));
 
-	Health = 100.f;
-
 	// 채팅 시스템
 	ChatText = CreateDefaultSubobject<UTextRenderComponent>("ChatText");
 	ChatText->SetRelativeLocation(FVector(0, 0, 100));
@@ -198,6 +196,10 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	////////////// 채팅 ////////////////
 	PlayerInputComponent->BindAction("Chatting", IE_Pressed, this, &AHelloFutureCharacter::Chatting);
 
+	// save game
+	PlayerInputComponent->BindAction("Save", IE_Pressed, this, &AHelloFutureCharacter::SaveGame);
+	PlayerInputComponent->BindAction("Load", IE_Pressed, this, &AHelloFutureCharacter::LoadGame);
+
 
 	//////////// 농장 꾸미기 ///////////////
 	
@@ -234,6 +236,58 @@ void AHelloFutureCharacter::CreatePlayerHUD(FText playerName)
 			nameWidget->AddToViewport();
 		}
 	}
+}
+
+void AHelloFutureCharacter::SaveGame()
+{
+	/** 인벤토리**/
+	// items 저장
+	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+	for (auto item : Inventory->Items)
+	{
+		SaveGameInstance->Items.Add(item);
+	}
+	// 인벤토리 정보들 저장
+	SaveGameInstance->accountBalance = Inventory->accountBalance;
+	SaveGameInstance->cash = Inventory->cash;
+	SaveGameInstance->columnLength = Inventory->columnLength;
+	SaveGameInstance->rowLength = Inventory->rowLength;
+	SaveGameInstance->Capacity = Inventory->Capacity;
+
+	// 플레이어 이름 저장
+	SaveGameInstance->PlayerName = Name;
+	SaveGameInstance->time = time;
+
+	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
+
+}
+
+void AHelloFutureCharacter::LoadGame()
+{
+	// items 로드
+	UYJ_SaveGame* LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+	LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
+	//Inventory->Items = LoadGameInstance->Items;
+	for (auto item : LoadGameInstance->Items)
+	{
+		Inventory->Items.Add(item);
+	}
+	Inventory->OnInventoryUpdated.Broadcast();
+	// 인벤토리 정보들 로드
+	Inventory->accountBalance = LoadGameInstance->accountBalance;
+	Inventory->cash = LoadGameInstance->cash;
+	Inventory->columnLength = LoadGameInstance->columnLength;
+	Inventory->rowLength = LoadGameInstance->rowLength;
+	Inventory->Capacity = LoadGameInstance->Capacity;
+
+	// 플레이어 이름 로드
+	Name = LoadGameInstance->PlayerName;
+	time = LoadGameInstance->time;
+
+	//if (GEngine)
+	//{
+	//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("로드 성공"));
+	//}
 }
 
 void AHelloFutureCharacter::OnResetVR()

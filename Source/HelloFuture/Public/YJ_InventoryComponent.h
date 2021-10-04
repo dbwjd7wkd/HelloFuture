@@ -44,9 +44,6 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FOnInventoryUpdated	OnInventoryUpdated;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	TArray<class UYJ_Item*> Items;
-
 	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
 	int32 accountBalance;
 
@@ -60,5 +57,8 @@ public:
 	int32 columnLength;
 	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
 	int32 rowLength;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
+	TArray<class UYJ_Item*> Items;
 	
 };
