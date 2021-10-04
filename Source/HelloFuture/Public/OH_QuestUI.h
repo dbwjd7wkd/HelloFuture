@@ -82,6 +82,7 @@ public:
 
 	void Interact();
 
+
 	void InitializeDialogue(class UDataTable* DialogueTable);
 		 
 	void OnSelectUpOption();
