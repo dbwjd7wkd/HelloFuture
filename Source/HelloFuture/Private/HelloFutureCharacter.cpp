@@ -267,12 +267,15 @@ void AHelloFutureCharacter::LoadGame()
 	// items 로드
 	UYJ_SaveGame* LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
 	LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
-	//Inventory->Items = LoadGameInstance->Items;
-	for (auto item : LoadGameInstance->Items)
-	{
-		Inventory->Items.Add(item);
-	}
-	Inventory->OnInventoryUpdated.Broadcast();
+
+	if (!LoadGameInstance || !Inventory) return;
+
+	//for (auto item : LoadGameInstance->Items)
+	//{
+	//	Inventory->Items.Add(item);
+	//}
+	Inventory->Items = LoadGameInstance->Items;
+	//Inventory->OnInventoryUpdated.Broadcast();
 	// 인벤토리 정보들 로드
 	Inventory->accountBalance = LoadGameInstance->accountBalance;
 	Inventory->cash = LoadGameInstance->cash;
