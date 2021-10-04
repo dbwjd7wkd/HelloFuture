@@ -9,6 +9,7 @@
 #include "Apple.h"
 
 
+
 AOH_PlayerController::AOH_PlayerController()
 {
 	
@@ -55,9 +56,33 @@ void AOH_PlayerController::BeginPlay()
 		//oh_QuestUI->SetMessage("HELLO WORLD!");
 		//oh_QuestUI->SetCharacterName("OH_SSang");
 		//oh_QuestUI->OnAinmationsShowMessageUI();
-		if(IntroDialogue  != nullptr)
+		/*if(IntroDialogue  != nullptr)
 		{
+			if(isPlaying == true)
+			{
 			SetCinematicMode(true,true,true);
+
+			oh_QuestUI->InitializeDialogue(IntroDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+			}
+
+		}*/
+
+	}
+
+}
+
+
+void AOH_PlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (IntroDialogue != nullptr)
+	{
+		if (isPlaying == true)
+		{
+			SetCinematicMode(true, true, true);
 
 			oh_QuestUI->InitializeDialogue(IntroDialogue);
 
@@ -68,6 +93,8 @@ void AOH_PlayerController::BeginPlay()
 
 }
 
+
+
 void AOH_PlayerController::OnintroDialogueCompleted()
 {
 	if (oh_QuestUI != nullptr)
@@ -75,6 +102,9 @@ void AOH_PlayerController::OnintroDialogueCompleted()
 		oh_QuestUI->OnDialogueCompleted.RemoveDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 	}
 	SetCinematicMode(false, true, true);
+
+	
+
 }
 
 void AOH_PlayerController::SetupInputComponent()

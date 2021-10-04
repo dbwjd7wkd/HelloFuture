@@ -63,6 +63,7 @@ void AOH_InteractiveBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 		currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);*/
 		//currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);
 
+		
 	}
 
 }

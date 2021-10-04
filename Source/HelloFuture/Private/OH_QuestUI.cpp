@@ -192,7 +192,7 @@ void UOH_QuestUI::Interact()
 		else
 		{
 			PlayerDialogTextBlock->SetText(FText::FromString(""));
-			CharacterNameText->SetText(FText::FromString("Blue Robot"));
+			CharacterNameText->SetText(FText::FromString(""));
 
 			if (dialogue[RowIndex]->MessageOptions.Num() > 0)
 			{

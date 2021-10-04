@@ -29,6 +29,10 @@ private:
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void ULockInput;*/
 
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 
 public:
 AOH_PlayerController();
