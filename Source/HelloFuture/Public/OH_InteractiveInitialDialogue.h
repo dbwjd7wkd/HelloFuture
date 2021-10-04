@@ -15,18 +15,20 @@ class HELLOFUTURE_API AOH_InteractiveInitialDialogue : public AOH_InteractiveBas
 	GENERATED_BODY()
 	
 
-private:
-	UFUNCTION()
-		virtual void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult);
+//private:
+//	UFUNCTION()
+//		virtual void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult);
+//
+//	UFUNCTION()
+//		virtual void EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UFUNCTION()
-		virtual void EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 private:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 		class UDataTable* Dialogue;
 
-	UFUNCTION(BlueprintCallable, Category = Event)
-		void OnDialogueCompleted();
+		/*UFUNCTION(BlueprintCallable, Category = Event)
+			void OnDialogueCompleted();*/
 
 	bool bIsInteracting = false;
+
+
 };

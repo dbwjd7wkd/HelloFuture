@@ -6,35 +6,35 @@
 #include "OH_QuestUI.h"
 
 
-void AOH_InteractiveInitialDialogue::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult)
-{
+//void AOH_InteractiveInitialDialogue::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bfromSweep, const FHitResult& SweepResult)
+//{
+//
+//
+//
+//
+//}
+//
+//void AOH_InteractiveInitialDialogue::EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+//{
+//
+//
+//
+//
+//
+//}
 
-
-
-
-}
-
-void AOH_InteractiveInitialDialogue::EndOverlap(UPrimitiveComponent* overlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-
-
-
-
-
-}
-
-void AOH_InteractiveInitialDialogue::OnDialogueCompleted()
-{
-	if (currentPlayerController != nullptr)
-	{
-		currentPlayerController->SetCinematicMode(false, true, true);
-
-		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue::OnDialogueCompleted);
-
-
-	}
-
-	bIsInteracting = false;
-
-
-}
+//void AOH_InteractiveInitialDialogue::OnDialogueCompleted()
+//{
+//	if (currentPlayerController != nullptr)
+//	{
+//		currentPlayerController->SetCinematicMode(false, true, true);
+//
+//		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue::OnDialogueCompleted);
+//
+//
+//	}
+//
+//	bIsInteracting = false;
+//
+//
+//}
