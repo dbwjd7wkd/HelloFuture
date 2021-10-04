@@ -28,6 +28,10 @@ public:
 
     UYJ_SaveGame();
 
+    // 모든 아이템 블루프린트 들어있는 배열
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Instanced)
+        TArray<class UYJ_Item*> AllItems;
+
     // save slot
     UPROPERTY(VisibleAnywhere, Category = Basic)
         FString SaveSlotName;

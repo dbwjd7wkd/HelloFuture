@@ -24,6 +24,7 @@
 #include "Minsu_PlantSeed.h"
 #include <Materials/MaterialInterface.h>
 #include <Minsu_ChatWidget.h>
+#include <YJ_GameInstance.h>
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -238,6 +239,17 @@ void AHelloFutureCharacter::CreatePlayerHUD(FText playerName)
 	}
 }
 
+void AHelloFutureCharacter::InitializeGame()
+{
+	for (auto item : Inventory->Items)
+	{
+		Inventory->RemoveItem(item);
+	}
+	// items 초기화
+	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+	Inventory->Items = SaveGameInstance->Items;
+}
+
 void AHelloFutureCharacter::SaveGame()
 {
 	/** 인벤토리**/
@@ -253,6 +265,8 @@ void AHelloFutureCharacter::SaveGame()
 	SaveGameInstance->columnLength = Inventory->columnLength;
 	SaveGameInstance->rowLength = Inventory->rowLength;
 	SaveGameInstance->Capacity = Inventory->Capacity;
+
+	SaveGameInstance->AllItems = Cast<UYJ_GameInstance>(GetGameInstance())->AllItems;
 
 	// 플레이어 이름 저장
 	SaveGameInstance->PlayerName = Name;

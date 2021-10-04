@@ -41,6 +41,8 @@ public:
 	/** save game**/
 public:
 	UFUNCTION(BlueprintCallable)
+	void InitializeGame();
+	UFUNCTION(BlueprintCallable)
 	void SaveGame();
 	UFUNCTION(BlueprintCallable)
 	void LoadGame();
