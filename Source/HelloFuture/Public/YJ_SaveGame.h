@@ -28,10 +28,6 @@ public:
 
     UYJ_SaveGame();
 
-    // 모든 아이템 블루프린트 들어있는 배열
-    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Instanced)
-        TArray<class UYJ_Item*> AllItems;
-
     // save slot
     UPROPERTY(VisibleAnywhere, Category = Basic)
         FString SaveSlotName;
@@ -48,9 +44,6 @@ public:
 
     // 인벤토리
     UPROPERTY(VisibleAnywhere, Category = "Inventory")
-        TArray<class UYJ_Item*> Items;
-
-    UPROPERTY(VisibleAnywhere, Category = "Inventory")
         int32 Capacity;
 
     UPROPERTY(VisibleAnywhere, Category = "Inventory")
@@ -64,4 +57,15 @@ public:
 
     UPROPERTY(VisibleAnywhere, Category = "Inventory")
         int32 rowLength;
+    
+    // 인벤토리 아이템 정보
+    UPROPERTY(VisibleAnywhere, Category = "Inventory")
+        TArray<int32> itemCnt; // 인벤토리의 각 아이템 갯수
+
+    UPROPERTY(VisibleAnywhere, Category = "Inventory")
+        TArray<int32> itemIdx; // 인벤토리의 각 아이템 인덱스
+
+    // 삭제 예정
+    UPROPERTY(VisibleAnywhere, Category = "Inventory")
+        TArray<class UYJ_Item*> Items;
 };

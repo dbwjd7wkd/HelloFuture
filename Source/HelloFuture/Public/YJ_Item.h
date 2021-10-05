@@ -51,8 +51,16 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
 		int32 MinPrice;
 		
-		UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
 		int32 MaxPrice;
+
+	/**The count for this item*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
+		int32 Count;
+
+	/**The count for this item*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
+		int32 Index;
 
 	/**The inventory that owns this item*/
 	UPROPERTY()

@@ -241,27 +241,28 @@ void AHelloFutureCharacter::CreatePlayerHUD(FText playerName)
 
 void AHelloFutureCharacter::InitializeGame()
 {
-	// items 초기화
-	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
-	if (!SaveGameInstance) return;
+	//// items 초기화
+	//UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+	//if (!SaveGameInstance) return;
 
-	// GameInstance의 AllItems 저장
-	SaveGameInstance->AllItems = Cast<UYJ_GameInstance>(GetGameInstance())->AllItems;
+	//// GameInstance의 AllItems 저장
+	//SaveGameInstance->AllItems = Cast<UYJ_GameInstance>(GetGameInstance())->AllItems;
 
-	//SaveGameInstance->Items.Empty();
-	//Inventory->Items = SaveGameInstance->Items;
-	//Inventory->OnInventoryUpdated.Broadcast();
-	SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
+	////SaveGameInstance->Items.Empty();
+	////Inventory->Items = SaveGameInstance->Items;
+	////Inventory->OnInventoryUpdated.Broadcast();
+	//SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
 }
 
 void AHelloFutureCharacter::SaveGame()
 {
 	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
-
-	if (!SaveGameInstance || !Inventory) return;
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
+	if (!SaveGameInstance || !Inventory || !gameInstance) return;
 
 	/** 인벤토리**/
-	// items 저장
+	// items 정보 저장
+
 	for (auto item : Inventory->Items)
 	{
 		SaveGameInstance->Items.Add(item);
@@ -286,16 +287,26 @@ void AHelloFutureCharacter::LoadGame()
 {
 	UYJ_SaveGame* LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
 	LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
 
-	if (!LoadGameInstance || !Inventory) return;
+	if (!LoadGameInstance || !Inventory || !gameInstance) return;
+
+	// items 정보 로드
+	//for (int i = 0; i < Inventory->Items.Num(); i++)
+	//{
+	//	// 인덱스가 0 이상일 때만 인벤토리에 가지고 있었음
+	//	int idx = LoadGameInstance->itemIdx[i];
+	//	if (idx < 0) continue;
+
+	//	// 가지고 있던 아이템들에 맞는 아이템 객체들 넣기
+	//	Inventory->Items[LoadGameInstance->itemIdx[i]] = gameInstance->AllItems[i];
+	//	// 가지고 있던 아이템들의 맞는 갯수 정보 넣기
+	//	Inventory->Items[LoadGameInstance->itemIdx[i]]->Count = LoadGameInstance->itemCnt[i];
+	//}
 
 	// items 로드
-	//for (auto item : LoadGameInstance->Items)
-	//{
-	//	Inventory->Items.Add(item);
-	//}
 	Inventory->Items = LoadGameInstance->Items;
-	//Inventory->OnInventoryUpdated.Broadcast();
+	Inventory->OnInventoryUpdated.Broadcast();
 	
 	// 인벤토리 정보들 로드
 	Inventory->accountBalance = LoadGameInstance->accountBalance;

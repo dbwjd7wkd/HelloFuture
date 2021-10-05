@@ -18,36 +18,8 @@ class HELLOFUTURE_API UYJ_GameInstance : public UGameInstance
 	
 public:
 
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	TArray<class UYJ_Item*> AllItems;
-	
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item")
-	//	class UYJ_Item* item_CornSeed;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	class UYJ_Item* item_Corn;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	class UYJ_Item* item_Daikon;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	class UYJ_Item* item_Bread;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	class UYJ_Item* item_Lemon;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	class UYJ_Item* item_Pumpkin;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	class UYJ_Item* item_PumpkinSeed;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
-	//	class UYJ_Item* item_WaterMelon;
-
+	// 플레이 시 모든 아이템들 객체 들어가있음
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Instanced)
 		TArray<class UYJ_Item*> AllItems;
 
-	//UFUNCTION(BlueprintCallable)
-	//	class UYJ_Item* GetItem(FName itemDisplayName);
 };

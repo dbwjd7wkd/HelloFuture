@@ -19,7 +19,6 @@ UYJ_InventoryComponent::UYJ_InventoryComponent()
 	rowLength = 3;
 	Capacity = columnLength * rowLength; // 20
 
-
 }
 
 // Called when the game starts
@@ -65,21 +64,16 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 	Item->OwningInventory = this;
 	Item->World = GetWorld();
 
-	//int idx = GetItemIndex(Item);
-	//// 만약 인벤토리에 Item이 있다면 갯수 증가
-	//if (idx >= 0)
-	//{
-	//	ItemsCount[idx]++;
-	//}
-	//// 그게 아니라면 인벤토리에 Item 추가
-	//else
+	//if(Item->Count <= 0)
 	//{
 	//	Items.Add(Item);
 	//}
-
-	Items.Add(Item);
+	//else
+	//{
+	//	Item->Count++;
+	//}
 	state = "add";
-	
+	Items.Add(Item);
 	// Update UI
 	OnInventoryUpdated.Broadcast();
 
@@ -110,6 +104,15 @@ bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 	//	Items.RemoveSingle(Item);
 	//}
 
+	//if (Item->Count <= 1)
+	//{
+	//	Items.RemoveSingle(Item);
+	//	Item->Count = 0;
+	//}
+	//else
+	//{
+	//	Item->Count--;
+	//}
 	Items.RemoveSingle(Item);
 	state = "remove";
 	OnInventoryUpdated.Broadcast();

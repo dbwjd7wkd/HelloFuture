@@ -7,6 +7,9 @@ UYJ_Item::UYJ_Item()
 {
 	ItemDisplayName = FText::FromString("Item");
 	Category = FText::FromString("Use");
+
+	Count = 0;
+	Index = -1;
 }
 
 void UYJ_Item::Use(class AHelloFutureCharacter* Character)

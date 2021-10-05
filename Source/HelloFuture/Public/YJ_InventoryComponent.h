@@ -60,10 +60,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
 	int32 rowLength;
 
+	// 인벤토리 아이템
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Items")
 	TArray<class UYJ_Item*> Items;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Items")
-	TArray<int32> ItemsCount;
 	
 };

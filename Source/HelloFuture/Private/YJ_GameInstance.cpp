@@ -23,19 +23,4 @@ UYJ_GameInstance::UYJ_GameInstance()
     //    AllItems.Add(item_CornSeed);
     //}
 
-
-
 }
-
-//UYJ_Item* UYJ_GameInstance::GetItem(FName itemDisplayName)
-//{
-//    //for (auto item : AllItems)
-//    //{
-//    //    if (item->ItemDisplayName == FText::FromName(itemDisplayName))
-//    //    {
-//    //        return item;
-//    //    }
-//    //}
-//
-//    return nullptr;
-//}
