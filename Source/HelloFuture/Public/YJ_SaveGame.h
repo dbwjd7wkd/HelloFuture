@@ -40,7 +40,7 @@ public:
         uint32 UserIndex;
 
     // 플레이어 정보
-    UPROPERTY(VisibleAnywhere, Category = Basic)
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
         FText PlayerName;
 
     UPROPERTY(VisibleAnywhere, Category = "Basic")
