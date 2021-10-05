@@ -15,8 +15,8 @@ UYJ_InventoryComponent::UYJ_InventoryComponent()
 	accountBalance = 10000;
 	cash = 5000;
 
-	columnLength = 10;
-	rowLength = 2;
+	columnLength = 7;
+	rowLength = 3;
 	Capacity = columnLength * rowLength; // 20
 
 
@@ -65,9 +65,19 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 	Item->OwningInventory = this;
 	Item->World = GetWorld();
 
-	// 인벤토리에 Item 추가
-	Items.Add(Item);
+	//int idx = GetItemIndex(Item);
+	//// 만약 인벤토리에 Item이 있다면 갯수 증가
+	//if (idx >= 0)
+	//{
+	//	ItemsCount[idx]++;
+	//}
+	//// 그게 아니라면 인벤토리에 Item 추가
+	//else
+	//{
+	//	Items.Add(Item);
+	//}
 
+	Items.Add(Item);
 	state = "add";
 	
 	// Update UI
@@ -78,17 +88,49 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 
 bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 {
-	if (Item)
+	// 인벤토리 창이 다 차거나 들어오는 Item 이 유효하지 않으면 아래 내용 실행하지 않음.
+	if (Items.Num() <= 0 || !Item)
 	{
-		Item->OwningInventory = nullptr;
-		Item->World = nullptr;
-		Items.RemoveSingle(Item);
-		state = "remove";
-		OnInventoryUpdated.Broadcast();
-		return true;
+		return false;
 	}
 
-	return false;
+	Item->OwningInventory = nullptr;
+	Item->World = nullptr;
+
+	//int idx = GetItemIndex(Item);
+	//// 만약 인벤토리에 Item이 있고 갯수가 2개 이상이라면 갯수 감소
+	//if (ItemsCount[idx] >= 2)
+	//{
+	//	ItemsCount[idx]--;
+	//}
+	//// 그게 아니고 갯수가 1개 이하라면 인벤토리에 Item 추가
+	//else if(ItemsCount[idx] <= 1)
+	//{
+	//	ItemsCount[idx] = 0;
+	//	Items.RemoveSingle(Item);
+	//}
+
+	Items.RemoveSingle(Item);
+	state = "remove";
+	OnInventoryUpdated.Broadcast();
+	return true;
+
+}
+
+int32 UYJ_InventoryComponent::GetItemIndex(UYJ_Item* Item)
+{
+	// 인벤토리에 Item이 있으면 인덱스 반환
+	int idx = -1;
+	for (auto inven_item : Items)
+	{
+		idx++;
+		if (inven_item->ItemDisplayName.ToString() == Item->ItemDisplayName.ToString())
+		{
+			return idx;
+		}
+	}
+	// 없으면 -1	반환
+	return -1;
 }
 
 bool UYJ_InventoryComponent::MinusCash(int32 minusPrice)

@@ -241,20 +241,27 @@ void AHelloFutureCharacter::CreatePlayerHUD(FText playerName)
 
 void AHelloFutureCharacter::InitializeGame()
 {
-	for (auto item : Inventory->Items)
-	{
-		Inventory->RemoveItem(item);
-	}
 	// items 초기화
 	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
-	Inventory->Items = SaveGameInstance->Items;
+	if (!SaveGameInstance) return;
+
+	// GameInstance의 AllItems 저장
+	SaveGameInstance->AllItems = Cast<UYJ_GameInstance>(GetGameInstance())->AllItems;
+
+	//SaveGameInstance->Items.Empty();
+	//Inventory->Items = SaveGameInstance->Items;
+	//Inventory->OnInventoryUpdated.Broadcast();
+	SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
 }
 
 void AHelloFutureCharacter::SaveGame()
 {
+	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+
+	if (!SaveGameInstance || !Inventory) return;
+
 	/** 인벤토리**/
 	// items 저장
-	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
 	for (auto item : Inventory->Items)
 	{
 		SaveGameInstance->Items.Add(item);
@@ -266,8 +273,7 @@ void AHelloFutureCharacter::SaveGame()
 	SaveGameInstance->rowLength = Inventory->rowLength;
 	SaveGameInstance->Capacity = Inventory->Capacity;
 
-	SaveGameInstance->AllItems = Cast<UYJ_GameInstance>(GetGameInstance())->AllItems;
-
+	/** 나머지 정보들 **/
 	// 플레이어 이름 저장
 	SaveGameInstance->PlayerName = Name;
 	SaveGameInstance->time = time;
@@ -278,18 +284,19 @@ void AHelloFutureCharacter::SaveGame()
 
 void AHelloFutureCharacter::LoadGame()
 {
-	// items 로드
 	UYJ_SaveGame* LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
 	LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
 
 	if (!LoadGameInstance || !Inventory) return;
 
+	// items 로드
 	//for (auto item : LoadGameInstance->Items)
 	//{
 	//	Inventory->Items.Add(item);
 	//}
 	Inventory->Items = LoadGameInstance->Items;
 	//Inventory->OnInventoryUpdated.Broadcast();
+	
 	// 인벤토리 정보들 로드
 	Inventory->accountBalance = LoadGameInstance->accountBalance;
 	Inventory->cash = LoadGameInstance->cash;

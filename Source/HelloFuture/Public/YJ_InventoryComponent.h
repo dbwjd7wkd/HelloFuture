@@ -24,6 +24,8 @@ public:
 		bool AddItem(class UYJ_Item* Item);
 	UFUNCTION(BlueprintCallable)
 		bool RemoveItem(class UYJ_Item* Item);
+	UFUNCTION(BlueprintCallable)
+		int32 GetItemIndex(class UYJ_Item* Item);
 
 	UFUNCTION(BlueprintCallable)
 		bool MinusCash(int32 minusPrice);
@@ -58,7 +60,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
 	int32 rowLength;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Items")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Items")
 	TArray<class UYJ_Item*> Items;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Items")
+	TArray<int32> ItemsCount;
 	
 };
