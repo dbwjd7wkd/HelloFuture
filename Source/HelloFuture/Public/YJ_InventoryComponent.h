@@ -9,6 +9,24 @@
 // Blueprints will bind to this to update the UI
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 
+UENUM(BlueprintType)
+enum class EItemEnum : uint8
+{
+	apple = 0,
+	clothingHelmet, // UMETA(DisplayName = "Option B")
+	clothingVest,
+	cornItem,
+	CornSeed,
+	Daikon,
+	Bread,
+	Lemon,
+	Pumpkin,
+	PumpkinSeed,
+	WaterMelon,
+	Wheat,
+	WheatSeed = 12
+};
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class HELLOFUTURE_API UYJ_InventoryComponent : public UActorComponent
 {
@@ -19,14 +37,18 @@ public:
 	UYJ_InventoryComponent();
 
 	virtual void BeginPlay() override;
-
+	// 아이템 관련 함수
 	UFUNCTION(BlueprintCallable)
 		bool AddItem(class UYJ_Item* Item);
 	UFUNCTION(BlueprintCallable)
+		bool AddItem2(EItemEnum Item);
+	UFUNCTION(BlueprintCallable)
 		bool RemoveItem(class UYJ_Item* Item);
 	UFUNCTION(BlueprintCallable)
+		bool RemoveItem2(EItemEnum Item);
+	UFUNCTION(BlueprintCallable)
 		int32 GetItemIndex(class UYJ_Item* Item);
-
+	// 돈 관련 함수
 	UFUNCTION(BlueprintCallable)
 		bool MinusCash(int32 minusPrice);
 	UFUNCTION(BlueprintCallable)

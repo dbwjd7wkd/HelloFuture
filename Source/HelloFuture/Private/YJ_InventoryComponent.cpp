@@ -7,6 +7,7 @@
 #include "YJ_GameModeBase.h"
 #include "YJ_WaitingTicketItem.h"
 #include "YJ_GameModeBase.h"
+#include "YJ_GameInstance.h"
 
 // Sets default values for this component's properties
 UYJ_InventoryComponent::UYJ_InventoryComponent()
@@ -80,9 +81,38 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 	return true;
 }
 
+// 게임인스턴스의 AllItems 배열에서 Item번째 YJ_Item 을 가져와서 add
+bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
+{
+	// 인벤토리 창이 다 차면 아래 내용 실행하지 않음.
+	if (Items.Num() >= Capacity)
+	{
+		return false;
+	}
+
+	// 게임인스턴스 가져오기
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GEngine->GetWorld()->GetGameInstance());
+	if (!gameInstance) return false;
+
+	// 아이템 가져오기
+	int32 idx = (int32)Item;
+	UYJ_Item* item = gameInstance->AllItems[idx];
+
+	// 아이템 추가하기
+	item->OwningInventory = this;
+	item->World = GetWorld();
+	state = "add";
+	// 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	Items.Add(item);
+	// Update UI
+	OnInventoryUpdated.Broadcast();
+
+	return true;
+}
+
 bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 {
-	// 인벤토리 창이 다 차거나 들어오는 Item 이 유효하지 않으면 아래 내용 실행하지 않음.
+	// 인벤토리 창이 비거나 들어오는 Item 이 유효하지 않으면 아래 내용 실행하지 않음.
 	if (Items.Num() <= 0 || !Item)
 	{
 		return false;
@@ -118,6 +148,34 @@ bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 	OnInventoryUpdated.Broadcast();
 	return true;
 
+}
+
+// 게임인스턴스의 AllItems 배열에서 Item번째 YJ_Item 을 가져와서 remove
+bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
+{
+	// 인벤토리 창이 비면 아래 내용 실행하지 않음.
+	if (Items.Num() <= 0)
+	{
+		return false;
+	}
+
+	// 게임인스턴스 가져오기
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GEngine->GetWorld()->GetGameInstance());
+	if (!gameInstance) return false;
+
+	// 아이템 가져오기
+	int32 idx = (int32)Item;
+	UYJ_Item* item = gameInstance->AllItems[idx];
+
+	// 아이템 지우기
+	item->OwningInventory = nullptr;
+	item->World = nullptr;
+	state = "remove";
+
+	Items.RemoveSingle(item);
+	OnInventoryUpdated.Broadcast();
+
+	return true;
 }
 
 int32 UYJ_InventoryComponent::GetItemIndex(UYJ_Item* Item)
