@@ -8,6 +8,12 @@ UYJ_SaveGame::UYJ_SaveGame()
 {
 	SaveSlotName = TEXT("MySaveSlot");
 	UserIndex = 0;
+
+	for (int i = 0; i < 15; i++)
+	{
+		inventoryIdx.Add(-1);
+		inventoryCnt.Add(0);
+	}
 	//itemIdx.Init(20, -1); // 총 아이템 20개에 대해 인덱스 -1 부여 // 오류남
 
  //   Items.Empty();

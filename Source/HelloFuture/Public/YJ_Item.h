@@ -58,9 +58,13 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
 		int32 Count;
 
-	/**The count for this item*/
+	/**The InventoryIndex for this item*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
-		int32 Index;
+		int32 InventoryIndex;
+
+	/**The ItemIndex for this item*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
+		int32 ItemIndex;
 
 	/**The inventory that owns this item*/
 	UPROPERTY()

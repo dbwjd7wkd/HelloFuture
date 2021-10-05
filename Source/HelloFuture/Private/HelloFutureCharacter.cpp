@@ -242,6 +242,21 @@ void AHelloFutureCharacter::CreatePlayerHUD(FText playerName)
 void AHelloFutureCharacter::InitializeGame()
 {
 	//// items 초기화
+	//UYJ_SaveGame* LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+	//LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
+	////UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
+
+	//if (!LoadGameInstance) return;
+
+	////items 정보 로드
+	//for (int i = 0; i < 15; i++)
+	//{
+	//	itemCnt.Add(0);
+	//	itemIdx.Add(-1);
+	//}
+	//LoadGameInstance->itemCnt = itemCnt;
+	//LoadGameInstance->itemIdx = itemIdx;
+
 	//UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
 	//if (!SaveGameInstance) return;
 
@@ -262,17 +277,20 @@ void AHelloFutureCharacter::SaveGame()
 
 	/** 인벤토리**/
 	// items 정보 저장
-
-	for (auto item : Inventory->Items)
+	for (int32 i=0; i<Inventory->ItemCnt; i++)
 	{
-		SaveGameInstance->Items.Add(item);
+		//SaveGameInstance->Items.Add(Inventory->Items[i]);
+		int32 idx = Inventory->Items[i]->ItemIndex;
+		SaveGameInstance->inventoryIdx[idx] = i;
+		SaveGameInstance->inventoryCnt[idx] = Inventory->Items[i]->Count;
 	}
+
 	// 인벤토리 정보들 저장
 	SaveGameInstance->accountBalance = Inventory->accountBalance;
 	SaveGameInstance->cash = Inventory->cash;
-	SaveGameInstance->columnLength = Inventory->columnLength;
-	SaveGameInstance->rowLength = Inventory->rowLength;
-	SaveGameInstance->Capacity = Inventory->Capacity;
+	//SaveGameInstance->columnLength = Inventory->columnLength;
+	//SaveGameInstance->rowLength = Inventory->rowLength;
+	//SaveGameInstance->Capacity = Inventory->Capacity;
 
 	/** 나머지 정보들 **/
 	// 플레이어 이름 저장
@@ -291,29 +309,32 @@ void AHelloFutureCharacter::LoadGame()
 
 	if (!LoadGameInstance || !Inventory || !gameInstance) return;
 
-	// items 정보 로드
-	//for (int i = 0; i < Inventory->Items.Num(); i++)
-	//{
-	//	// 인덱스가 0 이상일 때만 인벤토리에 가지고 있었음
-	//	int idx = LoadGameInstance->itemIdx[i];
-	//	if (idx < 0) continue;
+	//items 정보 로드
+	for (int32 i = 0; i < gameInstance->AllItems.Num(); i++)
+	{
+		// 갯수가 1 이상일 때만 인벤토리에 가지고 있었음
+		int32 cnt = LoadGameInstance->inventoryCnt[i];
+		if (cnt <= 0) continue;
 
-	//	// 가지고 있던 아이템들에 맞는 아이템 객체들 넣기
-	//	Inventory->Items[LoadGameInstance->itemIdx[i]] = gameInstance->AllItems[i];
-	//	// 가지고 있던 아이템들의 맞는 갯수 정보 넣기
-	//	Inventory->Items[LoadGameInstance->itemIdx[i]]->Count = LoadGameInstance->itemCnt[i];
-	//}
-
+		int32 idx = LoadGameInstance->inventoryIdx[i];
+		// 가지고 있던 아이템들에 맞는 아이템 객체들 넣기
+		Inventory->Items[idx] = gameInstance->AllItems[i];
+		// 가지고 있던 아이템들의 맞는 갯수 정보 넣기
+		Inventory->Items[idx]->Count = cnt;
+		Inventory->Items[idx]->ItemIndex = i;
+		Inventory->Items[idx]->InventoryIndex = idx;
+	}
 	// items 로드
-	Inventory->Items = LoadGameInstance->Items;
+	//Inventory->Items = LoadGameInstance->Items;
+
 	Inventory->OnInventoryUpdated.Broadcast();
 	
 	// 인벤토리 정보들 로드
 	Inventory->accountBalance = LoadGameInstance->accountBalance;
 	Inventory->cash = LoadGameInstance->cash;
-	Inventory->columnLength = LoadGameInstance->columnLength;
-	Inventory->rowLength = LoadGameInstance->rowLength;
-	Inventory->Capacity = LoadGameInstance->Capacity;
+	//Inventory->columnLength = LoadGameInstance->columnLength;
+	//Inventory->rowLength = LoadGameInstance->rowLength;
+	//Inventory->Capacity = LoadGameInstance->Capacity;
 
 	// 플레이어 이름 로드
 	Name = LoadGameInstance->PlayerName;

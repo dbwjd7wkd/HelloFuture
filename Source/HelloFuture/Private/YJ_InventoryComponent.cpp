@@ -20,6 +20,7 @@ UYJ_InventoryComponent::UYJ_InventoryComponent()
 	rowLength = 3;
 	Capacity = columnLength * rowLength; // 20
 
+	Items.SetNum(Capacity);
 }
 
 // Called when the game starts
@@ -31,7 +32,6 @@ void UYJ_InventoryComponent::BeginPlay()
 	//{
 	//	AddItem(Item);
 	//}
-	
 }
 
 bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
@@ -64,15 +64,6 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 
 	Item->OwningInventory = this;
 	Item->World = GetWorld();
-
-	//if(Item->Count <= 0)
-	//{
-	//	Items.Add(Item);
-	//}
-	//else
-	//{
-	//	Item->Count++;
-	//}
 	state = "add";
 	Items.Add(Item);
 	// Update UI
@@ -85,25 +76,61 @@ bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
 bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
 {
 	// 인벤토리 창이 다 차면 아래 내용 실행하지 않음.
-	if (Items.Num() >= Capacity)
+	if (ItemCnt >= Capacity)
 	{
 		return false;
 	}
 
 	// 게임인스턴스 가져오기
-	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GEngine->GetWorld()->GetGameInstance());
+	UWorld* world = GetWorld();
+	if (!world) return false;
+	UGameInstance* gameInst = world->GetGameInstance();
+	if (!gameInst) return false;
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(gameInst);
 	if (!gameInstance) return false;
 
 	// 아이템 가져오기
 	int32 idx = (int32)Item;
 	UYJ_Item* item = gameInstance->AllItems[idx];
 
+	// Item이 은행 대기표일 때, Items에 대기표가 있으면 아래 내용 실행하지 않음.
+	UYJ_WaitingTicketItem* waitingTicketItem = Cast<UYJ_WaitingTicketItem>(item);
+	if (waitingTicketItem)
+	{
+		for (auto yjItem : Items)
+		{
+			if (Cast<UYJ_WaitingTicketItem>(yjItem) != nullptr)
+			{
+				return false;
+			}
+		}
+
+		UWorld* const World = GetWorld();
+		AYJ_GameModeBase* GameMode;
+		if (World) {
+			GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
+			waitingTicketItem->ItemWaitingNumber = GameMode->waitingNumber + 1;
+		}
+	}
+
 	// 아이템 추가하기
-	item->OwningInventory = this;
-	item->World = GetWorld();
 	state = "add";
 	// 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	Items.Add(item);
+	if(item->Count <= 0)
+	{
+		item->OwningInventory = this;
+		item->World = GetWorld();
+		item->ItemIndex = idx;
+		item->InventoryIndex = ItemCnt;
+		item->Count = 1;
+		Items[ItemCnt] = item;
+		//Items.Add(item);
+		ItemCnt++;
+	}
+	else
+	{
+		Items[item->InventoryIndex]->Count++;
+	}
 	// Update UI
 	OnInventoryUpdated.Broadcast();
 
@@ -120,41 +147,19 @@ bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 
 	Item->OwningInventory = nullptr;
 	Item->World = nullptr;
-
-	//int idx = GetItemIndex(Item);
-	//// 만약 인벤토리에 Item이 있고 갯수가 2개 이상이라면 갯수 감소
-	//if (ItemsCount[idx] >= 2)
-	//{
-	//	ItemsCount[idx]--;
-	//}
-	//// 그게 아니고 갯수가 1개 이하라면 인벤토리에 Item 추가
-	//else if(ItemsCount[idx] <= 1)
-	//{
-	//	ItemsCount[idx] = 0;
-	//	Items.RemoveSingle(Item);
-	//}
-
-	//if (Item->Count <= 1)
-	//{
-	//	Items.RemoveSingle(Item);
-	//	Item->Count = 0;
-	//}
-	//else
-	//{
-	//	Item->Count--;
-	//}
-	Items.RemoveSingle(Item);
+	Items[ItemCnt] = nullptr;
+	//Items.RemoveSingle(Item);
 	state = "remove";
 	OnInventoryUpdated.Broadcast();
 	return true;
-
 }
 
 // 게임인스턴스의 AllItems 배열에서 Item번째 YJ_Item 을 가져와서 remove
 bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
 {
+	// sellingitem2 UI의 RemoveItem2에서 false가 반환이 됨 수정!!!!!!!!!!!!!!!!!!!!
 	// 인벤토리 창이 비면 아래 내용 실행하지 않음.
-	if (Items.Num() <= 0)
+	if (ItemCnt <= 0)
 	{
 		return false;
 	}
@@ -168,11 +173,27 @@ bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
 	UYJ_Item* item = gameInstance->AllItems[idx];
 
 	// 아이템 지우기
-	item->OwningInventory = nullptr;
-	item->World = nullptr;
+
 	state = "remove";
 
-	Items.RemoveSingle(item);
+	if (item->Count <= 1)
+	{
+		item->OwningInventory = nullptr;
+		item->World = nullptr;
+		item->ItemIndex = idx;
+		item->InventoryIndex = -1;
+		item->Count = 0;
+		Items[ItemCnt] = nullptr;
+		//Items.RemoveSingle(item);
+		ItemCnt--;
+		UE_LOG(LogTemp, Warning, TEXT("Remove Item"));
+	}
+	else
+	{
+		//Items[item->InventoryIndex]->Count--;
+		item->Count--;
+		UE_LOG(LogTemp, Warning, TEXT("Minus item count"));
+	}
 	OnInventoryUpdated.Broadcast();
 
 	return true;

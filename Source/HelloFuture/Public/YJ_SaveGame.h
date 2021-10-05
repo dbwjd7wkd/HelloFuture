@@ -44,26 +44,26 @@ public:
 
     // 인벤토리
     UPROPERTY(VisibleAnywhere, Category = "Inventory")
-        int32 Capacity;
-
-    UPROPERTY(VisibleAnywhere, Category = "Inventory")
         int32 accountBalance;
 
     UPROPERTY(VisibleAnywhere, Category = "Inventory")
         int32 cash;
 
-    UPROPERTY(VisibleAnywhere, Category = "Inventory")
-        int32 columnLength;
+    //UPROPERTY(VisibleAnywhere, Category = "Inventory")
+    //    int32 columnLength;
 
-    UPROPERTY(VisibleAnywhere, Category = "Inventory")
-        int32 rowLength;
-    
+    //UPROPERTY(VisibleAnywhere, Category = "Inventory")
+    //    int32 rowLength;
+    //
+    //UPROPERTY(VisibleAnywhere, Category = "Inventory")
+    //    int32 Capacity;
+
     // 인벤토리 아이템 정보
-    UPROPERTY(VisibleAnywhere, Category = "Inventory")
-        TArray<int32> itemCnt; // 인벤토리의 각 아이템 갯수
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory")
+        TArray<int32> inventoryIdx; // 인벤토리의 각 아이템 인덱스
 
-    UPROPERTY(VisibleAnywhere, Category = "Inventory")
-        TArray<int32> itemIdx; // 인벤토리의 각 아이템 인덱스
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory")
+        TArray<int32> inventoryCnt; // 인벤토리의 각 아이템 갯수
 
     // 삭제 예정
     UPROPERTY(VisibleAnywhere, Category = "Inventory")

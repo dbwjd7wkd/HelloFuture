@@ -9,7 +9,8 @@ UYJ_Item::UYJ_Item()
 	Category = FText::FromString("Use");
 
 	Count = 0;
-	Index = -1;
+	InventoryIndex = -1;
+	ItemIndex = -1;
 }
 
 void UYJ_Item::Use(class AHelloFutureCharacter* Character)
