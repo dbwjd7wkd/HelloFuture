@@ -81,7 +81,22 @@ UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 class UDataTable* IntroDialogue;
 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* FarmDialogue;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* MainMapDialogue;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* BankDialogue;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* ShopDialogue;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 	bool isPlaying = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool isfirstFarm = false;
 
 
 

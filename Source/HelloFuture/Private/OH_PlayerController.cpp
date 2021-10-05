@@ -89,6 +89,15 @@ void AOH_PlayerController::Tick(float DeltaTime)
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 		}
 
+		else if (isfirstFarm == true)
+		{
+			SetCinematicMode(true, true, true);
+
+			oh_QuestUI->InitializeDialogue(FarmDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+		}
+
 	}
 
 }
