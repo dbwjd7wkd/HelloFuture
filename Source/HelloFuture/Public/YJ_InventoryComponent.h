@@ -12,10 +12,10 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 UENUM(BlueprintType)
 enum class EItemEnum : uint8
 {
-	apple = 0,
-	clothingHelmet, // UMETA(DisplayName = "Option B")
-	clothingVest,
-	cornItem,
+	Apple = 0,
+	ClothingHelmet, // UMETA(DisplayName = "Option B")
+	ClothingVest,
+	CornItem,
 	CornSeed,
 	Radish,
 	Bread,
@@ -25,7 +25,8 @@ enum class EItemEnum : uint8
 	WaterMelon,
 	Wheat,
 	WheatSeed = 12,
-	RadishSeed
+	RadishSeed,
+	WaitingTicket
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )

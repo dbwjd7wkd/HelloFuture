@@ -69,6 +69,6 @@ public:
         int32 ItemCnt;
 
     // 삭제 예정
-    UPROPERTY(VisibleAnywhere, Category = "Inventory")
-        TArray<class UYJ_Item*> Items;
+    //UPROPERTY(VisibleAnywhere, Category = "Inventory")
+    //    TArray<class UYJ_Item*> Items;
 };

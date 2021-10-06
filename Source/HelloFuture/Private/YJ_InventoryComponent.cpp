@@ -84,9 +84,7 @@ bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
 	// 게임인스턴스 가져오기
 	UWorld* world = GetWorld();
 	if (!world) return false;
-	UGameInstance* gameInst = world->GetGameInstance();
-	if (!gameInst) return false;
-	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(gameInst);
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(world->GetGameInstance());
 	if (!gameInstance) return false;
 
 	// 아이템 가져오기
@@ -109,6 +107,7 @@ bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
 		AYJ_GameModeBase* GameMode;
 		if (World) {
 			GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
+			if (!GameMode) return false;
 			waitingTicketItem->ItemWaitingNumber = GameMode->waitingNumber + 1;
 		}
 	}
@@ -170,9 +169,7 @@ bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
 	// 게임인스턴스 가져오기
 	UWorld* world = GetWorld();
 	if (!world) return false;
-	UGameInstance* gameInst = world->GetGameInstance();
-	if (!gameInst) return false;
-	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(gameInst);
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(world->GetGameInstance());
 	if (!gameInstance) return false;
 
 	// 아이템 가져오기
@@ -215,6 +212,8 @@ int32 UYJ_InventoryComponent::GetItemIndex(UYJ_Item* Item)
 	for (auto inven_item : Items)
 	{
 		idx++;
+		int inven_idx = Items.Find(Item);
+		Items[inven_idx]->ItemIndex;
 		if (inven_item->ItemDisplayName.ToString() == Item->ItemDisplayName.ToString())
 		{
 			return idx;

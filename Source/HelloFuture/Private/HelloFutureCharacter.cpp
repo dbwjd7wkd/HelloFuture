@@ -85,7 +85,6 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 		ChatText->SetFont(FontFinder.Object);
 	}
 
-
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -317,6 +316,7 @@ void AHelloFutureCharacter::LoadGame()
 	for (int32 i = 0; i < gameInstance->AllItems.Num(); i++)
 	{
 		// 갯수가 1 이상일 때만 인벤토리에 가지고 있었음
+		gameInstance->AllItems[i]->ItemIndex = i;
 		int32 cnt = LoadGameInstance->inventoryCnt[i];
 		if (cnt <= 0) continue;
 
@@ -325,7 +325,6 @@ void AHelloFutureCharacter::LoadGame()
 		Inventory->Items[idx] = gameInstance->AllItems[i];
 		// 가지고 있던 아이템들의 맞는 갯수 정보 넣기
 		Inventory->Items[idx]->Count = cnt;
-		Inventory->Items[idx]->ItemIndex = i;
 		Inventory->Items[idx]->InventoryIndex = idx;
 	}
 	// items 로드
