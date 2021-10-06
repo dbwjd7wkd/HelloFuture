@@ -277,6 +277,8 @@ void AHelloFutureCharacter::SaveGame()
 
 	/** 인벤토리**/
 	// items 정보 저장
+	SaveGameInstance->ItemCnt = Inventory->ItemCnt;
+
 	for (int32 i=0; i<Inventory->ItemCnt; i++)
 	{
 		//SaveGameInstance->Items.Add(Inventory->Items[i]);
@@ -284,7 +286,6 @@ void AHelloFutureCharacter::SaveGame()
 		SaveGameInstance->inventoryIdx[idx] = i;
 		SaveGameInstance->inventoryCnt[idx] = Inventory->Items[i]->Count;
 	}
-
 	// 인벤토리 정보들 저장
 	SaveGameInstance->accountBalance = Inventory->accountBalance;
 	SaveGameInstance->cash = Inventory->cash;
@@ -310,6 +311,9 @@ void AHelloFutureCharacter::LoadGame()
 	if (!LoadGameInstance || !Inventory || !gameInstance) return;
 
 	//items 정보 로드
+	Inventory->ItemCnt = LoadGameInstance->ItemCnt;
+	Inventory->Items.SetNum(Inventory->ItemCnt);
+
 	for (int32 i = 0; i < gameInstance->AllItems.Num(); i++)
 	{
 		// 갯수가 1 이상일 때만 인벤토리에 가지고 있었음
@@ -326,7 +330,6 @@ void AHelloFutureCharacter::LoadGame()
 	}
 	// items 로드
 	//Inventory->Items = LoadGameInstance->Items;
-
 	Inventory->OnInventoryUpdated.Broadcast();
 	
 	// 인벤토리 정보들 로드
