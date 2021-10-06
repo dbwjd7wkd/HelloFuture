@@ -17,14 +17,15 @@ enum class EItemEnum : uint8
 	clothingVest,
 	cornItem,
 	CornSeed,
-	Daikon,
+	Radish,
 	Bread,
 	Lemon,
 	Pumpkin,
 	PumpkinSeed,
 	WaterMelon,
 	Wheat,
-	WheatSeed = 12
+	WheatSeed = 12,
+	RadishSeed
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
