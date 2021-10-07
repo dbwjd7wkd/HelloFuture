@@ -81,6 +81,7 @@ public:
 	UPROPERTY()
 	class AActor* target;
 
+
 private:
 	class UMyTalkWidget* myTalk2;
 	
