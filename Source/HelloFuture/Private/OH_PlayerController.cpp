@@ -98,6 +98,35 @@ void AOH_PlayerController::Tick(float DeltaTime)
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 		}
 
+
+		else if (isfirstMainMap == true)
+		{
+			SetCinematicMode(true, true, true);
+
+			oh_QuestUI->InitializeDialogue(MainMapDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+		}
+
+
+		else if (isfirstShop == true)
+		{
+			SetCinematicMode(true, true, true);
+
+			oh_QuestUI->InitializeDialogue(ShopDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+		}
+
+
+		else if (isfirstBank == true)
+		{
+			SetCinematicMode(true, true, true);
+
+			oh_QuestUI->InitializeDialogue(BankDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+		}
 	}
 
 }

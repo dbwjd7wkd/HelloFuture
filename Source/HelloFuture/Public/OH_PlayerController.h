@@ -98,6 +98,17 @@ UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool isfirstFarm = false;
 
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool isfirstMainMap = false;
+
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool isfirstShop = false;
+
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool isfirstBank = false;
+
 
 
 };
