@@ -9,7 +9,7 @@ UYJ_SaveGame::UYJ_SaveGame()
 	SaveSlotName = TEXT("MySaveSlot");
 	UserIndex = 0;
 
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 40; i++) // 아이템 추가되면 갯수 늘려야 함
 	{
 		inventoryIdx.Add(-1);
 		inventoryCnt.Add(0);
