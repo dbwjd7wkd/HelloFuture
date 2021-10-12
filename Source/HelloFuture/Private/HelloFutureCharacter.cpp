@@ -317,6 +317,7 @@ void AHelloFutureCharacter::LoadGame()
 	{
 		// 갯수가 1 이상일 때만 인벤토리에 가지고 있었음
 		gameInstance->AllItems[i]->ItemIndex = i;
+		if (LoadGameInstance->inventoryCnt.Num() < i+1) LoadGameInstance->inventoryCnt.Add(0); // 아이템 갯수가 늘어났을 경우 오류 대비
 		int32 cnt = LoadGameInstance->inventoryCnt[i];
 		if (cnt <= 0) continue;
 
