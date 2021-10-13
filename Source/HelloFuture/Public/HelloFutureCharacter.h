@@ -8,13 +8,14 @@
 #include "Minsu_PlantSeed.h"
 #include "YJ_SaveGame.h" // save game
 #include "Kismet/GameplayStatics.h" // save game
+#include "Minsu_ShakeTree.h"
 #include "HelloFutureCharacter.generated.h"
 
 
 //DECLARE_MULTICAST_DELEGATE_OneParam(FPlayerInputDelegate, class UInputComponent*)
 
-UCLASS(config=Game)
-class AHelloFutureCharacter : public ACharacter, public IMinsu_Activate, public IMinsu_PlantSeed
+UCLASS(config = Game)
+class AHelloFutureCharacter : public ACharacter, public IMinsu_Activate, public IMinsu_PlantSeed, public IMinsu_ShakeTree
 {
 	GENERATED_BODY()
 
@@ -223,6 +224,11 @@ public:
 // public:
 // 	void KeySeed();
 // 	void KeyActivate();
+	public:
+		void KeyShakeTree();
+		UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
+			void ShakeTree();
+		virtual void ShakeTree_Implementation() override;
 // 
 // 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Farm)
 // 		void Activate();
@@ -236,8 +242,8 @@ public:
 // 		TScriptInterface<IMinsu_Activate> minsuActive;
 // 
 // 	// 라인트레이스 거리
-// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
-// 	float TraceDistance = 2000.f;
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Farm)
+float TraceDistance = 500.f;
 
 // 	// 씨앗 종류 조절
 // 	void UpSeed();

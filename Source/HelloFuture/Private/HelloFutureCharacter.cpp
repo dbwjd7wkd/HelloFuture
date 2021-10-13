@@ -165,6 +165,37 @@ void AHelloFutureCharacter::UpdateChatText()
 }
 
 
+void AHelloFutureCharacter::KeyShakeTree()
+{
+	FHitResult HitResult;
+	FVector CamLoc;
+	FRotator CamRot;
+	
+	GetController()->GetPlayerViewPoint(CamLoc, CamRot);
+	 
+	FVector StartTrace = CamLoc;
+	FVector EndTrace = StartTrace + (CamRot.Vector() * TraceDistance);
+	
+	FCollisionQueryParams TraceParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, TraceParams);
+	
+	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Green, false, 2.0f);
+	if (bHit)
+		{
+			DrawDebugBox(GetWorld(), HitResult.ImpactPoint, FVector(5, 5, 5), FColor::Green, false, 2.0f);
+			if (HitResult.GetActor()->GetClass()->ImplementsInterface(UMinsu_PlantSeed::StaticClass()))
+				{
+					IMinsu_ShakeTree::Execute_ShakeTree(HitResult.GetActor());
+				}
+	 
+		}
+}
+
+void AHelloFutureCharacter::ShakeTree_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("ShakeTree_Activate"));
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
