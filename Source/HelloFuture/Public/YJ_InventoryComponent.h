@@ -27,7 +27,10 @@ enum class EItemEnum : uint8
 	WheatSeed = 12,
 	RadishSeed,
 	WaitingTicket,
-	Fertilizer
+	Fertilizer,
+	Fertilizer2,
+	MagicPowder,
+	Tonic
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
