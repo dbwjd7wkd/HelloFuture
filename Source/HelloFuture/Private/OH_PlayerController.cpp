@@ -44,9 +44,13 @@ void AOH_PlayerController::BeginPlay()
 
 	if (oh_QuestUIclass != nullptr)
 	{
-		if (HasAuthority() == false) // true: 서버, false: 클라이언트
+		if (HasAuthority() == true) // true: 서버, false: 클라이언트
 		{
 			oh_QuestUI = CreateWidget<UOH_QuestUI>(this, oh_QuestUIclass);
+		}
+		else
+		{
+
 		}
 	}
 
@@ -81,7 +85,7 @@ void AOH_PlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (IntroDialogue != nullptr)
+	if (IntroDialogue != nullptr && oh_QuestUI != nullptr)
 	{
 		if (isPlaying == true)
 		{
@@ -101,7 +105,6 @@ void AOH_PlayerController::Tick(float DeltaTime)
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 		}
 
-
 		else if (isfirstMainMap == true)
 		{
 			SetCinematicMode(true, true, true);
@@ -111,7 +114,6 @@ void AOH_PlayerController::Tick(float DeltaTime)
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 		}
 
-
 		else if (isfirstShop == true)
 		{
 			SetCinematicMode(true, true, true);
@@ -120,7 +122,6 @@ void AOH_PlayerController::Tick(float DeltaTime)
 
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 		}
-
 
 		else if (isfirstBank == true)
 		{
