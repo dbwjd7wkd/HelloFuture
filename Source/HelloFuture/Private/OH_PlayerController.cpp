@@ -7,7 +7,8 @@
 #include "HelloFutureCharacter.h"
 #include "HelloFutureGameMode.h"
 #include "Apple.h"
-
+#include "GameFramework/Actor.h"
+#include "OH_InteractiveBase.h"
 
 
 AOH_PlayerController::AOH_PlayerController()
@@ -43,8 +44,10 @@ void AOH_PlayerController::BeginPlay()
 
 	if (oh_QuestUIclass != nullptr)
 	{
-		oh_QuestUI = CreateWidget<UOH_QuestUI>(this, oh_QuestUIclass);
-		
+		if (HasAuthority() == false) // true: 서버, false: 클라이언트
+		{
+			oh_QuestUI = CreateWidget<UOH_QuestUI>(this, oh_QuestUIclass);
+		}
 	}
 
 	if (oh_QuestUI != nullptr)
