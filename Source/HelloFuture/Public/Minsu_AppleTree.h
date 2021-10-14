@@ -33,7 +33,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Stat")
 		TSubclassOf<class AActor> fruits;
 
-	UFUNCTION(Category = "Stat")
+	UFUNCTION(BlueprintCallable, Category = "Stat")
 		void SpawnFruit();
 
 	class AMinsu_AppleTree* me;

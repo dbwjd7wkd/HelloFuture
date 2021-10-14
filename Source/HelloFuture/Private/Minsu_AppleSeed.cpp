@@ -11,16 +11,6 @@ AMinsu_AppleSeed::AMinsu_AppleSeed()
 
 	bodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Body Mesh"));
 	SetRootComponent(bodyMesh);
-	bodyMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-	ConstructorHelpers::FObjectFinder<UStaticMesh>TempMesh(TEXT("StaticMesh'/Game/Import/Village/Meshes/Props/TB_Prop_Apple_TB_Prop_Apple_188.TB_Prop_Apple_TB_Prop_Apple_188'"));
-	{
-		if (TempMesh.Succeeded())
-		{
-			bodyMesh->SetStaticMesh(TempMesh.Object);
-		}
-	}
-
 }
 
 // Called when the game starts or when spawned
