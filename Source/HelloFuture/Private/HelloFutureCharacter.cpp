@@ -26,7 +26,6 @@
 #include <Minsu_ChatWidget.h>
 #include <YJ_GameInstance.h>
 
-
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
 
@@ -85,6 +84,12 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 		ChatText->SetFont(FontFinder.Object);
 	}
 
+	// 옷 구매 TMap
+	BoughtClothes.Add("ShopClothes1", false);
+	BoughtClothes.Add("ShopClothes2", false);
+	BoughtClothes.Add("ShopClothes3", false);
+	BoughtClothes.Add("ShopClothes4", false);
+	BoughtClothes.Add("ShopClothes5", false);
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -194,6 +199,26 @@ void AHelloFutureCharacter::KeyShakeTree()
 void AHelloFutureCharacter::ShakeTree_Implementation()
 {
 	UE_LOG(LogTemp, Warning, TEXT("ShakeTree_Activate"));
+}
+
+/////////////////////////////////////////////////////////////////////////
+// 옷 구매 확인
+bool AHelloFutureCharacter::GetBoughtClothes(FString key)
+{
+	bool value;
+	bool* isKey = BoughtClothes.Find(key);
+	if (isKey != nullptr)
+	{
+		// 유효하면 값을 돌려줌
+		value = BoughtClothes[key];
+	}
+	return value;
+}
+
+void AHelloFutureCharacter::SetBoughtClothes(FString key, bool value)
+{
+	// 자동으로 오버로딩됨
+	BoughtClothes.Add(key, value);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -330,6 +355,8 @@ void AHelloFutureCharacter::SaveGame()
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 
+	// 구매한 옷
+	SaveGameInstance->BoughtClothes = BoughtClothes;
 }
 
 void AHelloFutureCharacter::LoadGame()
@@ -378,6 +405,9 @@ void AHelloFutureCharacter::LoadGame()
 	//{
 	//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("로드 성공"));
 	//}
+
+	//구매한 옷 로드
+	BoughtClothes = LoadGameInstance->BoughtClothes;
 }
 
 void AHelloFutureCharacter::OnResetVR()

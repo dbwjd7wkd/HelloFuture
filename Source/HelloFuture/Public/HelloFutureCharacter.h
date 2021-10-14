@@ -267,5 +267,16 @@ float TraceDistance = 500.f;
 // 		int AmountBush = 0;
 
 	/////////////////////////////////////////////////////////////
+// ¿Ê ±¸¸Å
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BoughtClothes)
+		TMap<FString, bool> BoughtClothes;
+
+	UFUNCTION(BlueprintCallable, Category = BoughtClothes)
+		bool GetBoughtClothes(FString key);
+
+	UFUNCTION(BlueprintCallable, Category = BoughtClothes)
+		void SetBoughtClothes(FString key, bool value);
+
 };
 

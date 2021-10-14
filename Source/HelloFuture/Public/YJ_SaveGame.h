@@ -71,4 +71,10 @@ public:
     // 삭제 예정
     //UPROPERTY(VisibleAnywhere, Category = "Inventory")
     //    TArray<class UYJ_Item*> Items;
+
+
+    // 구매한 옷
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoughtClothes")
+        TMap<FString, bool> BoughtClothes;
+
 };
