@@ -28,6 +28,8 @@ void AOH_InteractiveDialogue3::Interact()
 
 		// 다이얼로그 완료
 		currentPlayerController->GetUI()->OnDialogueCompleted.AddDynamic(this, &AOH_InteractiveDialogue3::OnDialogueCompleted);
+
+		
 	}
 }
 
@@ -39,7 +41,7 @@ void AOH_InteractiveDialogue3::OnDialogueCompleted()
 
 		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue3::OnDialogueCompleted);
 
-		Destroy();
+			interactQuest = true;
 
 		
 	}

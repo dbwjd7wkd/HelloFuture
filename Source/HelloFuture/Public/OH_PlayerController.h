@@ -109,6 +109,8 @@ bool isfirstShop = false;
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool isfirstBank = false;
 
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool interactQuest = false;
 
 
 };

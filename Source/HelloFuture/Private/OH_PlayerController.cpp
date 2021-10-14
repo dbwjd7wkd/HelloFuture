@@ -145,6 +145,8 @@ void AOH_PlayerController::OnintroDialogueCompleted()
 	}
 	SetCinematicMode(false, true, true);
 
+	interactQuest = true;
+	
 	
 
 }

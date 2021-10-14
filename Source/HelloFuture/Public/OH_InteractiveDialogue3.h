@@ -29,6 +29,9 @@ protected:
 	bool bIsInteracting = false;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+		bool interactQuest = false;
+
 
 
 };
