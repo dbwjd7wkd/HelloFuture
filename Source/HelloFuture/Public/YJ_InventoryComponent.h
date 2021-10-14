@@ -53,7 +53,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 		bool RemoveItem2(EItemEnum Item);
 	UFUNCTION(BlueprintCallable)
-		int32 GetItemIndex(class UYJ_Item* Item);
+		class UYJ_Item* EnumIndexToItem(EItemEnum Item);
+	UFUNCTION(BlueprintCallable)
+		bool CheckHaveItemAsYJ_Item(class UYJ_Item* Item);
+	UFUNCTION(BlueprintCallable)
+		bool CheckHaveItemAsEnum(EItemEnum Item);
+
 	// µ· °ü·Ã ÇÔ¼ö
 	UFUNCTION(BlueprintCallable)
 		bool MinusCash(int32 minusPrice);

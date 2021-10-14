@@ -32,6 +32,7 @@ void UYJ_InventoryComponent::BeginPlay()
 	//{
 	//	AddItem(Item);
 	//}
+
 }
 
 bool UYJ_InventoryComponent::AddItem(UYJ_Item* Item)
@@ -205,22 +206,33 @@ bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
 	return true;
 }
 
-int32 UYJ_InventoryComponent::GetItemIndex(UYJ_Item* Item)
+UYJ_Item* UYJ_InventoryComponent::EnumIndexToItem(EItemEnum Item)
 {
-	// 인벤토리에 Item이 있으면 인덱스 반환
-	int idx = -1;
-	for (auto inven_item : Items)
-	{
-		idx++;
-		int inven_idx = Items.Find(Item);
-		Items[inven_idx]->ItemIndex;
-		if (inven_item->ItemDisplayName.ToString() == Item->ItemDisplayName.ToString())
-		{
-			return idx;
-		}
-	}
-	// 없으면 -1	반환
-	return -1;
+	UWorld* world = GetWorld();
+	if (!world) return false;
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(world->GetGameInstance());
+	if (!gameInstance) return false;
+
+	int32 idx = (int32)Item;
+	UYJ_Item* item = gameInstance->AllItems[idx];
+	if (item) return item;
+	else return nullptr;
+}
+
+bool UYJ_InventoryComponent::CheckHaveItemAsYJ_Item(class UYJ_Item* Item)
+{
+	if (Item->InventoryIndex >= 0) return true;
+	else return false;
+}
+
+bool UYJ_InventoryComponent::CheckHaveItemAsEnum(EItemEnum Item)
+{
+	UYJ_Item* item = UYJ_InventoryComponent::EnumIndexToItem(Item);
+
+	if (!item) return false;
+
+	if (item->InventoryIndex >= 0) return true;
+	else return false;
 }
 
 bool UYJ_InventoryComponent::MinusCash(int32 minusPrice)
