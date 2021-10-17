@@ -8,6 +8,7 @@
 
 void AOH_InteractiveDialogue3::Interact()
 {
+		
 	if (bIsInteracting)
 	{
 		return;
@@ -16,12 +17,14 @@ void AOH_InteractiveDialogue3::Interact()
 	if ((currentPlayerController != nullptr) && (Dialogue != nullptr))
 	{
 
+		camera = true;
 		bIsInteracting = true;
 
+		
 		// 플레이어 인풋 잠금
 		currentPlayerController->SetCinematicMode(true, true, true);
 
-
+		
 		// 다이얼로그 가져오기
 		currentPlayerController->GetUI()->InitializeDialogue(Dialogue);
 
@@ -41,8 +44,8 @@ void AOH_InteractiveDialogue3::OnDialogueCompleted()
 
 		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue3::OnDialogueCompleted);
 
-			interactQuest = true;
 
+			interactQuest = true;
 		
 	}
 

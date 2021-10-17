@@ -33,5 +33,8 @@ protected:
 		bool interactQuest = false;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+		bool camera = false;
+
 
 };
