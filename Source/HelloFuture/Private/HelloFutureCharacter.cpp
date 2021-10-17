@@ -90,6 +90,9 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	BoughtClothes.Add("ShopClothes3", false);
 	BoughtClothes.Add("ShopClothes4", false);
 	BoughtClothes.Add("ShopClothes5", false);
+	BoughtClothes.Add("ShopClothes6", false);
+	BoughtClothes.Add("ShopClothes7", false);
+	
 }
 
 void AHelloFutureCharacter::BeginPlay()

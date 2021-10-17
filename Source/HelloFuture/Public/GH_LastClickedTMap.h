@@ -33,4 +33,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = LastCliked)
 	void SetLastClickedItem(FString key, FString value);
 
+	UFUNCTION(BlueprintCallable, Category = LastCliked)
+	void InitLastClickedItem();
 };

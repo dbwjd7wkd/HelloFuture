@@ -60,3 +60,17 @@ void AGH_LastClickedTMap::SetLastClickedItem(FString key, FString value)
 	LastClicked.Add(key, value);
 }
 
+void AGH_LastClickedTMap::InitLastClickedItem()
+{
+	LastClicked.Add("Head");
+	LastClicked.Add("HairStyle");
+	LastClicked.Add("Nose");
+	LastClicked.Add("UpperClothes");
+	LastClicked.Add("UnderClothes");
+	LastClicked.Add("WholeClothes");
+	LastClicked.Add("Glasses");
+	LastClicked.Add("Hat");
+	LastClicked.Add("Bag");
+	LastClicked.Add("Watch");
+}
+
