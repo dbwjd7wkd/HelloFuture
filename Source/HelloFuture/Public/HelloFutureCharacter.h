@@ -11,7 +11,8 @@
 #include "Minsu_ShakeTree.h"
 #include "HelloFutureCharacter.generated.h"
 
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSaveGameDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoadGameDelegate);
 //DECLARE_MULTICAST_DELEGATE_OneParam(FPlayerInputDelegate, class UInputComponent*)
 
 UCLASS(config = Game)
@@ -90,8 +91,22 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-	// 인벤토리시스템
 public:
+	// save Game
+	UPROPERTY(BlueprintReadOnly)
+	class UYJ_SaveGame* SaveGameInstance;
+	UPROPERTY(BlueprintReadOnly)
+	class UYJ_GameInstance* gameInstance;
+	UPROPERTY(BlueprintReadOnly)
+	class UYJ_SaveGame* LoadGameInstance;
+
+	// 퀘스트
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+		FSaveGameDelegate OnSaveGame;
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+		FLoadGameDelegate OnLoadGame;
+
+	// 인벤토리시스템
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 	class UYJ_InventoryComponent* Inventory;
 

@@ -329,8 +329,8 @@ void AHelloFutureCharacter::InitializeGame()
 
 void AHelloFutureCharacter::SaveGame()
 {
-	UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
-	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
+	SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+	gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
 	if (!SaveGameInstance || !Inventory || !gameInstance) return;
 
 	/** 인벤토리**/
@@ -356,17 +356,19 @@ void AHelloFutureCharacter::SaveGame()
 	SaveGameInstance->PlayerName = Name;
 	SaveGameInstance->time = time;
 
-	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
-
 	// 구매한 옷
 	SaveGameInstance->BoughtClothes = BoughtClothes;
+
+	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
+
+	OnSaveGame.Broadcast();
 }
 
 void AHelloFutureCharacter::LoadGame()
 {
-	UYJ_SaveGame* LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
+	LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
 	LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
-	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
+	gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
 
 	if (!LoadGameInstance || !Inventory || !gameInstance) return;
 
@@ -411,6 +413,8 @@ void AHelloFutureCharacter::LoadGame()
 
 	//구매한 옷 로드
 	BoughtClothes = LoadGameInstance->BoughtClothes;
+
+	OnLoadGame.Broadcast();
 }
 
 void AHelloFutureCharacter::OnResetVR()

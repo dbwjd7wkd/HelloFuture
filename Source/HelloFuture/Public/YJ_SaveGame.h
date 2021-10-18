@@ -29,11 +29,11 @@ public:
     UYJ_SaveGame();
 
     // save slot
-    UPROPERTY(VisibleAnywhere, Category = Basic)
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
         FString SaveSlotName;
 
-    UPROPERTY(VisibleAnywhere, Category = Basic)
-        uint32 UserIndex;
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
+        int32 UserIndex;
 
     // 플레이어 정보
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
@@ -76,5 +76,9 @@ public:
     // 구매한 옷
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoughtClothes")
         TMap<FString, bool> BoughtClothes;
+
+    // 퀘스트
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Quest")
+    UActorComponent* saveQuest;
 
 };
