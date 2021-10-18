@@ -215,8 +215,17 @@ UYJ_Item* UYJ_InventoryComponent::EnumIndexToItem(EItemEnum Item)
 
 	int32 idx = (int32)Item;
 	UYJ_Item* item = gameInstance->AllItems[idx];
-	if (item) return item;
-	else return nullptr;
+	if (item)
+	{
+		for (auto itm : Items)
+		{
+			if (itm == item)
+			{
+				return itm;
+			}
+		}
+	}
+	return nullptr;
 }
 
 bool UYJ_InventoryComponent::CheckHaveItemAsYJ_Item(class UYJ_Item* Item)
@@ -229,10 +238,19 @@ bool UYJ_InventoryComponent::CheckHaveItemAsEnum(EItemEnum Item)
 {
 	UYJ_Item* item = UYJ_InventoryComponent::EnumIndexToItem(Item);
 
-	if (!item) return false;
+	for (auto itm : Items)
+	{
+		if (itm == item)
+		{
+			return true;
+		}
+	}
 
-	if (item->InventoryIndex >= 0) return true;
-	else return false;
+	return false;
+	//if (!item) return false;
+
+	//if (item->Count > 0) return true;
+	//else return false;
 }
 
 bool UYJ_InventoryComponent::MinusCash(int32 minusPrice)
