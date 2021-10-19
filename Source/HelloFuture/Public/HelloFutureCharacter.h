@@ -293,5 +293,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BoughtClothes)
 		void SetBoughtClothes(FString key, bool value);
 
+// 이전 맵 이름 저장
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PreLevelName")
+		FString preLevelName;
 };
 

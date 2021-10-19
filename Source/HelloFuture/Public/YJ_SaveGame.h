@@ -81,4 +81,8 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Quest")
     UActorComponent* saveQuest;
 
+    // ∏ ¿« ¿Ã∏ß
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="PreLevelName")
+        FString preLevelName = "MainMap";
+
 };
