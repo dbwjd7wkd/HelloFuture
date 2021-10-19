@@ -3,6 +3,7 @@
 
 #include "YJ_GameInstance.h"
 #include "YJ_Item.h"
+//#include "YJ_InventoryComponent.h"
 
 UYJ_GameInstance::UYJ_GameInstance()
 {
@@ -23,4 +24,17 @@ UYJ_GameInstance::UYJ_GameInstance()
     //    AllItems.Add(item_CornSeed);
     //}
 
+}
+
+UYJ_Item* UYJ_GameInstance::GetItemAsEnum(EItemEnum itemEnum)
+{
+	UWorld* world = GetWorld();
+	if (!world) return false;
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(world->GetGameInstance());
+	if (!gameInstance) return false;
+
+	int32 idx = (int32)itemEnum;
+	UYJ_Item* item = gameInstance->AllItems[idx];
+
+    return item;
 }
