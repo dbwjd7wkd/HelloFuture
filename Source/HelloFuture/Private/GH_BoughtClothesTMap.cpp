@@ -33,7 +33,7 @@ void AGH_BoughtClothesTMap::Tick(float DeltaTime)
 
 bool AGH_BoughtClothesTMap::GetBoughtClothes(FString key)
 {
-	bool value;
+	bool value = false;
 	bool* isKey = BoughtClothes.Find(key);
 	if (isKey != nullptr)
 	{
