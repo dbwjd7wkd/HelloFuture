@@ -93,7 +93,6 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	BoughtClothes.Add("ShopClothes6", false);
 	BoughtClothes.Add("ShopClothes7", false);
 
-	preLevelName = TEXT("MainMap");
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -361,7 +360,7 @@ void AHelloFutureCharacter::SaveGame()
 	SaveGameInstance->BoughtClothes = BoughtClothes;
 
 	// 이전 맵의 이름 저장
-	SaveGameInstance->preLevelName = preLevelName;
+	//SaveGameInstance->preLevelName = preLevelName;
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 
@@ -419,7 +418,7 @@ void AHelloFutureCharacter::LoadGame()
 	BoughtClothes = LoadGameInstance->BoughtClothes;
 
 	// 이전 맵의 이름 로드
-	preLevelName = LoadGameInstance->preLevelName;
+	//preLevelName = LoadGameInstance->preLevelName;
 
 	OnLoadGame.Broadcast();
 

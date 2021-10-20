@@ -82,7 +82,7 @@ public:
     UActorComponent* saveQuest;
 
     // ∏ ¿« ¿Ã∏ß
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="PreLevelName")
-        FName preLevelName;
+    /*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="PreLevelName")
+        FName preLevelName;*/
 
 };
