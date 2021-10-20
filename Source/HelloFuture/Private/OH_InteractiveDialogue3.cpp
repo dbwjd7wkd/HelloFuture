@@ -49,5 +49,6 @@ void AOH_InteractiveDialogue3::OnDialogueCompleted()
 		
 	}
 
+
 	bIsInteracting = false;
 }
