@@ -93,6 +93,7 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	BoughtClothes.Add("ShopClothes6", false);
 	BoughtClothes.Add("ShopClothes7", false);
 
+	preLevelName = TEXT("MainMap");
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -208,7 +209,7 @@ void AHelloFutureCharacter::ShakeTree_Implementation()
 // 옷 구매 확인
 bool AHelloFutureCharacter::GetBoughtClothes(FString key)
 {
-	bool value;
+	bool value = false;
 	bool* isKey = BoughtClothes.Find(key);
 	if (isKey != nullptr)
 	{

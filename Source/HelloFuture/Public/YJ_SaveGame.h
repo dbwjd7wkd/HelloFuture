@@ -83,6 +83,6 @@ public:
 
     // ∏ ¿« ¿Ã∏ß
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="PreLevelName")
-        FString preLevelName = "MainMap";
+        FName preLevelName;
 
 };
