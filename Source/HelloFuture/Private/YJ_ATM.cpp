@@ -30,7 +30,7 @@ AYJ_ATM::AYJ_ATM()
 	// ¸Þ½Ã
 	mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube Mesh"));
 	mesh->SetupAttachment(collision);
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMeshAsset(TEXT("/Engine/BasicShapes/Cube.Cube"));
+	/*static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMeshAsset(TEXT("/Engine/BasicShapes/Cube.Cube"));
 	if (CubeMeshAsset.Succeeded())
 	{
 		mesh->SetStaticMesh(CubeMeshAsset.Object);
@@ -39,7 +39,7 @@ AYJ_ATM::AYJ_ATM()
 	if (CubeMaterialAsset.Succeeded())
 	{
 		mesh->SetMaterial(0, CubeMaterialAsset.Object);
-	}
+	}*/
 
 	// UI
 	static ConstructorHelpers::FClassFinder<UUserWidget> MainMenuWidget (TEXT("WidgetBlueprint'/Game/YJ/UI/ATM/WBP_ATM'"));
