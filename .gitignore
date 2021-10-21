@@ -76,12 +76,4 @@ DerivedDataCache/*
 #Content/CraftResourcesIcons/*
 
 # HelloFutureAssets
-Content/FarmSoundsAudioPack/*
-Content/Game_UI_Bundle/*
-Content/HappyLifeville - Source files - FBX/*
-Content/HappyLifeville/*
-Content/LowPolyInterior/*
-Content/LowpolyStyle/*
-Content/PolygonHeist/*
-Content/StylizedSky/*
-Content/clean_cartoon_gui/*
+Content/NewAssets/*
