@@ -72,13 +72,13 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	ChatText->SetTextRenderColor(FColor::Black);
 	ChatText->SetText(TEXT(""));
 	
-	ConstructorHelpers::FObjectFinder<UMaterial> MatFinder(TEXT("Material'/Game/Minsu/Minsu_TextMat.Minsu_TextMat'"));
+	ConstructorHelpers::FObjectFinder<UMaterial> MatFinder(TEXT("Material'/Game/Minsu/Font/Font01/Minsu_TextMat.Minsu_TextMat'"));
 	if (MatFinder.Succeeded())
 	{
 		ChatText->SetTextMaterial(MatFinder.Object);
 	}
 	
-	ConstructorHelpers::FObjectFinder<UFont> FontFinder(TEXT("Font'/Game/Oh/Font/OH_Font.OH_Font'"));
+	ConstructorHelpers::FObjectFinder<UFont> FontFinder(TEXT("Font'/Game/Minsu/Font/Font03/Font03.Font03'"));
 	if (FontFinder.Succeeded())
 	{
 		ChatText->SetFont(FontFinder.Object);
