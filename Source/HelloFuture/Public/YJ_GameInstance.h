@@ -26,4 +26,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Instanced)
 		TArray<class UYJ_Item*> AllItems;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetSpawnLocation")
+		TArray<FVector> closetSpawnLocation;
 };

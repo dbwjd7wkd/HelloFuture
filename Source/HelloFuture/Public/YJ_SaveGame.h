@@ -81,8 +81,8 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Quest")
     UActorComponent* saveQuest;
 
-    // ∏ ¿« ¿Ã∏ß
-    /*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="PreLevelName")
-        FName preLevelName;*/
+    // ±∏∏≈«— ø  º¯º≠¥Î∑Œ in ø ¿Â
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+        TArray<int32> closetBought;
 
 };

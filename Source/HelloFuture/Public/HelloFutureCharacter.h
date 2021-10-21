@@ -296,5 +296,9 @@ public:
 // 이전 맵 이름 저장
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PreLevelName")
 		FName preLevelName;
+
+	// 구매한 옷 순서대로 in 옷장
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+		TArray<int32> closetBought;
 };
 

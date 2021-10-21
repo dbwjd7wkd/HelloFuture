@@ -362,6 +362,9 @@ void AHelloFutureCharacter::SaveGame()
 	// 이전 맵의 이름 저장
 	//SaveGameInstance->preLevelName = preLevelName;
 
+	// 구매한 옷 순서대로 in 옷장
+	SaveGameInstance->closetBought = closetBought;
+
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 
 	OnSaveGame.Broadcast();
@@ -419,6 +422,9 @@ void AHelloFutureCharacter::LoadGame()
 
 	// 이전 맵의 이름 로드
 	//preLevelName = LoadGameInstance->preLevelName;
+
+	// 구매한 옷 순서대로 in 옷장
+	closetBought = LoadGameInstance->closetBought;
 
 	OnLoadGame.Broadcast();
 
