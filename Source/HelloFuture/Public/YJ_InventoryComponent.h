@@ -49,9 +49,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 		bool AddItem2(EItemEnum Item);
 	UFUNCTION(BlueprintCallable)
+		bool AddItemByNumber(EItemEnum Item, int32 num);
+
+	UFUNCTION(BlueprintCallable)
 		bool RemoveItem(class UYJ_Item* Item);
 	UFUNCTION(BlueprintCallable)
 		bool RemoveItem2(EItemEnum Item);
+	UFUNCTION(BlueprintCallable)
+		bool RemoveItemByNumber(EItemEnum Item, int32 num);
+
 	UFUNCTION(BlueprintCallable)
 		class UYJ_Item* EnumIndexToItem(EItemEnum Item);
 	UFUNCTION(BlueprintCallable)
