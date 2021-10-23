@@ -309,12 +309,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PreLevelName")
 		FName preLevelName;
 
-	// 구매한 옷 순서대로 in 옷장(Mesh array)
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
-		TArray<USkeletalMesh*> closetBoughtMesh;
+	//// 구매한 옷 순서대로 in 옷장(Mesh array)
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+	//	TArray<USkeletalMesh*> closetBoughtMesh;
 
-	// 구매한 옷 순서대로 in 옷장(Material array)-외부 배열
+	//// 구매한 옷 순서대로 in 옷장(Material array)-외부 배열
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+	//	TArray<FcloseBoughtMStruct> closetBoughtMaterialStruct;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
-		TArray<FcloseBoughtMStruct> closetBoughtMaterialStruct;
+		TArray<FcloseBoughtMStruct> closetBoughts;
 };
 

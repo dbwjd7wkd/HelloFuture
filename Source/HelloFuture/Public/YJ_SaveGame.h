@@ -20,6 +20,25 @@
 //
 //    E_MAX,
 //};
+UENUM(BlueprintType)
+enum class EClosetBoughtCategory : uint8
+{
+    Category1 UMETA(DisplayName = "None"),
+    Category2 UMETA(DisplayName = "Head"),
+    Category3 UMETA(DisplayName = "HairStyle"),
+    Category4 UMETA(DisplayName = "Nose"),
+    Category5 UMETA(DisplayName = "UpperClothes"),
+    Category6 UMETA(DisplayName = "UnderClothes"),
+    Category7 UMETA(DisplayName = "WholeClothes"),
+    Category8 UMETA(DisplayName = "Glasses"),
+    Category9 UMETA(DisplayName = "Hat"),
+    Category10 UMETA(DisplayName = "Bag"),
+    Category11 UMETA(DisplayName = "Watch"),
+    Category12 UMETA(DisplayName = "HatHair"),
+    Category13 UMETA(DisplayName = "Hair_Acc_R"),
+    Category14 UMETA(DisplayName = "Hair_Acc_BB"),
+};
+
 
 USTRUCT(Atomic, BlueprintType)
 struct FcloseBoughtMStruct
@@ -27,8 +46,15 @@ struct FcloseBoughtMStruct
     GENERATED_BODY()
 public:
     // 구매한 옷 순서대로 in 옷장(Material array)-내부 배열
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+        USkeletalMesh* closetBoughtMesh;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
         TArray<UMaterialInterface*> closetBoughtMaterial;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+       EClosetBoughtCategory closetBoughtCategory;
 };
 
 UCLASS()
@@ -97,6 +123,7 @@ public:
     //UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
     //    TArray<FString> closetBought;
 
+    /*
     // 구매한 옷 순서대로 in 옷장(Mesh array)
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
         TArray<USkeletalMesh*> closetBoughtMesh;
@@ -104,5 +131,8 @@ public:
     // 구매한 옷 순서대로 in 옷장(Material array)-외부 배열
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
         TArray<FcloseBoughtMStruct> closetBoughtMaterialStruct;
+    */
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+        TArray<FcloseBoughtMStruct> closetBoughts;
 };
