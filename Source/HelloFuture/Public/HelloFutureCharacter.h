@@ -9,11 +9,23 @@
 #include "YJ_SaveGame.h" // save game
 #include "Kismet/GameplayStatics.h" // save game
 #include "Minsu_ShakeTree.h"
+#include "Engine/SkeletalMesh.h"
+#include "Materials/MaterialInterface.h"
 #include "HelloFutureCharacter.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSaveGameDelegate);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoadGameDelegate);
 //DECLARE_MULTICAST_DELEGATE_OneParam(FPlayerInputDelegate, class UInputComponent*)
+
+//USTRUCT(Atomic, BlueprintType)
+//struct FcloseBoughtMStruct
+//{
+//	GENERATED_BODY()
+//	public:
+//		// 구매한 옷 순서대로 in 옷장(Material array)-내부 배열
+//		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+//			TArray<UMaterialInterface*> closetBoughtMaterial;
+//};
 
 UCLASS(config = Game)
 class AHelloFutureCharacter : public ACharacter, public IMinsu_Activate, public IMinsu_PlantSeed, public IMinsu_ShakeTree
@@ -297,8 +309,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PreLevelName")
 		FName preLevelName;
 
-	// 구매한 옷 순서대로 in 옷장
+	// 구매한 옷 순서대로 in 옷장(Mesh array)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
-		TArray<int32> closetBought;
+		TArray<USkeletalMesh*> closetBoughtMesh;
+
+	// 구매한 옷 순서대로 in 옷장(Material array)-외부 배열
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+		TArray<FcloseBoughtMStruct> closetBoughtMaterialStruct;
 };
 

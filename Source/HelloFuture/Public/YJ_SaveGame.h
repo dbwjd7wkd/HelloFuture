@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "Engine/SkeletalMesh.h"
+#include "Materials/MaterialInterface.h"
 #include "YJ_SaveGame.generated.h"
 
 /**
@@ -18,6 +20,16 @@
 //
 //    E_MAX,
 //};
+
+USTRUCT(Atomic, BlueprintType)
+struct FcloseBoughtMStruct
+{
+    GENERATED_BODY()
+public:
+    // 구매한 옷 순서대로 in 옷장(Material array)-내부 배열
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+        TArray<UMaterialInterface*> closetBoughtMaterial;
+};
 
 UCLASS()
 class HELLOFUTURE_API UYJ_SaveGame : public USaveGame
@@ -81,8 +93,16 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Quest")
     UActorComponent* saveQuest;
 
-    // 구매한 옷 순서대로 in 옷장
+    //// 구매한 옷 순서대로 in 옷장(array)
+    //UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+    //    TArray<FString> closetBought;
+
+    // 구매한 옷 순서대로 in 옷장(Mesh array)
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
-        TArray<int32> closetBought;
+        TArray<USkeletalMesh*> closetBoughtMesh;
+
+    // 구매한 옷 순서대로 in 옷장(Material array)-외부 배열
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
+        TArray<FcloseBoughtMStruct> closetBoughtMaterialStruct;
 
 };
