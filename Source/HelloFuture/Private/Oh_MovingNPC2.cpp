@@ -49,7 +49,16 @@ void AOh_MovingNPC2::Tick(float DeltaTime)
 		break;
 	}
 
+	TArray<AActor*>objs;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHelloFutureCharacter::StaticClass(), objs);
+	for (AActor* actor : objs)
+	{
+		if (actor) target = actor;
+	}
 
+
+	FVector PlayerDir = target->GetActorLocation() - GetActorLocation();
+	FRotator rot = PlayerDir.Rotation();
 
 }
 
