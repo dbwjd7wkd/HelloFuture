@@ -104,6 +104,13 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 public:
+	// Widget
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = UI)
+	class UUserWidget* UI;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI, Instanced)
+	TMap<TSubclassOf<class AActor>, class UUserWidget*> WidgetMap;
+
 	// save Game
 	UPROPERTY(BlueprintReadOnly)
 	class UYJ_SaveGame* SaveGameInstance;

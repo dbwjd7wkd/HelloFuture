@@ -20,6 +20,9 @@ class HELLOFUTURE_API UYJ_GameInstance : public UGameInstance
 public:
 	UFUNCTION(BlueprintCallable)
 	class UYJ_Item* GetItemAsEnum(EItemEnum itemEnum);
+
+	UFUNCTION(BlueprintCallable)
+	FString GetMyIpAddress();
 	
 public:
 	// 플레이 시 모든 아이템들 객체 들어가있음

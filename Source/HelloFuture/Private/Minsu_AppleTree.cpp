@@ -57,6 +57,7 @@ void AMinsu_AppleTree::SpawnFruit()
 			FVector SpawnLocation = billboard->GetComponentLocation();
 
 			world->SpawnActor<AActor>(fruits, SpawnLocation, rotator, SpawnParams);
+			
 		}
 	}
 }

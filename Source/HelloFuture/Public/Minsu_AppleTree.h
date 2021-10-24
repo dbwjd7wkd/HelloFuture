@@ -30,7 +30,7 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Stat")
 		class UBillboardComponent* billboard;
 
-	UPROPERTY(EditAnywhere, Category = "Stat")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stat")
 		TSubclassOf<class AActor> fruits;
 
 	UFUNCTION(BlueprintCallable, Category = "Stat")

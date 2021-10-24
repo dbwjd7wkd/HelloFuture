@@ -25,6 +25,7 @@
 #include <Materials/MaterialInterface.h>
 #include <Minsu_ChatWidget.h>
 #include <YJ_GameInstance.h>
+#include "Engine/NetConnection.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter

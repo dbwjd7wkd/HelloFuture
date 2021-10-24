@@ -3,6 +3,7 @@
 
 #include "YJ_GameInstance.h"
 #include "YJ_Item.h"
+#include "SocketSubsystem.h"
 //#include "YJ_InventoryComponent.h"
 
 UYJ_GameInstance::UYJ_GameInstance()
@@ -45,4 +46,16 @@ UYJ_Item* UYJ_GameInstance::GetItemAsEnum(EItemEnum itemEnum)
 	UYJ_Item* item = gameInstance->AllItems[idx];
 
     return item;
+}
+
+FString UYJ_GameInstance::GetMyIpAddress()
+{
+    FString IpAddr("NONE");
+    bool canBind = false;
+    TSharedRef<FInternetAddr> LocalIp = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->GetLocalHostAddr(*GLog, canBind);
+    if (LocalIp->IsValid())
+    {
+        IpAddr = LocalIp->ToString(false);
+    }
+    return IpAddr;
 }
