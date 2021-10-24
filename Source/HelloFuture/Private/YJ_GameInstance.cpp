@@ -27,9 +27,9 @@ UYJ_GameInstance::UYJ_GameInstance()
     int length = 13;
     for (int i=0; i < length; i++)
     {
-        int x = 400;
-        int y = -650 + 80 * i;
-        int z = 25;
+        int x = 100;
+        int y = -300 + 50 * i;
+        int z = 45;
         closetSpawnLocation.Add(FVector(x,y,z));
     }
     
