@@ -105,8 +105,8 @@ public:
 
 public:
 	// Widget
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = UI)
-	class UUserWidget* UI;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = UI)
+	//class UUserWidget* UI;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI, Instanced)
 	TMap<TSubclassOf<class AActor>, class UUserWidget*> WidgetMap;
