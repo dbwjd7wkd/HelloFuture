@@ -104,9 +104,6 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 public:
-	// dialogue UI
-	//TSubclassOf<class UUserWidget> oh_QuestUIclass;
-
 	// Widget
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = UI)
 	class UUserWidget* UI;

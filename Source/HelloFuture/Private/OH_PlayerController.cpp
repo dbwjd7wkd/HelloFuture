@@ -46,11 +46,11 @@ void AOH_PlayerController::BeginPlay()
 	{
 		if (HasAuthority() == true) // true: 서버, false: 클라이언트
 		{
-			//oh_QuestUI = CreateWidget<UOH_QuestUI>(this, oh_QuestUIclass);
+			oh_QuestUI = CreateWidget<UOH_QuestUI>(this, oh_QuestUIclass);
 		}
 		else
 		{
-			oh_QuestUI = CreateWidget<UOH_QuestUI>(this, oh_QuestUIclass);
+			//oh_QuestUI = CreateWidget<UOH_QuestUI>(this, oh_QuestUIclass);
 		}
 	}
 
