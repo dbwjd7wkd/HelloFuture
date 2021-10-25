@@ -115,7 +115,7 @@ bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
 
 	// 아이템 추가하기
 	state = "add";
-	// 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
 	if(item->Count <= 0)
 	{
 		item->OwningInventory = this;
@@ -123,13 +123,11 @@ bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
 		item->ItemIndex = idx;
 		item->InventoryIndex = ItemCnt;
 		item->Count = 1;
-		//Items[ItemCnt] = item;
 		Items.Add(item);
 		ItemCnt++;
 	}
 	else
 	{
-		//Items[item->InventoryIndex]->Count++;
 		item->Count++;
 	}
 	// Update UI
@@ -163,14 +161,12 @@ bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
 // 게임인스턴스의 AllItems 배열에서 Item번째 YJ_Item 을 가져와서 remove
 bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
 {
-	// sellingitem2 UI의 RemoveItem2에서 false가 반환이 됨 수정!!!!!!!!!!!!!!!!!!!!
 	// 인벤토리 창이 비면 아래 내용 실행하지 않음.
 	if (ItemCnt <= 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("1"));
 		return false;
 	}
-
 
 	// 게임인스턴스 가져오기
 	UWorld* world = GetWorld();
@@ -183,7 +179,6 @@ bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
 	UYJ_Item* item = gameInstance->AllItems[idx];
 
 	// 아이템 지우기
-
 	state = "remove";
 
 	if (item->Count <= 1)
@@ -193,19 +188,18 @@ bool UYJ_InventoryComponent::RemoveItem2(EItemEnum Item)
 		item->ItemIndex = idx;
 		item->InventoryIndex = -1;
 		item->Count = 0;
-		//Items[ItemCnt] = nullptr;
 		Items.RemoveSingle(item);
-		//Items.SetNum(Capacity);
 		ItemCnt--;
 		UE_LOG(LogTemp, Warning, TEXT("Remove Item"));
 		UE_LOG(LogTemp, Warning, TEXT("%d"), Items.Num());
 	}
 	else
 	{
-		//Items[item->InventoryIndex]->Count--;
 		item->Count--;
 		UE_LOG(LogTemp, Warning, TEXT("Minus item count"));
 	}
+
+	// Update UI
 	OnInventoryUpdated.Broadcast();
 
 	return true;
