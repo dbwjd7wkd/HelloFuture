@@ -131,6 +131,24 @@ void AOH_PlayerController::Tick(float DeltaTime)
 
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
 		}
+
+		else if (isfirstcustom == true)
+		{
+			SetCinematicMode(true, true, true);
+
+			oh_QuestUI->InitializeDialogue(CustomDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+		}
+
+		else if (isfirstclothing == true)
+		{
+			SetCinematicMode(true, true, true);
+
+			oh_QuestUI->InitializeDialogue(ClothingDialogue);
+
+			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+		}
 	}
 
 }

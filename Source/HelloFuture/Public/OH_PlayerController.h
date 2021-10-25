@@ -93,6 +93,12 @@ UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 class UDataTable* ShopDialogue;
 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* CustomDialogue;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+class UDataTable* ClothingDialogue;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 	bool isPlaying = false;
 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
@@ -108,6 +114,15 @@ bool isfirstShop = false;
 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool isfirstBank = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool isfirstcustom = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool isfirstclothing = false;
+
+
+
 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool interactQuest = false;
