@@ -79,7 +79,7 @@ void AOh_MovingNPC2::IdleState()
 
 		currnetTime = 0;
 
-		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1000);
+		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1500);
 	}
 
 }
@@ -96,7 +96,7 @@ void AOh_MovingNPC2::IdleState()
 		{
 			// 이동 가능한 랜덤위치 가져오기
 			//randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1500);
-
+			
 			m_state2 = ENPCState2::Idle;
 
 			currnetTime = 0;
