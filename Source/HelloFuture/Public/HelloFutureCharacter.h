@@ -158,7 +158,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
 		float time;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name, Replicated)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
 		FText Name;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Name)
