@@ -49,7 +49,6 @@ void UOH_QuestUI::InitializeDialogue(class UDataTable* DialogueTable)
 
 		RowIndex = 0;
 
-
 		CharacterNameText->SetText(FText::FromString(dialogue[RowIndex]->CharacterName.ToString()));
 
 		if (dialogue[RowIndex]->Message.Num() > 0)
@@ -177,7 +176,7 @@ void UOH_QuestUI::Interact()
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
 
 		PlayerDialogTextBlock->SetText(FText::FromString(InitialMessage));
-
+		
 		CurrentState = 2;
 	}
 	else if (CurrentState == 2)
@@ -187,6 +186,7 @@ void UOH_QuestUI::Interact()
 			MessageIndex +=1;
 
 			AnimateMessage(dialogue[RowIndex]->Message[MessageIndex].ToString());
+			
 		}
 
 		else
@@ -196,11 +196,13 @@ void UOH_QuestUI::Interact()
 
 			if (dialogue[RowIndex]->MessageOptions.Num() > 0)
 			{
+				
 				OnResetOptions();
 
 				for (int i = 0; i < dialogue[RowIndex]->MessageOptions.Num(); i++)
 				{
 					OnSetOption(i, dialogue[RowIndex]->MessageOptions[i].OptionText);
+					
 				}
 
 				SelectectedOption = 0;
@@ -208,6 +210,8 @@ void UOH_QuestUI::Interact()
 				OnHighLightOption(SelectectedOption);
 
 				CurrentState = 3;
+
+				
 			}
 			else
 			{
@@ -227,9 +231,11 @@ void UOH_QuestUI::Interact()
 		if ((RowIndex >= 0) && (RowIndex < dialogue.Num()))
 		{
 			PlayerDialogTextBlock->SetText(FText::FromString(""));
+			
 
 			MessageIndex = 0;
 			AnimateMessage(dialogue[RowIndex]->Message[MessageIndex].ToString());
+			CharacterNameText->SetText(FText::FromString(dialogue[RowIndex]->CharacterName.ToString()));
 		}
 		else
 		{

@@ -26,6 +26,7 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = Event)
 		void OnDialogueCompleted();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 	bool bIsInteracting = false;
 
 
