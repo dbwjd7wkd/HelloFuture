@@ -155,11 +155,9 @@ public:
 
 
 //FPlayerInputDelegate OninputDelegate;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
-		float time;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
-		FText Name;
+		float time;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Name)
 		class UMinsu_NameInputUserWidget* nameWidget;
@@ -187,35 +185,69 @@ public:
 
 	void SetInteractiveInRange(class AOH_InteractiveBase* Interactive);
 	void ClearInteractiveInRange(class AOH_InteractiveBase* Interactive);
+	/////////// 닉네임 ///////////////////////////
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
+	class UTextRenderComponent* C_TextRenderName;
 
-	
+	UFUNCTION(BlueprintCallable, Category = Chat)
+	void AttemptToSendName(const FString& Message);
+
+			// 닉네임 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendName 실행
+	UFUNCTION(BlueprintCallable, Category = Name)
+	void SendName(const FString& Message);
+
+	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = Name)
+	void ServerSendName(const FString& Message);
+	void ServerSendName_Implementation(const FString& Message);
+	bool ServerSendName_Validate(const FString& Message);
+
+	UFUNCTION(Client, Reliable, WithValidation, BlueprintCallable, Category = Name)
+	void ClientSendName(const FString& Message);
+	void ClientSendName_Implementation(const FString& Message);
+	bool ClientSendName_Validate(const FString& Message);
+
+	UFUNCTION(BlueprintCallable, Category = Name)
+	void OnRep_CurrentName();
+
+	UFUNCTION(BlueprintCallable, Category = Name)
+	void UpdateNameText();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentMessage, Category = Chat)
+	FString CurrentName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentName, Category = Name)
+	FText Name;
+
 	//////////// 채팅 ////////////////////////////
 public:
 	void Chatting();
 
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Chat)
-			class UTextRenderComponent* ChatText;
+		class UTextRenderComponent* ChatText;
 
 		virtual void BeginPlay() override;
 
 		virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
 
 		UFUNCTION(BlueprintCallable, Category = Chat)
-			void AttemptToSendChatMessage(const FString& Message);
+		void AttemptToSendChatMessage(const FString& Message);
 
+////////
 		// 채팅 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendChatMessage 실행
 		UFUNCTION(BlueprintCallable, Category = Chat)
-			void SendChatMessage(const FString& Message);
+		void SendChatMessage(const FString& Message);
 
 		// 현재 메세지 지우기 (채팅 보내고 5초 후)
 		UFUNCTION(BlueprintCallable, Category = Chat)
-			void ClearChatMessage();
+		void ClearChatMessage();
 
 		UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = Chat)
-			void ServerSendChatMessage(const FString& Message);
+		void ServerSendChatMessage(const FString& Message);
 		void ServerSendChatMessage_Implementation(const FString& Message);
 		bool ServerSendChatMessage_Validate(const FString& Message);
-
+		
+////////
 		UFUNCTION(BlueprintCallable, Category = Chat)
 			void OnRep_CurrentMessage();
 

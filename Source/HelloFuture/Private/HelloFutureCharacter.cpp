@@ -26,6 +26,7 @@
 #include <Minsu_ChatWidget.h>
 #include <YJ_GameInstance.h>
 #include "Engine/NetConnection.h"
+#include "Components/TextRenderComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -94,6 +95,24 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	BoughtClothes.Add("ShopClothes6", false);
 	BoughtClothes.Add("ShopClothes7", false);
 
+	// 닉네임
+	C_TextRenderName = CreateDefaultSubobject<UTextRenderComponent>(TEXT("C_TextRenderName"));
+	C_TextRenderName->SetRelativeLocation(FVector(17, 0, 52));
+	C_TextRenderName->SetHorizontalAlignment(EHTA_Center);
+	C_TextRenderName->SetupAttachment(RootComponent);
+	C_TextRenderName->SetVerticalAlignment(EVRTA_TextCenter);
+	C_TextRenderName->SetTextRenderColor(FColor::Black);
+	C_TextRenderName->SetText(TEXT(""));
+
+	if (MatFinder.Succeeded())
+	{
+		C_TextRenderName->SetTextMaterial(MatFinder.Object);
+	}
+	if (FontFinder.Succeeded())
+	{
+		C_TextRenderName->SetFont(FontFinder.Object);
+	}
+
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -109,6 +128,9 @@ void AHelloFutureCharacter::BeginPlay()
 		playerController->bEnableMouseOverEvents = true;
 	}
 
+	// 닉네임 셋팅
+	//name_TextRender->SetText(FText::FromString("Something"));
+
 }
 
 void AHelloFutureCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -116,6 +138,8 @@ void AHelloFutureCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AHelloFutureCharacter, CurrentMessage);
+	DOREPLIFETIME(AHelloFutureCharacter, CurrentName);
+	DOREPLIFETIME(AHelloFutureCharacter, Name);
 
 }
 
@@ -515,6 +539,72 @@ void AHelloFutureCharacter::ClearInteractiveInRange(class AOH_InteractiveBase* I
 	currentInteractive = nullptr;
 	
 }
+
+
+///////////////////// 닉네임
+
+void AHelloFutureCharacter::AttemptToSendName(const FString& Message)
+{
+	// 만약 서버가 없다면 ServerSendName를 보내고
+	// 아니라면, SendName를 이용
+	if (GetLocalRole() < ROLE_Authority)
+	{
+		// 클라이언트일 때
+		ServerSendName(Message);
+	}
+	else
+	{
+		// 서버일 때
+		SendName(Message);
+	}
+}
+
+void AHelloFutureCharacter::SendName(const FString& Message)
+{
+	CurrentName = Message;
+	UpdateNameText();
+}
+
+void AHelloFutureCharacter::ServerSendName_Implementation(const FString& Message)
+{
+	SendName(Message);
+	ClientSendName(Message);
+}
+
+bool AHelloFutureCharacter::ServerSendName_Validate(const FString& Message)
+{
+		if (Message.Len() < 255)
+	{
+		return true;
+	}
+	else return false;
+}
+
+void AHelloFutureCharacter::ClientSendName_Implementation(const FString& Message)
+{
+	SendName(Message);
+}
+
+bool AHelloFutureCharacter::ClientSendName_Validate(const FString& Message)
+{
+	if (Message.Len() < 255)
+	{
+		return true;
+	}
+	else return false;
+}
+
+void AHelloFutureCharacter::OnRep_CurrentName()
+{
+	UpdateNameText();
+}
+
+void AHelloFutureCharacter::UpdateNameText()
+{
+	C_TextRenderName->SetText(CurrentName);
+}
+////////////////////////////////////////////////
+
 
 void AHelloFutureCharacter::Chatting()
 {
