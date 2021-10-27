@@ -185,15 +185,29 @@ public:
 
 	void SetInteractiveInRange(class AOH_InteractiveBase* Interactive);
 	void ClearInteractiveInRange(class AOH_InteractiveBase* Interactive);
-	/////////// 닉네임 ///////////////////////////
+
+	/////////// 커스텀_서버 ///////////////////////////
+public:
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Custom")
+	void BP_GetCustom(const FString& OldName);
+
+	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = "Custom")
+	void GetCustom_OnServer(const FString& OldName);
+	void GetCustom_OnServer_Implementation(const FString& OldName);
+	bool GetCustom_OnServer_Validate(const FString& OldName);
+	UFUNCTION(Client, Reliable, WithValidation, BlueprintCallable, Category = "Custom")
+	void GetCustom_OnClient(const FString& OldName);
+	void GetCustom_OnClient_Implementation(const FString& OldName);
+	bool GetCustom_OnClient_Validate(const FString& OldName);
+	/////////// 닉네임_서버 ///////////////////////////
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
 	class UTextRenderComponent* C_TextRenderName;
 
 	UFUNCTION(BlueprintCallable, Category = Chat)
-	void AttemptToSendName(const FString& Message);
+	void AttemptToSendName(const FString& Message, const FString& OldName);
 
-			// 닉네임 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendName 실행
+	// 닉네임 보내기 (서버에 있을때만 실행 가능), 서버에 없다면 ServerSendName 실행
 	UFUNCTION(BlueprintCallable, Category = Name)
 	void SendName(const FString& Message);
 
@@ -213,10 +227,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Name)
 	void UpdateNameText();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentMessage, Category = Chat)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentName, Category = Name)
 	FString CurrentName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, ReplicatedUsing = OnRep_CurrentName, Category = Name)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, Category = Name)
 	FText Name;
 
 	//////////// 채팅 ////////////////////////////

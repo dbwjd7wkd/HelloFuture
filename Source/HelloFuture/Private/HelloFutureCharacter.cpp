@@ -139,7 +139,7 @@ void AHelloFutureCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 
 	DOREPLIFETIME(AHelloFutureCharacter, CurrentMessage);
 	DOREPLIFETIME(AHelloFutureCharacter, CurrentName);
-	DOREPLIFETIME(AHelloFutureCharacter, Name);
+	//DOREPLIFETIME(AHelloFutureCharacter, Name);
 
 }
 
@@ -278,7 +278,7 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
 
 	////////////// 채팅 ////////////////
-	// PlayerInputComponent->BindAction("Chatting", IE_Pressed, this, &AHelloFutureCharacter::Chatting);
+	PlayerInputComponent->BindAction("Chatting", IE_Pressed, this, &AHelloFutureCharacter::Chatting);
 
 	// save game
 	PlayerInputComponent->BindAction("Save", IE_Pressed, this, &AHelloFutureCharacter::SaveGame);
@@ -324,32 +324,7 @@ void AHelloFutureCharacter::CreatePlayerHUD(FText playerName)
 
 void AHelloFutureCharacter::InitializeGame()
 {
-	//// items 초기화
-	//UYJ_SaveGame* LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
-	//LoadGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
-	////UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(GetGameInstance());
 
-	//if (!LoadGameInstance) return;
-
-	////items 정보 로드
-	//for (int i = 0; i < 15; i++)
-	//{
-	//	itemCnt.Add(0);
-	//	itemIdx.Add(-1);
-	//}
-	//LoadGameInstance->itemCnt = itemCnt;
-	//LoadGameInstance->itemIdx = itemIdx;
-
-	//UYJ_SaveGame* SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::CreateSaveGameObject(UYJ_SaveGame::StaticClass()));
-	//if (!SaveGameInstance) return;
-
-	//// GameInstance의 AllItems 저장
-	//SaveGameInstance->AllItems = Cast<UYJ_GameInstance>(GetGameInstance())->AllItems;
-
-	////SaveGameInstance->Items.Empty();
-	////Inventory->Items = SaveGameInstance->Items;
-	////Inventory->OnInventoryUpdated.Broadcast();
-	//SaveGameInstance = Cast<UYJ_SaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
 }
 
 void AHelloFutureCharacter::SaveGame()
@@ -541,9 +516,30 @@ void AHelloFutureCharacter::ClearInteractiveInRange(class AOH_InteractiveBase* I
 }
 
 
-///////////////////// 닉네임
+///////////////////// 커스텀_서버
+void AHelloFutureCharacter::GetCustom_OnServer_Implementation(const FString& OldName)
+{
+	BP_GetCustom(OldName);
+	GetCustom_OnClient(OldName);
+}
 
-void AHelloFutureCharacter::AttemptToSendName(const FString& Message)
+bool AHelloFutureCharacter::GetCustom_OnServer_Validate(const FString& OldName)
+{
+	return true;
+}
+
+void AHelloFutureCharacter::GetCustom_OnClient_Implementation(const FString& OldName)
+{
+	BP_GetCustom(OldName);
+}
+
+bool AHelloFutureCharacter::GetCustom_OnClient_Validate(const FString& OldName)
+{
+	return true;
+}
+
+///////////////////// 닉네임_서버
+void AHelloFutureCharacter::AttemptToSendName(const FString& Message, const FString& OldName)
 {
 	// 만약 서버가 없다면 ServerSendName를 보내고
 	// 아니라면, SendName를 이용
@@ -551,11 +547,13 @@ void AHelloFutureCharacter::AttemptToSendName(const FString& Message)
 	{
 		// 클라이언트일 때
 		ServerSendName(Message);
+		GetCustom_OnServer(OldName);
 	}
 	else
 	{
 		// 서버일 때
 		SendName(Message);
+		BP_GetCustom(OldName);
 	}
 }
 
@@ -563,6 +561,7 @@ void AHelloFutureCharacter::SendName(const FString& Message)
 {
 	CurrentName = Message;
 	UpdateNameText();
+	//c->CallFunctionByNameWithArguments(TEXT("Get Custom on Server"), ar, NULL, true);
 }
 
 void AHelloFutureCharacter::ServerSendName_Implementation(const FString& Message)
@@ -608,14 +607,14 @@ void AHelloFutureCharacter::UpdateNameText()
 
 void AHelloFutureCharacter::Chatting()
 {
-// 	if (ChatWidgetClass)
-// 	{
-// 		ChatWidget = CreateWidget<UMinsu_ChatWidget>(UGameplayStatics::GetPlayerController(GetWorld(), 0), ChatWidgetClass);
-// 		if (ChatWidget)
-// 		{
-// 			ChatWidget->AddToViewport();
-// 		}
-// 	}
+	if (ChatWidgetClass)
+	{
+		ChatWidget = CreateWidget<UMinsu_ChatWidget>(UGameplayStatics::GetPlayerController(GetWorld(), 0), ChatWidgetClass);
+		if (ChatWidget)
+		{
+			ChatWidget->AddToViewport();
+		}
+	}
 }
 
 // void AHelloFutureCharacter::Activate_Implementation()
