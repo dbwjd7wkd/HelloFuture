@@ -16,7 +16,7 @@ void AOH_InteractiveDialogue3::Interact()
 
 	if ((currentPlayerController != nullptr) && (Dialogue != nullptr))
 	{
-
+		
 		camera = true;
 		bIsInteracting = true;
 
@@ -40,15 +40,15 @@ void AOH_InteractiveDialogue3::OnDialogueCompleted()
 {
 	if (currentPlayerController != nullptr)
 	{
-		currentPlayerController->SetCinematicMode(false, true, true);
+		currentPlayerdController->SetCinematicMode(false, true, true);
 
 		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue3::OnDialogueCompleted);
 
-
 			interactQuest = true;
+
 		
 	}
-
+	as
 
 	bIsInteracting = false;
 }
