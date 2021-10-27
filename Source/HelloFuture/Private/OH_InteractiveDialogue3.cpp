@@ -40,7 +40,7 @@ void AOH_InteractiveDialogue3::OnDialogueCompleted()
 {
 	if (currentPlayerController != nullptr)
 	{
-		currentPlayerdController->SetCinematicMode(false, true, true);
+		currentPlayerController->SetCinematicMode(false, true, true);
 
 		currentPlayerController->GetUI()->OnDialogueCompleted.RemoveDynamic(this, &AOH_InteractiveDialogue3::OnDialogueCompleted);
 
@@ -48,7 +48,7 @@ void AOH_InteractiveDialogue3::OnDialogueCompleted()
 
 		
 	}
-	as
+	
 
 	bIsInteracting = false;
 }
