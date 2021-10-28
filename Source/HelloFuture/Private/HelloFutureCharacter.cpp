@@ -278,7 +278,7 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AHelloFutureCharacter::OnResetVR);
 
 	////////////// 채팅 ////////////////
-	PlayerInputComponent->BindAction("Chatting", IE_Pressed, this, &AHelloFutureCharacter::Chatting);
+	/*PlayerInputComponent->BindAction("Chatting", IE_Pressed, this, &AHelloFutureCharacter::Chatting);*/
 
 	// save game
 	PlayerInputComponent->BindAction("Save", IE_Pressed, this, &AHelloFutureCharacter::SaveGame);
@@ -607,14 +607,14 @@ void AHelloFutureCharacter::UpdateNameText()
 
 void AHelloFutureCharacter::Chatting()
 {
-	if (ChatWidgetClass)
-	{
-		ChatWidget = CreateWidget<UMinsu_ChatWidget>(UGameplayStatics::GetPlayerController(GetWorld(), 0), ChatWidgetClass);
-		if (ChatWidget)
-		{
-			ChatWidget->AddToViewport();
-		}
-	}
+// 	if (ChatWidgetClass)
+// 	{
+// 		ChatWidget = CreateWidget<UMinsu_ChatWidget>(UGameplayStatics::GetPlayerController(GetWorld(), 0), ChatWidgetClass);
+// 		if (ChatWidget)
+// 		{
+// 			ChatWidget->AddToViewport();
+// 		}
+// 	}
 }
 
 // void AHelloFutureCharacter::Activate_Implementation()
