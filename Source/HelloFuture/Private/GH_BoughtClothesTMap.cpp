@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "GH_BoughtClothesTMap.h"
@@ -37,7 +37,7 @@ bool AGH_BoughtClothesTMap::GetBoughtClothes(FString key)
 	bool* isKey = BoughtClothes.Find(key);
 	if (isKey != nullptr)
 	{
-		// À¯È¿ÇÏ¸é °ªÀ» µ¹·ÁÁÜ
+		// ìœ íš¨í•˜ë©´ ê°’ì„ ëŒë ¤ì¤Œ
 		value = BoughtClothes[key];
 	}
 	return value;
@@ -45,7 +45,7 @@ bool AGH_BoughtClothesTMap::GetBoughtClothes(FString key)
 
 void AGH_BoughtClothesTMap::SetBoughtClothes(FString key, bool value)
 {
-	// ÀÚµ¿À¸·Î ¿À¹ö·ÎµùµÊ
+	// ìë™ìœ¼ë¡œ ì˜¤ë²„ë¡œë”©ë¨
 	BoughtClothes.Add(key, value);
 }
 

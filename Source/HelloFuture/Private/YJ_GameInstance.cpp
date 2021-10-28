@@ -28,8 +28,8 @@ UYJ_GameInstance::UYJ_GameInstance()
     for (int i=0; i < length; i++)
     {
         int x = 100;
-        int y = -300 + 100 * i;
-        int z = 45;
+        int y = -750 + 100 * i;
+        int z = 100;
         closetSpawnLocation.Add(FVector(x,y,z));
     }
     
