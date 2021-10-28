@@ -7,6 +7,7 @@
 #include <GameFramework/CharacterMovementComponent.h>
 #include <GameFramework/Character.h>
 #include "HelloFutureCharacter.h"
+#include "OH_InteractiveDialogue3.h"
 #include <Kismet/GameplayStatics.h>
 #include <Engine/EngineTypes.h>
 
@@ -80,7 +81,11 @@ void AOh_MovingNPC2::IdleState()
 		currnetTime = 0;
 
 		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1500);
+
+		
 	}
+
+
 
 }
 
@@ -100,5 +105,9 @@ void AOh_MovingNPC2::IdleState()
 			m_state2 = ENPCState2::Idle;
 
 			currnetTime = 0;
+
+			
 		}
+
+		
 	}

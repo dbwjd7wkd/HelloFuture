@@ -45,6 +45,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = FSM)
 		float idleDelayTime = 2;
 
+	UPROPERTY()
+		class AOH_InteractiveDialogue3* Dialogue3;
+
 
 	UPROPERTY()
 		class AAIController* ai;

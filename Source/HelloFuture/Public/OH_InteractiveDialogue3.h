@@ -18,6 +18,9 @@ public:
 
 	void Interact() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+	bool bIsInteracting = false;
+
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
@@ -26,8 +29,6 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = Event)
 		void OnDialogueCompleted();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
-	bool bIsInteracting = false;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
