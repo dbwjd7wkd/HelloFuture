@@ -26,6 +26,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 		class UDataTable* Dialogue;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+		class UDataTable* Dialogue2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+		class UDataTable* Dialogue3;
+
 	UFUNCTION(BlueprintCallable, Category = Event)
 		void OnDialogueCompleted();
 
@@ -33,6 +39,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 		bool interactQuest = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+		bool interactQuestclear = false;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)

@@ -17,20 +17,31 @@ void AOH_InteractiveDialogue3::Interact()
 	if ((currentPlayerController != nullptr) && (Dialogue != nullptr))
 	{
 		
-		camera = true;
-		bIsInteracting = true;
+			camera = true;
+			bIsInteracting = true;
 
 		
-		// 플레이어 인풋 잠금
-		currentPlayerController->SetCinematicMode(true, true, true);
+			// 플레이어 인풋 잠금
+			currentPlayerController->SetCinematicMode(true, true, true);
+
+			if (interactQuestclear == false)
+			{
+			// 다이얼로그 가져오기
+			currentPlayerController->GetUI()->InitializeDialogue(Dialogue);
+			}
+
+			else if (interactQuestclear == true)
+			{
+			// 다이얼로그 가져오기
+			currentPlayerController->GetUI()->InitializeDialogue(Dialogue2);
+
+			}
+
+			// 다이얼로그 완료
+			currentPlayerController->GetUI()->OnDialogueCompleted.AddDynamic(this, &AOH_InteractiveDialogue3::OnDialogueCompleted);
+		
 
 		
-		// 다이얼로그 가져오기
-		currentPlayerController->GetUI()->InitializeDialogue(Dialogue);
-
-
-		// 다이얼로그 완료
-		currentPlayerController->GetUI()->OnDialogueCompleted.AddDynamic(this, &AOH_InteractiveDialogue3::OnDialogueCompleted);
 
 		
 	}
