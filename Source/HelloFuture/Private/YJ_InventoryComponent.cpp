@@ -138,7 +138,64 @@ bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
 
 bool UYJ_InventoryComponent::AddItemByNumber(EItemEnum Item, int32 num)
 {
-	return false;
+	// 인벤토리 창이 다 차면 아래 내용 실행하지 않음.
+	if (ItemCnt >= Capacity)
+	{
+		return false;
+	}
+
+	// 게임인스턴스 가져오기
+	UWorld* world = GetWorld();
+	if (!world) return false;
+	UYJ_GameInstance* gameInstance = Cast<UYJ_GameInstance>(world->GetGameInstance());
+	if (!gameInstance) return false;
+
+	// 아이템 가져오기
+	int32 idx = (int32)Item;
+	UYJ_Item* item = gameInstance->AllItems[idx];
+
+	// Item이 은행 대기표일 때, Items에 대기표가 있으면 아래 내용 실행하지 않음.
+	UYJ_WaitingTicketItem* waitingTicketItem = Cast<UYJ_WaitingTicketItem>(item);
+	if (waitingTicketItem)
+	{
+		for (auto yjItem : Items)
+		{
+			if (Cast<UYJ_WaitingTicketItem>(yjItem) != nullptr)
+			{
+				return false;
+			}
+		}
+
+		UWorld* const World = GetWorld();
+		AYJ_GameModeBase* GameMode;
+		if (World) {
+			GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
+			if (!GameMode) return false;
+			waitingTicketItem->ItemWaitingNumber = GameMode->waitingNumber + 1;
+		}
+	}
+
+	// 아이템 추가하기
+	state = "add";
+
+	if (item->Count <= 0)
+	{
+		item->OwningInventory = this;
+		item->World = GetWorld();
+		item->ItemIndex = idx;
+		item->InventoryIndex = ItemCnt;
+		item->Count += num;
+		Items.Add(item);
+		ItemCnt++;
+	}
+	else
+	{
+		item->Count += num;
+	}
+	// Update UI
+	OnInventoryUpdated.Broadcast();
+
+	return true;
 }
 
 bool UYJ_InventoryComponent::RemoveItem(UYJ_Item* Item)
