@@ -106,6 +106,13 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Items")
 	int32 ItemCnt;
 
+	// 은행
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+	bool HaveBorrowedLoan = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+	bool UnpaidLoan = false;
+
 	//// SaveGame에 넣을 인벤토리 아이템 정보
 	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory")
 	//	TArray<int32> inventoryCnt; // 인벤토리의 각 아이템 갯수
