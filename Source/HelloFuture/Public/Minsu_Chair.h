@@ -28,4 +28,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Collision")
 		class UBoxComponent* collision;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bool")
+		bool isSit = false;
 };

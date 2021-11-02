@@ -16,6 +16,11 @@ AMinsu_Chair::AMinsu_Chair()
 
 	collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
 	collision->SetupAttachment(bodyMesh);
+
+	/*for (int i = 1; ; i++)
+	{
+		Tags.Add("Chair_%d", i);
+	}*/
 }
 
 // Called when the game starts or when spawned
