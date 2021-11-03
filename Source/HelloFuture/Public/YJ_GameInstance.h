@@ -32,4 +32,8 @@ public:
 	// custoM에서 구매한 옷을 배치할 위치 백터 어레이 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetSpawnLocation")
 		TArray<FVector> closetSpawnLocation;
+
+	// 시간
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
+		int32 worldTime = 1;
 };

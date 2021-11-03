@@ -13,8 +13,8 @@
 UYJ_InventoryComponent::UYJ_InventoryComponent()
 {
 
-	accountBalance = 10000;
-	cash = 5000;
+	accountBalance = 0;
+	cash = 10000;
 
 	columnLength = 7;
 	rowLength = 3;

@@ -367,6 +367,14 @@ void AHelloFutureCharacter::SaveGame()
 	//SaveGameInstance->closetBoughtMaterialStruct/ = closetBoughtMaterialStruct;
 	SaveGameInstance->closetBoughts = closetBoughts;
 
+	// 은행
+	SaveGameInstance->HaveBorrowedLoan = Inventory->HaveBorrowedLoan;
+	SaveGameInstance->UnpaidLoan = Inventory->UnpaidLoan;
+	SaveGameInstance->HaveBankBook = Inventory->HaveBankBook;
+
+	// 시간
+	SaveGameInstance->worldTime = gameInstance->worldTime;
+
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 
 	OnSaveGame.Broadcast();
@@ -388,7 +396,12 @@ void AHelloFutureCharacter::LoadGame()
 	{
 		// 갯수가 1 이상일 때만 인벤토리에 가지고 있었음
 		gameInstance->AllItems[i]->ItemIndex = i;
-		if (LoadGameInstance->inventoryCnt.Num() < i+1) LoadGameInstance->inventoryCnt.Add(0); // 아이템 갯수가 늘어났을 경우 오류 대비
+		if (LoadGameInstance->inventoryCnt.Num() < i + 1)
+		{
+			// 아이템 갯수가 늘어났을 경우 오류 대비
+			LoadGameInstance->inventoryCnt.Add(0); 
+			LoadGameInstance->inventoryIdx.Add(-1);
+		}
 		int32 cnt = LoadGameInstance->inventoryCnt[i];
 		if (cnt <= 0) continue;
 
@@ -430,6 +443,14 @@ void AHelloFutureCharacter::LoadGame()
 	//closetBoughtMaterialStruct = LoadGameInstance->closetBoughtMaterialStruct;
 
 	closetBoughts = LoadGameInstance->closetBoughts;
+
+	// 은행
+	Inventory->HaveBorrowedLoan = LoadGameInstance->HaveBorrowedLoan;
+	Inventory->UnpaidLoan = LoadGameInstance->UnpaidLoan;
+	Inventory->HaveBankBook = LoadGameInstance->HaveBankBook;
+
+	// 시간
+	gameInstance->worldTime = LoadGameInstance->worldTime;
 
 	OnLoadGame.Broadcast();
 

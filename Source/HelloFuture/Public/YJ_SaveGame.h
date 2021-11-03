@@ -135,4 +135,18 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
         TArray<FcloseBoughtMStruct> closetBoughts;
+
+	// 은행
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		bool HaveBorrowedLoan = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		bool UnpaidLoan = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+		bool HaveBankBook = false;
+
+	// 시간
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
+        int32 worldTime;
 };
