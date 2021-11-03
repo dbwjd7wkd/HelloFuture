@@ -75,6 +75,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 		bool PlusAccountBalance(int32 plusPrice);
 
+	// 이자 관련 함수
+	//UFUNCTION(BlueprintCallable)
+	//	bool Update_AccountBalance_Interest(int32 plusPrice);
+
 public:
 	UPROPERTY(EditDefaultsOnly, Instanced)
 	TArray<class UYJ_Item*> DefaultItems;
@@ -125,6 +129,16 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
 	int32 BankBook_Interest = 0; 	// 통장 이자
+
+	//세금
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+	bool UnpaidTax = false; // 아직 안 갚은 세금이 있는지
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+	int32 Tax_Interest; 	// 세금 이자
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+	int32 Tax_RemainingDate = 7; 	// 세금 남은 날짜
 
 	//// SaveGame에 넣을 인벤토리 아이템 정보
 	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory")
