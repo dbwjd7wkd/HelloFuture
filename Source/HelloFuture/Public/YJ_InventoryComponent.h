@@ -108,13 +108,23 @@ public:
 
 	// 은행
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-	bool HaveBorrowedLoan = false;
+	bool HaveBorrowedLoan = false; // 대출을 했었는지
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-	bool UnpaidLoan = false;
+	bool UnpaidLoan = false; // 아직 안 갚은 대출금이 있는지
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
-	bool HaveBankBook = false;
+	bool HaveBankBook = false; // 통장을 가지고 있는지
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+	int32 Loan_RemainingDate = 7; 	// 대출 남은 날짜
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+	int32 Loan_Interest = 0; 	// 대출 이자
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+	int32 BankBook_Interest = 0; 	// 통장 이자
 
 	//// SaveGame에 넣을 인벤토리 아이템 정보
 	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory")

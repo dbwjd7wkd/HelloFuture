@@ -36,4 +36,6 @@ public:
 	// ½Ã°£
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
 		int32 worldTime = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
+		FDateTime worldTime_Structure;
 };

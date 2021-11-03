@@ -146,7 +146,19 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
 		bool HaveBankBook = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		int32 Loan_RemainingDate; 	// 대출 남은 날짜
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		int32 Loan_Interest; 	// 대출 이자
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+		int32 BankBook_Interest; 	// 통장 이자
+
 	// 시간
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
         int32 worldTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
+		FDateTime worldTime_Structure;
 };

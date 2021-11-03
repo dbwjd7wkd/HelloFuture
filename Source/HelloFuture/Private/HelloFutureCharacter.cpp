@@ -372,8 +372,13 @@ void AHelloFutureCharacter::SaveGame()
 	SaveGameInstance->UnpaidLoan = Inventory->UnpaidLoan;
 	SaveGameInstance->HaveBankBook = Inventory->HaveBankBook;
 
+	SaveGameInstance->Loan_RemainingDate = Inventory->Loan_RemainingDate;
+	SaveGameInstance->Loan_Interest = Inventory->Loan_Interest;
+	SaveGameInstance->BankBook_Interest = Inventory->BankBook_Interest;
+
 	// 시간
 	SaveGameInstance->worldTime = gameInstance->worldTime;
+	SaveGameInstance->worldTime_Structure = gameInstance->worldTime_Structure;
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 
@@ -449,8 +454,13 @@ void AHelloFutureCharacter::LoadGame()
 	Inventory->UnpaidLoan = LoadGameInstance->UnpaidLoan;
 	Inventory->HaveBankBook = LoadGameInstance->HaveBankBook;
 
+	Inventory->Loan_RemainingDate = LoadGameInstance->Loan_RemainingDate;
+	Inventory->Loan_Interest = LoadGameInstance->Loan_Interest;
+	Inventory->BankBook_Interest = LoadGameInstance->BankBook_Interest;
+
 	// 시간
 	gameInstance->worldTime = LoadGameInstance->worldTime;
+	gameInstance->worldTime_Structure = LoadGameInstance->worldTime_Structure;
 
 	OnLoadGame.Broadcast();
 
