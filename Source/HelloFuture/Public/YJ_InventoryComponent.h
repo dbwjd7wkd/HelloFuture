@@ -8,6 +8,7 @@
 
 // Blueprints will bind to this to update the UI
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTaxUpdated);
 
 UENUM(BlueprintType)
 enum class EItemEnum : uint8
@@ -79,6 +80,10 @@ public:
 	//UFUNCTION(BlueprintCallable)
 	//	bool Update_AccountBalance_Interest(int32 plusPrice);
 
+	// 세금 관련 함수
+	UFUNCTION(BlueprintCallable)
+	bool Update_Tax();
+
 public:
 	UPROPERTY(EditDefaultsOnly, Instanced)
 	TArray<class UYJ_Item*> DefaultItems;
@@ -88,6 +93,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FOnInventoryUpdated	OnInventoryUpdated;
+
+	UPROPERTY(BlueprintAssignable, Category = "Tax")
+	FOnTaxUpdated onTaxUpdated;
 
 	UPROPERTY(EditDefaultsOnly, blueprintReadWrite, Category = "Inventory")
 	int32 accountBalance;
@@ -138,7 +146,13 @@ public:
 	int32 Tax_Interest; 	// 세금 이자
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
-	int32 Tax_RemainingDate = 7; 	// 세금 남은 날짜
+	int32 Tax_RemainingDate = 1; 	// 세금 남은 날짜
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+	int32 Tax_Content = 0; 	// 세금고지서 번호
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+	int32 Tax_Percent; 	// 세금 비율
 
 	//// SaveGame에 넣을 인벤토리 아이템 정보
 	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory")
