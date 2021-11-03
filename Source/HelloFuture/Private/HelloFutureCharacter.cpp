@@ -368,13 +368,9 @@ void AHelloFutureCharacter::SaveGame()
 	SaveGameInstance->closetBoughts = closetBoughts;
 
 	// 은행
-	SaveGameInstance->HaveBorrowedLoan = Inventory->HaveBorrowedLoan;
-	SaveGameInstance->UnpaidLoan = Inventory->UnpaidLoan;
-	SaveGameInstance->HaveBankBook = Inventory->HaveBankBook;
-
-	SaveGameInstance->Loan_RemainingDate = Inventory->Loan_RemainingDate;
-	SaveGameInstance->Loan_Interest = Inventory->Loan_Interest;
-	SaveGameInstance->BankBook_Interest = Inventory->BankBook_Interest;
+	SaveGameInstance->BankBook = Inventory->BankBook;
+	SaveGameInstance->Loan = Inventory->Loan;
+	SaveGameInstance->Tax = Inventory->Tax;
 
 	// 시간
 	SaveGameInstance->worldTime = gameInstance->worldTime;
@@ -450,13 +446,9 @@ void AHelloFutureCharacter::LoadGame()
 	closetBoughts = LoadGameInstance->closetBoughts;
 
 	// 은행
-	Inventory->HaveBorrowedLoan = LoadGameInstance->HaveBorrowedLoan;
-	Inventory->UnpaidLoan = LoadGameInstance->UnpaidLoan;
-	Inventory->HaveBankBook = LoadGameInstance->HaveBankBook;
-
-	Inventory->Loan_RemainingDate = LoadGameInstance->Loan_RemainingDate;
-	Inventory->Loan_Interest = LoadGameInstance->Loan_Interest;
-	Inventory->BankBook_Interest = LoadGameInstance->BankBook_Interest;
+	Inventory->BankBook = LoadGameInstance->BankBook;
+	Inventory->Loan = LoadGameInstance->Loan;
+	Inventory->Tax = LoadGameInstance->Tax;
 
 	// 시간
 	gameInstance->worldTime = LoadGameInstance->worldTime;

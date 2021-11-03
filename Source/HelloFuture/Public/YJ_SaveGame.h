@@ -6,6 +6,7 @@
 #include "GameFramework/SaveGame.h"
 #include "Engine/SkeletalMesh.h"
 #include "Materials/MaterialInterface.h"
+#include "YJ_InventoryComponent.h"
 #include "YJ_SaveGame.generated.h"
 
 /**
@@ -136,24 +137,17 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ClosetBought")
         TArray<FcloseBoughtMStruct> closetBoughts;
 
-	// 은행
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-		bool HaveBorrowedLoan = false;
+    // 통장이자
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+        FBankBookInterestStruct BankBook;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-		bool UnpaidLoan = false;
+    // 대출
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+        FLoanStruct Loan;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
-		bool HaveBankBook = false;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-		int32 Loan_RemainingDate; 	// 대출 남은 날짜
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-		int32 Loan_Interest; 	// 대출 이자
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
-		int32 BankBook_Interest; 	// 통장 이자
+    // 세금
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+        FTaxStruct Tax;
 
 	// 시간
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")

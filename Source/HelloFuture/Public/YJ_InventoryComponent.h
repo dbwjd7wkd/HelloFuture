@@ -34,6 +34,75 @@ enum class EItemEnum : uint8
 	Tonic
 };
 
+USTRUCT(Atomic, BlueprintType)
+struct FBankBookInterestStruct
+{
+	GENERATED_BODY()
+
+public:
+	// 통장이자
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+		bool HaveBankBook = false; // 통장을 가지고 있는지
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+		int32 BankBook_Interest = 0; // 통장 이자
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+		int32 BankBook_PastDate = 0; // 통장 이자 준 후 지난 날짜
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
+		float BankBook_Percent = 0.01; // 통장 이자율
+};
+
+USTRUCT(Atomic, BlueprintType)
+struct FLoanStruct
+{
+	GENERATED_BODY()
+
+public:
+	// 대출
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		bool HaveBorrowedLoan = false; // 대출을 했었는지
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		bool UnpaidLoan = false; // 아직 안 갚은 대출금이 있는지
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		int32 Loan_Interest = 0; // 대출 이자
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		int32 Loan_PastDate = 0; // 대출 후 지난 날짜
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		float Loan_Percent = 0.05; // 대출 이자율
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
+		int32 Loan_Value = 100000; // 원래 대출금
+};
+
+USTRUCT(Atomic, BlueprintType)
+struct FTaxStruct
+{
+	GENERATED_BODY()
+
+public:
+	// 세금
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+		bool UnpaidTax = false; // 아직 안 갚은 세금이 있는지
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+		int32 Tax_Interest; // 세금 이자
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+		int32 Tax_PastDate = 0; // 세금 고지 후 지난 날짜
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+		float Tax_Percent; 	// 세금 비율
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
+		int32 Tax_Content = 0; 	// 세금고지서 번호
+};
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class HELLOFUTURE_API UYJ_InventoryComponent : public UActorComponent
 {
@@ -76,9 +145,16 @@ public:
 	UFUNCTION(BlueprintCallable)
 		bool PlusAccountBalance(int32 plusPrice);
 
-	// 이자 관련 함수
-	//UFUNCTION(BlueprintCallable)
-	//	bool Update_AccountBalance_Interest(int32 plusPrice);
+	// 통장이자 관련 함수
+	UFUNCTION(BlueprintCallable)
+	bool Update_BankBook_Interest();
+
+	// 대출 관련 함수
+	UFUNCTION(BlueprintCallable)
+	bool Update_Loan();
+
+	UFUNCTION(BlueprintCallable)
+	int32 Get_TotalLoanAmount();
 
 	// 세금 관련 함수
 	UFUNCTION(BlueprintCallable)
@@ -118,41 +194,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Items")
 	int32 ItemCnt;
 
-	// 은행
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-	bool HaveBorrowedLoan = false; // 대출을 했었는지
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-	bool UnpaidLoan = false; // 아직 안 갚은 대출금이 있는지
-
+	// 통장이자
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
-	bool HaveBankBook = false; // 통장을 가지고 있는지
+	FBankBookInterestStruct BankBook;
 
-
+	// 대출
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-	int32 Loan_RemainingDate = 7; 	// 대출 남은 날짜
+	FLoanStruct Loan;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Loan")
-	int32 Loan_Interest = 0; 	// 대출 이자
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BankBook")
-	int32 BankBook_Interest = 0; 	// 통장 이자
-
-	//세금
+	// 세금
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
-	bool UnpaidTax = false; // 아직 안 갚은 세금이 있는지
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
-	int32 Tax_Interest; 	// 세금 이자
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
-	int32 Tax_RemainingDate = 1; 	// 세금 남은 날짜
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
-	int32 Tax_Content = 0; 	// 세금고지서 번호
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tax")
-	int32 Tax_Percent; 	// 세금 비율
+	FTaxStruct Tax;
 
 	//// SaveGame에 넣을 인벤토리 아이템 정보
 	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory")

@@ -390,36 +390,79 @@ bool UYJ_InventoryComponent::PlusAccountBalance(int32 plusPrice)
 	return true;
 }
 
+bool UYJ_InventoryComponent::Update_BankBook_Interest()
+{
+	// 통장이 없다면 리턴
+	if (BankBook.HaveBankBook == false) return true;
+	// 통장이자 매일 더하고, 7일이 지나면 이자주기
+	BankBook.BankBook_PastDate++;
+	BankBook.BankBook_Interest += accountBalance * BankBook.BankBook_Percent / 7;
+
+	if (BankBook.BankBook_PastDate >= 7)
+	{
+		accountBalance += BankBook.BankBook_Interest;
+		BankBook.BankBook_Interest = 0;
+		BankBook.BankBook_PastDate = 0;
+	}
+
+	return true;
+}
+
+bool UYJ_InventoryComponent::Update_Loan()
+{
+	// 만약 갚을 대출금이 없으면 리턴
+	if (Loan.UnpaidLoan == false)
+	{
+		Loan.Loan_PastDate = 0;
+		Loan.Loan_Interest = 0;
+		return true;
+	}
+
+	// 대출금을 갚지않았고, 7일이 지났으면 이자가 붙음
+	Loan.Loan_PastDate++;
+	if (Loan.Loan_PastDate >= 7)
+	{
+		Loan.Loan_Interest += Loan.Loan_Value * Loan.Loan_Percent;
+	}
+
+	return true;
+}
+
+int32 UYJ_InventoryComponent::Get_TotalLoanAmount()
+{
+	return Loan.Loan_Interest + Loan.Loan_Value;
+}
+
 bool UYJ_InventoryComponent::Update_Tax()
 {
-	Tax_RemainingDate++;
-
-	if (Tax_RemainingDate % 7 == 0)
+	// 세금 고지한지 7일 지났으면, 세금율 랜덤으로 세금계산
+	Tax.Tax_PastDate++;
+	if (Tax.Tax_PastDate % 7 == 0)
 	{
-		Tax_Content = FMath::RandRange(0, 4);
+		Tax.Tax_Content = FMath::RandRange(0, 4);
 
-		switch (Tax_Content)
+		switch (Tax.Tax_Content)
 		{
 		case 0:
-			Tax_Percent = 3;
+			Tax.Tax_Percent = 0.03;
 			break;
 		case 1:
-			Tax_Percent = 5;
+			Tax.Tax_Percent = 0.05;
 			break;
 		case 2:
-			Tax_Percent = 8;
+			Tax.Tax_Percent = 0.08;
 			break;
 		case 3: 
-			Tax_Percent = 10;
+			Tax.Tax_Percent = 0.1;
 			break;
 		case 4:
-			Tax_Percent = 15;
+			Tax.Tax_Percent = 0.15;
 			break;
 		default:
 			break;
 		}
 
-		Tax_Interest = (accountBalance + cash) * Tax_Percent * 0.01;
+		Tax.Tax_Interest = (int32)((accountBalance + cash) * Tax.Tax_Percent);
 		onTaxUpdated.Broadcast();
 	}
 
