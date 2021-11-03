@@ -10,5 +10,6 @@ public class HelloFuture : ModuleRules
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "AIModule", "NavigationSystem", "UMG", "Networking", "Sockets", "WebBrowser"});
         PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-    }
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "SlateCore" });
+	}
 }
