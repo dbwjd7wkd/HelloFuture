@@ -389,3 +389,39 @@ bool UYJ_InventoryComponent::PlusAccountBalance(int32 plusPrice)
 	accountBalance = accountBalance + plusPrice;
 	return true;
 }
+
+bool UYJ_InventoryComponent::Update_Tax()
+{
+	Tax_RemainingDate++;
+
+	if (Tax_RemainingDate % 7 == 0)
+	{
+		Tax_Content = FMath::RandRange(0, 4);
+
+		switch (Tax_Content)
+		{
+		case 0:
+			Tax_Percent = 3;
+			break;
+		case 1:
+			Tax_Percent = 5;
+			break;
+		case 2:
+			Tax_Percent = 8;
+			break;
+		case 3: 
+			Tax_Percent = 10;
+			break;
+		case 4:
+			Tax_Percent = 15;
+			break;
+		default:
+			break;
+		}
+
+		Tax_Interest = (accountBalance + cash) * Tax_Percent * 0.01;
+		onTaxUpdated.Broadcast();
+	}
+
+	return true;
+}
