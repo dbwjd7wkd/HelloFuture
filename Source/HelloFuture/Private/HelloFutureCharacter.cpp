@@ -30,9 +30,28 @@
 //File picker includes
 #include "Developer/DesktopPlatform/Public/IDesktopPlatform.h"
 #include "Developer/DesktopPlatform/Public/DesktopPlatformModule.h"
+#include "GenericPlatform/GenericPlatformMisc.h"
+//#include "Runtime/ImageWrapper/Public/Interfaces/IImageWrapper.h"
+//#include "Runtime/ImageWrapper/Public/Interfaces/IImageWrapperModule.h"
+#include "IImageWrapper.h"
+#include "IImageWrapperModule.h"
+#include "RHICommandList.h"
+
+#include "Runtime/Engine/Public/TextureResource.h"
+#include "Runtime/Engine/Public/HighResScreenshot.h"
+#include "Runtime/Engine/Classes/Engine/Texture2D.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
+
+struct FUpdateTextureData
+{
+	UTexture2D* Texture2D;
+	FUpdateTextureRegion2D Region;
+	uint32 Pitch;
+	TArray64<uint8> BufferArray;
+	TSharedPtr<IImageWrapper> Wrapper;	//to keep the uncompressed data alive
+};
 
 AHelloFutureCharacter::AHelloFutureCharacter()
 {
@@ -115,7 +134,6 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	{
 		C_TextRenderName->SetFont(FontFinder.Object);
 	}
-
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -252,7 +270,8 @@ void AHelloFutureCharacter::SetBoughtClothes(FString key, bool value)
 	BoughtClothes.Add(key, value);
 }
 
-void AHelloFutureCharacter::OpenFileDialog(const FString& DialogTitle, const FString& DefaultPath, const FString& FileTypes, TArray<FString>& OutFileNames)
+// 액자 이미지 FilePicker
+void AHelloFutureCharacter::OpenFileDialog(int32 frameNumber, const FString& DialogTitle, const FString& DefaultPath, const FString& FileTypes, TArray<FString>& OutFileNames)
 {
 	if (GEngine)
 	{
@@ -270,17 +289,68 @@ void AHelloFutureCharacter::OpenFileDialog(const FString& DialogTitle, const FSt
 	}
 }
 
-void AHelloFutureCharacter::PrintData(const FString& File)
+
+UTexture2D* AHelloFutureCharacter::GetFile(const FString& File, bool& IsValid, int32& Width, int32& Height)
 {
-	//Parse the data into a string array
-	TArray<FString> LoadedText;
-	FFileHelper::LoadFileToStringArray(LoadedText, *File);
-	//Print the contents
-	for (int32 i = 0; i < LoadedText.Num(); i++)
+	IsValid = false;
+
+	// 텍스처를 넣을 자리 지정
+	UTexture2D* Texture = NULL;
+
+	IImageWrapperModule& ImageWrapperModule = FModuleManager::LoadModuleChecked<IImageWrapperModule>(FName("ImageWrapper"));
+
+	// 이미지 파일 데이터를 받을 TArray
+	TArray<uint8> ImageRawData;
+	
+	EImageFormat DetectedFormat = ImageWrapperModule.DetectImageFormat(ImageRawData.GetData(), ImageRawData.Num());
+
+	IImageWrapperPtr ImageWrapper = ImageWrapperModule.CreateImageWrapper(DetectedFormat);
+
+	if (!FFileHelper::LoadFileToArray(ImageRawData, *File))
 	{
-		GLog->Log(LoadedText[i]);
+		return NULL;
 	}
+
+	if (ImageWrapper.IsValid() && ImageWrapper->SetCompressed(ImageRawData.GetData(), ImageRawData.Num()))
+	{
+		TArray<uint8> UncompressedBGRA;
+
+		///
+
+		if (ImageWrapper->GetRaw(ERGBFormat::BGRA, 8, UncompressedBGRA))
+		{
+			Texture = UTexture2D::CreateTransient(ImageWrapper->GetWidth(), ImageWrapper->GetHeight(), PF_B8G8R8A8);
+
+			if (!Texture)
+			{
+				return NULL;
+			}
+
+			Width = ImageWrapper->GetWidth();
+			Height = ImageWrapper->GetHeight();
+
+			void* TextureData = Texture->PlatformData->Mips[0].BulkData.Lock(LOCK_READ_WRITE);
+			FMemory::Memcpy(TextureData, UncompressedBGRA.GetData(), UncompressedBGRA.Num());
+			Texture->PlatformData->Mips[0].BulkData.Unlock();
+
+			Texture->UpdateResource();
+		}
+	}
+	return Texture;
 }
+
+
+//void AHelloFutureCharacter::PrintData(const FString& File)
+//{
+//	//Parse the data into a string array
+//	TArray<FString> LoadedText;
+//	FFileHelper::LoadFileToStringArray(LoadedText, *File);
+//	//Print the contents
+//	for (int32 i = 0; i < LoadedText.Num(); i++)
+//	{
+//		GLog->Log(LoadedText[i]);
+//	}
+//}
 
 //////////////////////////////////////////////////////////////////////////
 // Input

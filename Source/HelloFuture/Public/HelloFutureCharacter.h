@@ -381,10 +381,13 @@ public:
 		* For example: Text Files|*.txt|Excel files|*.csv|Image Files|*.png;*.jpg;*.bmp will display 3 lines for 3 different type of files.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "FilePicker")
-	void OpenFileDialog(const FString & DialogTitle, const FString & DefaultPath, const FString & FileTypes, TArray<FString>&OutFileNames);
+	void OpenFileDialog(int32 frameNumber, const FString & DialogTitle, const FString & DefaultPath, const FString & FileTypes, TArray<FString>&OutFileNames);
+
+	UFUNCTION(BlueprintCallable, Category = "FilePicker")
+		UTexture2D* GetFile(const FString& File, bool& IsValid, int32& Width, int32& Height);
 
 	/*Prints the data of the given file*/
-	UFUNCTION(BlueprintCallable, Category = "FilePicker")
-		void PrintData(const FString& File);
+	//UFUNCTION(BlueprintCallable, Category = "FilePicker")
+	//	void PrintData(const FString& File);
 };
 
