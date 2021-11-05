@@ -6,9 +6,9 @@
 /NAME:"UE4Editor-AdvancedSteamSessions.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\Default.DESKTOP-6F3BTUF\Documents\GitHub\HelloFuture\Intermediate\Build\Win64\HelloFutureEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"C:\Users\Default.DESKTOP-6F3BTUF\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.cpp.obj"
-"C:\Users\Default.DESKTOP-6F3BTUF\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
-"C:\Users\Default.DESKTOP-6F3BTUF\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\Default.rc2.res"
-/OUT:"C:\Users\Default.DESKTOP-6F3BTUF\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\UE4Editor-AdvancedSteamSessions.lib"
+"C:\Users\YuJeong\Documents\GitHub\HelloFuture\Intermediate\Build\Win64\HelloFutureEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\YuJeong\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.cpp.obj"
+"C:\Users\YuJeong\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
+"C:\Users\YuJeong\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\Default.rc2.res"
+/OUT:"C:\Users\YuJeong\Documents\GitHub\HelloFuture\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UE4Editor\Development\AdvancedSteamSessions\UE4Editor-AdvancedSteamSessions.lib"
 /INCLUDE:IMPLEMENT_MODULE_AdvancedSteamSessions
