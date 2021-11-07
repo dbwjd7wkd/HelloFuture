@@ -292,6 +292,8 @@ void AHelloFutureCharacter::OpenFileDialog(int32 frameNumber, const FString& Dia
 
 UTexture2D* AHelloFutureCharacter::GetFile(const FString& File, bool& IsValid, int32& Width, int32& Height)
 {
+
+	UE_LOG(LogTemp, Warning, TEXT("okay"));
 	IsValid = false;
 
 	// 텍스처를 넣을 자리 지정
@@ -302,12 +304,13 @@ UTexture2D* AHelloFutureCharacter::GetFile(const FString& File, bool& IsValid, i
 	// 이미지 파일 데이터를 받을 TArray
 	TArray<uint8> ImageRawData;
 	
-	EImageFormat DetectedFormat = ImageWrapperModule.DetectImageFormat(ImageRawData.GetData(), ImageRawData.Num());
+	//EImageFormkat DetectedFormat = ImageWrapperModule.DetectImageFormat(ImageRawData.GetData(), ImageRawData.Num());
 
-	IImageWrapperPtr ImageWrapper = ImageWrapperModule.CreateImageWrapper(DetectedFormat);
+	IImageWrapperPtr ImageWrapper = ImageWrapperModule.CreateImageWrapper(EImageFormat::PNG);
 
 	if (!FFileHelper::LoadFileToArray(ImageRawData, *File))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("NULLNULL"));
 		return NULL;
 	}
 
@@ -315,14 +318,16 @@ UTexture2D* AHelloFutureCharacter::GetFile(const FString& File, bool& IsValid, i
 	{
 		TArray<uint8> UncompressedBGRA;
 
-		///
+		UE_LOG(LogTemp, Warning, TEXT("what?"));
 
 		if (ImageWrapper->GetRaw(ERGBFormat::BGRA, 8, UncompressedBGRA))
 		{
+			UE_LOG(LogTemp, Warning, TEXT("came here?"));
 			Texture = UTexture2D::CreateTransient(ImageWrapper->GetWidth(), ImageWrapper->GetHeight(), PF_B8G8R8A8);
 
 			if (!Texture)
 			{
+				UE_LOG(LogTemp, Warning, TEXT("INValidTexture"));
 				return NULL;
 			}
 
@@ -334,8 +339,10 @@ UTexture2D* AHelloFutureCharacter::GetFile(const FString& File, bool& IsValid, i
 			Texture->PlatformData->Mips[0].BulkData.Unlock();
 
 			Texture->UpdateResource();
+			/*IsValid = true;*/
 		}
 	}
+	IsValid = true;
 	return Texture;
 }
 
