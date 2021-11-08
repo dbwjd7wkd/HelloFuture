@@ -306,7 +306,7 @@ UTexture2D* AHelloFutureCharacter::GetFile(const FString& File, bool& IsValid, i
 	
 	//EImageFormkat DetectedFormat = ImageWrapperModule.DetectImageFormat(ImageRawData.GetData(), ImageRawData.Num());
 
-	IImageWrapperPtr ImageWrapper = ImageWrapperModule.CreateImageWrapper(EImageFormat::PNG);
+	IImageWrapperPtr ImageWrapper = ImageWrapperModule.CreateImageWrapper(EImageFormat::JPEG);
 
 	if (!FFileHelper::LoadFileToArray(ImageRawData, *File))
 	{
