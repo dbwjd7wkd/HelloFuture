@@ -39,6 +39,14 @@
 		{
 			"Name": "AdvancedSessions",
 			"Enabled": true
+		},
+		{
+			"Name": "ElectraPlayer",
+			"Enabled": true
+		},
+		{
+			"Name": "ElectraUtil",
+			"Enabled": true
 		}
 	]
 }
