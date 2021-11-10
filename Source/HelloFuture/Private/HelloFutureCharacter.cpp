@@ -36,10 +36,13 @@
 #include "IImageWrapper.h"
 #include "IImageWrapperModule.h"
 #include "RHICommandList.h"
-
+#include "Blueprint/UserWidget.h"
+#include "MyTalkWidget.h"
 #include "Runtime/Engine/Public/TextureResource.h"
 #include "Runtime/Engine/Public/HighResScreenshot.h"
 #include "Runtime/Engine/Classes/Engine/Texture2D.h"
+#include "Components/WidgetComponent.h"
+#include "Components/TextBlock.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -134,6 +137,10 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	{
 		C_TextRenderName->SetFont(FontFinder.Object);
 	}
+
+	//닉네임 수정
+	// name = CreateDefaultSubobject<UWidgetComponent>(TEXT("name"));
+	// name->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void AHelloFutureCharacter::BeginPlay()

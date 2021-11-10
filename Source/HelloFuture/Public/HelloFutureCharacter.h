@@ -389,5 +389,12 @@ public:
 	/*Prints the data of the given file*/
 	//UFUNCTION(BlueprintCallable, Category = "FilePicker")
 	//	void PrintData(const FString& File);
+
+	public:
+		class UMyTalkWidget* name;
+
+		UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = stat)
+		class UWidgetComponent* namecomponent;
+
 };
 
