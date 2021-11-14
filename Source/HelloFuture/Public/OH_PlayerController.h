@@ -48,6 +48,9 @@ FORCEINLINE UOH_QuestUI* GetUI() {return Cast<UOH_QuestUI>(oh_QuestUI); };
 //FORCEINLINE UOH_QuestUI* GetUI() {return  oh_QuestUI;}
 
 void SetupInputComponent();
+UPROPERTY(BlueprintReadWrite, Category = "datatable")
+class UOH_DataTable* datatable;
+
 
 UPROPERTY()
 class AApple* apple;
@@ -122,10 +125,24 @@ UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool isfirstclothing = false;
 
 
-
-
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool interactQuest = false;
 
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool introtutorialfinish = false;
+
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Tutorial1 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Tutorial2 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Tutorial3 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Tutorial4 = false;
 
 };

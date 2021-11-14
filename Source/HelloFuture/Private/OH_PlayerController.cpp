@@ -94,6 +94,9 @@ void AOH_PlayerController::Tick(float DeltaTime)
 			oh_QuestUI->InitializeDialogue(IntroDialogue);
 
 			oh_QuestUI->OnDialogueCompleted.AddDynamic(this, &AOH_PlayerController::OnintroDialogueCompleted);
+
+
+
 		}
 
 		else if (isfirstFarm == true)
@@ -165,6 +168,7 @@ void AOH_PlayerController::OnintroDialogueCompleted()
 
 	interactQuest = true;
 	
+	introtutorialfinish = true;
 	
 
 }
@@ -185,6 +189,7 @@ void AOH_PlayerController::SetupInputComponent()
 }
 
 void AOH_PlayerController::Interact()
+
 {
 	//OnActionPressed.Broadcast();
 	if ((me != nullptr) && (me->GetInteractive() != nullptr))
@@ -197,6 +202,8 @@ void AOH_PlayerController::Interact()
 	{
 		oh_QuestUI-> Interact();
 	}
+
+
 
 
 	
