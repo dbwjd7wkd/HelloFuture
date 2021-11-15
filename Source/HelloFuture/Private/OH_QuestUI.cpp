@@ -109,6 +109,7 @@ void UOH_QuestUI::AnimateMessage( const FString& Text)
 	OnAinmationsShowMessageUI();
 
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UOH_QuestUI::OnTimerCompleted, 0.5f, false);*/
+	
 
 	CurrentState = 1;
 
@@ -155,6 +156,8 @@ void UOH_QuestUI::OnAnimationTimerCompleted()
 
 	}
 
+	
+
 }
 
 void UOH_QuestUI::Interact()
@@ -184,6 +187,7 @@ void UOH_QuestUI::Interact()
 		PlayerDialogTextBlock->SetText(FText::FromString(InitialMessage));
 		
 		CurrentState = 2;
+		
 		
 	}
 	else if (CurrentState == 2)

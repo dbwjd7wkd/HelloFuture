@@ -155,4 +155,49 @@ bool farmtutorial2 = false;
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool farmtutorial3 = false;
 
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Towntutorial1 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Towntutorial2 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Towntutorial3 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Shoptutorial1 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Shoptutorial2 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Shoptutorial3 = false;
+
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Banktutorial1 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Banktutorial2 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Banktutorial3 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Banktutorial4 = false;
+
+
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Clothingtutorial1 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Clothingtutorial2 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Clothingtutorial3 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool Clothingtutorial4 = false;
 };
