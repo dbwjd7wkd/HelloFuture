@@ -118,9 +118,11 @@ void UOH_QuestUI::AnimateMessage( const FString& Text)
 
 	iLetter = 0;
 
+	
 	PlayerDialogTextBlock->SetText(FText::FromString(""));
 
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UOH_QuestUI::OnAnimationTimerCompleted, DelayBetweenLetters, false);
+
 }
 
 
@@ -148,6 +150,9 @@ void UOH_QuestUI::OnAnimationTimerCompleted()
 	else
 	{
 		CurrentState = 2;
+
+		
+
 	}
 
 }
@@ -170,6 +175,7 @@ void UOH_QuestUI::Interact()
 
 		OnAinmationsHideMessageUI();
 	}*/
+	
 
 	if (CurrentState == 1)
 	{
@@ -178,6 +184,7 @@ void UOH_QuestUI::Interact()
 		PlayerDialogTextBlock->SetText(FText::FromString(InitialMessage));
 		
 		CurrentState = 2;
+		
 	}
 	else if (CurrentState == 2)
 	{
@@ -186,7 +193,7 @@ void UOH_QuestUI::Interact()
 			MessageIndex +=1;
 
 			AnimateMessage(dialogue[RowIndex]->Message[MessageIndex].ToString());
-			
+			finish = true;
 		}
 
 		else

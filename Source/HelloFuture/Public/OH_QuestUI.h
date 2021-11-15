@@ -20,7 +20,7 @@ class HELLOFUTURE_API UOH_QuestUI : public UUserWidget
 	
 protected:
 	UPROPERTY(EditAnywhere, Category = "UI Message Settings")
-	float DelayBetweenLetters = 0.3f;
+	float DelayBetweenLetters = 0.2f;
 
 	UPROPERTY(EditAnywhere, Category = "UI Message Settings")
 	class USoundBase* SoundCueMessage;
@@ -94,6 +94,8 @@ public:
 
 
 
+
+
 private:
 	FTimerHandle TimerHandle;
 
@@ -134,5 +136,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UDataTable* curDialog;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool finish = false;
 	
 };

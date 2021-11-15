@@ -145,4 +145,14 @@ bool Tutorial3 = false;
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
 bool Tutorial4 = false;
 
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool farmtutorial1 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool farmtutorial2 = false;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dialogue)
+bool farmtutorial3 = false;
+
 };
