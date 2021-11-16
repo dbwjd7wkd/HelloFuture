@@ -193,7 +193,7 @@ void UOH_QuestUI::Interact()
 	else if (CurrentState == 2)
 	{
 		if ((MessageIndex + 1) < dialogue[RowIndex]->Message.Num())
-		{
+		{ 
 			MessageIndex +=1;
 
 			AnimateMessage(dialogue[RowIndex]->Message[MessageIndex].ToString());
