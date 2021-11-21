@@ -10,6 +10,7 @@
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDialogueCompletedDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FNextDialogueStartDelegate);
 /**
  * 
  */
@@ -133,6 +134,9 @@ private:
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FDialogueCompletedDelegate OnDialogueCompleted;
+
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FNextDialogueStartDelegate OnNextDialogueStart;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UDataTable* curDialog;

@@ -179,7 +179,6 @@ void UOH_QuestUI::Interact()
 		OnAinmationsHideMessageUI();
 	}*/
 	
-
 	if (CurrentState == 1)
 	{
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
@@ -187,11 +186,11 @@ void UOH_QuestUI::Interact()
 		PlayerDialogTextBlock->SetText(FText::FromString(InitialMessage));
 		
 		CurrentState = 2;
-		
-		
 	}
 	else if (CurrentState == 2)
 	{
+		OnNextDialogueStart.Broadcast();
+
 		if ((MessageIndex + 1) < dialogue[RowIndex]->Message.Num())
 		{ 
 			MessageIndex +=1;
