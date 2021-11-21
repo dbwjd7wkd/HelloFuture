@@ -109,7 +109,7 @@ bool UYJ_InventoryComponent::AddItem2(EItemEnum Item)
 		if (World) {
 			GameMode = Cast<AYJ_GameModeBase>(UGameplayStatics::GetGameMode(World));
 			if (!GameMode) return false;
-			waitingTicketItem->ItemWaitingNumber = GameMode->waitingNumber + 1;
+			waitingTicketItem->ItemWaitingNumber = GameMode->waitingNumber;
 		}
 	}
 

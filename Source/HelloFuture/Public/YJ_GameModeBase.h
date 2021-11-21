@@ -17,7 +17,7 @@ class HELLOFUTURE_API AYJ_GameModeBase : public AGameModeBase
 public:
 	// 대기번호
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Numbering System")
-		int32 waitingNumber = 0;
+		int32 waitingNumber = 1;
 
 public:
 	UFUNCTION(BlueprintCallable)
