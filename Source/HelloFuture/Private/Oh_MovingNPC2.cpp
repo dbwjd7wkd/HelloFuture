@@ -92,7 +92,7 @@ void AOh_MovingNPC2::IdleState()
 	void AOh_MovingNPC2::WalkState()
 	{
 		if (!ai) return;
-		GetCharacterMovement()->MaxWalkSpeed = 200;
+		GetCharacterMovement()->MaxWalkSpeed = 100;
 
 		//EPathFollowingRequestResult::Type r = ai->MoveToLocation(randomPos);
 
