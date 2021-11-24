@@ -354,6 +354,8 @@ UTexture2D* AHelloFutureCharacter::GetFile(const FString& File, bool& IsValid, i
 }
 
 
+
+
 //void AHelloFutureCharacter::PrintData(const FString& File)
 //{
 //	//Parse the data into a string array
@@ -400,6 +402,8 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	// save game
 	PlayerInputComponent->BindAction("Save", IE_Pressed, this, &AHelloFutureCharacter::SaveGame);
 	PlayerInputComponent->BindAction("Load", IE_Pressed, this, &AHelloFutureCharacter::LoadGame);
+
+	PlayerInputComponent->BindAction("Fishing", IE_Pressed, this, &AHelloFutureCharacter::Fishing);
 
 
 	//////////// 농장 꾸미기 ///////////////
@@ -832,4 +836,14 @@ void AHelloFutureCharacter::Chatting()
 // {
 // 	/*Seed = FMath::Clamp(Seed - 1, 0, 2);*/
 // }
+
+
+
+void AHelloFutureCharacter::Fishing()
+{
+	
+
+
+
+}
 

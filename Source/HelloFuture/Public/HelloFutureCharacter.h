@@ -396,5 +396,10 @@ public:
 		UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = stat)
 		class UWidgetComponent* namecomponent;
 
+
+	public:
+		
+		void Fishing();
+
 };
 
