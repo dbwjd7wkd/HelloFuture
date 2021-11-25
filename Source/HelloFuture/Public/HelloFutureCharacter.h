@@ -72,12 +72,18 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	bool movementBool = true;
+
+	void AddControllerYawInput(float Val);
 	/**
 	 * Called via input to turn at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void TurnAtRate(float Rate);
 
+	void AddControllerPitchInput(float Val);
+	
 	/**
 	 * Called via input to turn look up/down at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate

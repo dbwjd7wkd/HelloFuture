@@ -384,9 +384,11 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("Turn", this, &AHelloFutureCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AHelloFutureCharacter::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	//PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("LookUp", this, &AHelloFutureCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AHelloFutureCharacter::LookUpAtRate);
 
 	// handle touch devices
@@ -600,10 +602,35 @@ void AHelloFutureCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector 
 		StopJumping();
 }
 
+
+void AHelloFutureCharacter::AddControllerYawInput(float Val)
+{
+if (movementBool == true)
+	{
+		if (Val != 0.f && Controller && Controller->IsLocalPlayerController())
+		{
+			APlayerController* const PC = CastChecked<APlayerController>(Controller);
+			PC->AddYawInput(Val);
+		}
+	}
+}
+
 void AHelloFutureCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AHelloFutureCharacter::AddControllerPitchInput(float Val)
+{
+	if (movementBool == true)
+	{
+		if (Val != 0.f && Controller && Controller->IsLocalPlayerController())
+		{
+			APlayerController* const PC = CastChecked<APlayerController>(Controller);
+			PC->AddPitchInput(Val);
+		}
+	}
 }
 
 void AHelloFutureCharacter::LookUpAtRate(float Rate)
