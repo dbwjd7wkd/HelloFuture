@@ -9,6 +9,8 @@
 #include <Engine/EngineTypes.h>
 #include "HelloFutureCharacter.h"
 #include <Kismet/GameplayStatics.h>
+#include <Components/BoxComponent.h>
+#include <Blueprint/UserWidget.h>
 
 // Sets default values
 AMinsu_Cow::AMinsu_Cow()
@@ -16,6 +18,10 @@ AMinsu_Cow::AMinsu_Cow()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
+	boxComp->SetupAttachment(RootComponent);
+	boxComp->SetWorldLocation(FVector(200, 0, 0));
+	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AMinsu_Cow::OnTriggerEnter);
 }
 
 // Called when the game starts or when spawned
@@ -50,7 +56,7 @@ void AMinsu_Cow::Tick(float DeltaTime)
 	{
 		if (actor) target = actor;
 	}
-	// 시간이 흐른다.
+
 	currnetTime2 += GetWorld()->DeltaTimeSeconds;
 
 	FVector PlayerDir = target->GetActorLocation() - GetActorLocation();
@@ -83,16 +89,27 @@ void AMinsu_Cow::WalkState()
 	if (!ai) return;
 	GetCharacterMovement()->MaxWalkSpeed = 100;
 
-	//EPathFollowingRequestResult::Type r = ai->MoveToLocation(randomPos);
 
-	// 랜덤 위치로 가자 
 	if (ai->MoveToLocation(randomPos) == EPathFollowingRequestResult::AlreadyAtGoal)
 	{
-		// 이동 가능한 랜덤위치 가져오기
-		//randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1500);
 
 		m_state = ECowState::Idle;
 
 		currnetTime = 0;
 	}
+}
+
+void AMinsu_Cow::OnTriggerEnter(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (AnimalUI == nullptr)
+	{
+		AnimalUI = CreateWidget<UUserWidget>(GetWorld(), AnimalUIFactory);
+	
+	}
+
+	if (AnimalUI)
+	{
+		AnimalUI->AddToViewport();
+	}
+
 }

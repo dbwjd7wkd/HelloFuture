@@ -63,9 +63,19 @@ public:
 	UPROPERTY()
 		class AActor* target;
 
+	UPROPERTY(EditAnywhere, Category = BoxComp)
+		class UBoxComponent* boxComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = UI)
+		TSubclassOf<class UUserWidget> AnimalUIFactory;
+
+	UPROPERTY()
+		class UUserWidget* AnimalUI;
+
 private:
 	void IdleState();
 	void WalkState();
+	void OnTriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
 };
