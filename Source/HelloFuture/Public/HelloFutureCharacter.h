@@ -407,5 +407,14 @@ public:
 		
 		void Fishing();
 
+		UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = Fishing)
+		bool FishingStart = false;
+
+	public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishingFSM")
+	class UOh_FishingFSM* FishingFSM;
+
+
 };
 

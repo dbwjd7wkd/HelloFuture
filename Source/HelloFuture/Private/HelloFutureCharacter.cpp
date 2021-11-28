@@ -43,6 +43,7 @@
 #include "Runtime/Engine/Classes/Engine/Texture2D.h"
 #include "Components/WidgetComponent.h"
 #include "Components/TextBlock.h"
+#include "Oh_FishingFSM.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -141,6 +142,8 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	//닉네임 수정
 	// name = CreateDefaultSubobject<UWidgetComponent>(TEXT("name"));
 	// name->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
+	FishingFSM = CreateDefaultSubobject<UOh_FishingFSM>(TEXT("FishingFSM"));
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -868,9 +871,16 @@ void AHelloFutureCharacter::Chatting()
 
 void AHelloFutureCharacter::Fishing()
 {
+
 	
+	FishingStart = true;
 
+	if(FishingFSM->m_state == EFishingState::Idle)
+	{ 
 
+		FishingFSM->m_state = EFishingState::fishingStart;
+
+	}
 
 }
 
