@@ -49,19 +49,29 @@ void AMinsu_Cow::Tick(float DeltaTime)
 	case ECowState::Walk:
 		WalkState();
 		break;
+	case ECowState::TurnLeft:
+		break;
+	case ECowState::TurnRight:
+		break;
+	case ECowState::Sleep:
+		SleepState();
+		break;
+	case ECowState::Feed:
+		FeedState();
+		break;
 	}
 
-	TArray<AActor*>objs;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHelloFutureCharacter::StaticClass(), objs);
-	for (AActor* actor : objs)
-	{
-		if (actor) target = actor;
-	}
+	//TArray<AActor*>objs;
+	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHelloFutureCharacter::StaticClass(), objs);
+	//for (AActor* actor : objs)
+	//{
+	//	if (actor) target = actor;
+	//}
 
-	currnetTime2 += GetWorld()->DeltaTimeSeconds;
+	//currentTime2 += GetWorld()->DeltaTimeSeconds;
 
-	FVector PlayerDir = target->GetActorLocation() - GetActorLocation();
-	FRotator rot = PlayerDir.Rotation();
+	//FVector PlayerDir = target->GetActorLocation() - GetActorLocation();
+	//FRotator rot = PlayerDir.Rotation();
 }
 
 // Called to bind functionality to input
@@ -73,13 +83,14 @@ void AMinsu_Cow::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 void AMinsu_Cow::IdleState()
 {
-	currnetTime += GetWorld()->DeltaTimeSeconds;
+	currentTime += GetWorld()->DeltaTimeSeconds;
+	GetCharacterMovement()->MaxWalkSpeed = 0;
 
-	if (currnetTime > idleDelayTime)
+	if (currentTime > idleDelayTime)
 	{
 		m_state = ECowState::Walk;
 
-		currnetTime = 0;
+		currentTime = 0;
 
 		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1000);
 	}
@@ -93,10 +104,36 @@ void AMinsu_Cow::WalkState()
 
 	if (ai->MoveToLocation(randomPos) == EPathFollowingRequestResult::AlreadyAtGoal)
 	{
+		int32 ratio = FMath::RandRange(1, 100);
+		if (ratio < 10)
+		{
+			m_state = ECowState::Idle;
+		}
+		else
+		{
+			m_state = ECowState::Sleep;
+		}
 
+		currentTime = 0;
+	}
+}
+
+void AMinsu_Cow::SleepState()
+{
+	if (currentTime > sleepTime)
+	{
 		m_state = ECowState::Idle;
+		currentTime = 0;
+	}
 
-		currnetTime = 0;
+}
+
+void AMinsu_Cow::FeedState()
+{
+	if (currentTime > feedTime)
+	{
+		m_state = ECowState::Idle;
+		currentTime = 0;
 	}
 }
 

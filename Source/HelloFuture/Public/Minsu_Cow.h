@@ -10,7 +10,11 @@ UENUM(BlueprintType)
 enum class ECowState : uint8
 {
 	Idle,
-	Walk
+	Walk,
+	TurnLeft,
+	TurnRight,
+	Sleep,
+	Feed
 };
 
 UCLASS()
@@ -37,10 +41,10 @@ public:
 		ECowState m_state;
 
 	UPROPERTY(EditAnywhere, Category = Time)
-		float currnetTime = 0;
+		float currentTime = 0;
 
-	UPROPERTY(EditAnywhere, Category = Time)
-		float currnetTime2 = 0;
+	/*UPROPERTY(EditAnywhere, Category = Time)
+		float currentTime2 = 0;*/
 
 	UPROPERTY(EditAnywhere, Category = Time)
 		float createTime = 8;
@@ -50,6 +54,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Time)
 		float delayTime = 9;
+
+	UPROPERTY(EditAnywhere, Category = Time)
+		float sleepTime = 3;
+
+	UPROPERTY(EditAnywhere, Category = Time)
+		float feedTime = 3.4;
 
 	UPROPERTY()
 		class AAIController* ai;
@@ -72,9 +82,17 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = UI)
 		class UUserWidget* AnimalUI;
 
+	UPROPERTY(EditAnywhere, Category = Setting)
+		float speed;
+
+	UPROPERTY(EditAnywhere, Category = Setting)
+		float direction;
+
 private:
 	void IdleState();
 	void WalkState();
+	void SleepState();
+	void FeedState();
 	void OnTriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
