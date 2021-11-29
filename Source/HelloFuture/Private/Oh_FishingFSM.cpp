@@ -4,6 +4,11 @@
 #include "Oh_FishingFSM.h"
 #include "HelloFutureCharacter.h"
 #include "Math/UnrealMathUtility.h"
+#include <Kismet/GameplayStatics.h>
+#include <EngineUtils.h>
+#include "FishingAnimInstance.h"
+#include <Animation/AnimNode_StateMachine.h>
+#include <GameFramework/CharacterMovementComponent.h>
 
 // Sets default values for this component's properties
 UOh_FishingFSM::UOh_FishingFSM()
@@ -12,7 +17,8 @@ UOh_FishingFSM::UOh_FishingFSM()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+
+	
 }
 
 
@@ -21,7 +27,10 @@ void UOh_FishingFSM::BeginPlay()
 {
 	Super::BeginPlay();
 
+	me = Cast<AHelloFutureCharacter>(GetOwner());
+	anim = Cast<UFishingAnimInstance>(me->GetMesh()->GetAnimInstance());
 	m_state = EFishingState::Idle;
+	anim->state = m_state;
 	
 }
 
@@ -39,8 +48,8 @@ void UOh_FishingFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	case EFishingState::fishingStart:
 		StartState();
 		break;
-	case EFishingState::fishingRoop:
-		RoopState();
+	case EFishingState::fishingLoop:
+		LoopState();
 		break;
 	case EFishingState::fishingNibble:
 		NibbleState();
@@ -59,6 +68,7 @@ void UOh_FishingFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 void UOh_FishingFSM::IdleState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Idle"));
+	anim->state = m_state;
 	/*if(me->FishingStart == false)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("111"));
@@ -76,18 +86,25 @@ void UOh_FishingFSM::StartState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Start"));
 	
+	anim->state = m_state;
+	NibbleMiss = false;
+	BiteMiss = false;
+
 	currentTime += GetWorld()->DeltaTimeSeconds;
 	if (currentTime > fishingStartTime)
 	{
-		m_state = EFishingState::fishingRoop;
+		m_state = EFishingState::fishingLoop;
 		currentTime = 0;
+		anim->state = m_state;
 	}
 
 }
 
-void UOh_FishingFSM::RoopState()
+void UOh_FishingFSM::LoopState()
 {
+	//anim->isfishingLoop = true;
 	UE_LOG(LogTemp, Warning, TEXT("Roop"));
+	anim->state = m_state;
 	currentTime += GetWorld()->DeltaTimeSeconds;
 
 	int32 RandomTime = FMath::RandRange(1, 4);
@@ -117,24 +134,53 @@ void UOh_FishingFSM::RoopState()
 void UOh_FishingFSM::NibbleState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Nibble"));
-
-	/*if (currentTime <= NibbleTime )
+	anim->state = m_state;
+	currentTime += GetWorld()->DeltaTimeSeconds;
+	if (currentTime > LimitTime)
 	{
-		if (me->Fishing())
-		{
-
-		}
-	}*/
+		NibbleMiss = true;
+		m_state = EFishingState::Idle;
+		currentTime = 0;
+		me->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
 
 }
 
 void UOh_FishingFSM::BiteState()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Bite"));
+	anim->state = m_state;
+	currentTime += GetWorld()->DeltaTimeSeconds;
+	if (BiteNumber == 10 && currentTime < BiteTime)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("BiteFinish"));
+		m_state = EFishingState::fishingEnd;
+		BiteNumber = 0;
+		currentTime = 0;
+	}
+	else if( currentTime > BiteTime)
+	{
+		BiteMiss = true;
+		m_state = EFishingState::Idle;
+		BiteNumber = 0;
+		currentTime = 0;
+		me->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		
+	}
+
 
 }
 
 void UOh_FishingFSM::EndState()
 {
+	UE_LOG(LogTemp, Warning, TEXT("End"));
+	anim->state = m_state;
+	//currentTime += GetWorld()->DeltaTimeSeconds;
 
+	/*if(currentTime > EndTime)
+	{
+	m_state = EFishingState::Idle;
+	}*/
+	
 }
 

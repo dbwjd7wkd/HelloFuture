@@ -44,6 +44,7 @@
 #include "Components/WidgetComponent.h"
 #include "Components/TextBlock.h"
 #include "Oh_FishingFSM.h"
+#include "FishingAnimInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AHelloFutureCharacter
@@ -144,6 +145,21 @@ AHelloFutureCharacter::AHelloFutureCharacter()
 	// name->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	FishingFSM = CreateDefaultSubobject<UOh_FishingFSM>(TEXT("FishingFSM"));
+
+	/*ConstructorHelpers::FObjectFinder<USkeletalMesh> tempMesh(TEXT("SkeletalMesh'/Game/GH/Assets/RealMeshs/Body/T-Poser.T-Poser'"));
+
+	if (tempMesh.Succeeded())
+	{
+
+	}*/
+
+	/*ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("AnimBlueprint'/Game/Map/Animation/REALMain_ABP.REALMain_ABP'"));
+	if (tempAnim.Succeeded())
+	{
+		GetMesh()->SetAnimClass(tempAnim.Class);
+	}*/
+
+
 }
 
 void AHelloFutureCharacter::BeginPlay()
@@ -422,6 +438,20 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 // 	// 씨앗개수 조절
 // 	PlayerInputComponent->BindAction("SeedUp", IE_Pressed, this, &AHelloFutureCharacter::UpSeed);
 // 	PlayerInputComponent->BindAction("SeedDown", IE_Pressed, this, &AHelloFutureCharacter::DownSeed);
+
+	
+}
+
+void AHelloFutureCharacter::Tick(float DeltaTime)
+{
+	/*if (FishingFSM->BiteMiss == true)
+	{
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
+	else if (FishingFSM->NibbleMiss == true)
+	{
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}*/
 
 }
 
@@ -879,8 +909,33 @@ void AHelloFutureCharacter::Fishing()
 	{ 
 
 		FishingFSM->m_state = EFishingState::fishingStart;
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);
 
 	}
+	else if (FishingFSM->m_state == EFishingState::fishingNibble)
+	{
+		FishingFSM->m_state = EFishingState::fishingBite;
+	}
+	else if (FishingFSM->m_state == EFishingState::fishingBite)
+	{
+		FishingFSM->BiteNumber++;
+		
+	}
+	else if (FishingFSM->m_state == EFishingState::fishingEnd)
+	{
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		FishingFSM->m_state = EFishingState::Idle;
+	}
+
+	else if (FishingFSM->BiteMiss == true)
+	{
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
+	else if (FishingFSM->NibbleMiss == true)
+	{
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
+	
 
 }
 

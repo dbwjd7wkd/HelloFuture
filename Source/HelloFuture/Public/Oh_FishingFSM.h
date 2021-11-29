@@ -12,7 +12,7 @@ enum class EFishingState : uint8
 {
 	Idle,
 	fishingStart,
-	fishingRoop,
+	fishingLoop,
 	fishingNibble,
 	fishingBite,
 	fishingEnd
@@ -39,17 +39,23 @@ public:
 	UPROPERTY(EditAnywhere, Category = "FSM")
 	EFishingState m_state;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,  Category = "FSM")
+	UPROPERTY()
 	class AHelloFutureCharacter* me;
 
+	UPROPERTY()
+	class UFishingAnimInstance* anim;
 
 	
 	void IdleState();
 	void StartState();
-	void RoopState();
+	void LoopState();
 	void NibbleState();
 	void BiteState();
 	void EndState();
+
+public:
+
+
 
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
@@ -72,5 +78,25 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
 		float LoopTime4 = 6.5;
+
+	UPROPERTY(EditAnywhere, Category = "FSM")
+		float LimitTime = 2;
 	
+
+	UPROPERTY(EditAnywhere, Category = "FSM")
+		int32 BiteNumber = 0;
+
+	UPROPERTY(EditAnywhere, Category = "FSM")
+		float BiteTime = 6;
+
+	UPROPERTY(EditAnywhere, Category = "FSM")
+		bool NibbleMiss = false;
+
+	UPROPERTY(EditAnywhere, Category = "FSM")
+		bool BiteMiss = false;
+
+	UPROPERTY(EditAnywhere, Category = "FSM")
+		float EndTime = 4;
+
+
 };

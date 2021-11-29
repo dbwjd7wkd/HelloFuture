@@ -110,6 +110,10 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+public:
 	//Widget
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = UI)
 	class UUserWidget* UI;
@@ -415,6 +419,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishingFSM")
 	class UOh_FishingFSM* FishingFSM;
 
-
+	
 };
 
