@@ -59,7 +59,7 @@ public:
 
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
-	float fishingStartTime = 3;
+	float fishingStartTime = 1.86;
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
 		float NibbleTime = 2;
