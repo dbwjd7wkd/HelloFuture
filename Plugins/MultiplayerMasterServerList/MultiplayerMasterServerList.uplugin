@@ -1,0 +1,30 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Multiplayer Server Browser",
+	"Description": "This plugin allows to register your multiplayer game for servers, and get a list of servers for clients.",
+	"Category": "Other",
+	"CreatedBy": "MeoPlay",
+	"CreatedByURL": "https://www.meoplay.com",
+	"DocsURL": "",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/185971680fb94e6d84e9c597e30445e5",
+	"SupportURL": "",
+	"EngineVersion": "4.26.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "MultiplayerMasterServerList",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Linux",
+				"Mac",
+				"IOS",
+				"Android"
+			]
+		}
+	]
+}
