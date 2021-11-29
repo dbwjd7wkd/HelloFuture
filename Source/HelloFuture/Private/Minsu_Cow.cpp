@@ -15,13 +15,14 @@
 // Sets default values
 AMinsu_Cow::AMinsu_Cow()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
 	boxComp->SetupAttachment(RootComponent);
-	boxComp->SetWorldLocation(FVector(200, 0, 0));
-	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AMinsu_Cow::OnTriggerEnter);
+	boxComp->SetWorldLocation(FVector(115, 0, 0));
+	/*boxComp->OnComponentBeginOverlap.AddDynamic(this, &AMinsu_Cow::OnTriggerEnter);*/
+	boxComp->SetRelativeScale3D(FVector(2.5, 2.5, 2.5));
 }
 
 // Called when the game starts or when spawned
@@ -99,17 +100,16 @@ void AMinsu_Cow::WalkState()
 	}
 }
 
-void AMinsu_Cow::OnTriggerEnter(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	if (AnimalUI == nullptr)
-	{
-		AnimalUI = CreateWidget<UUserWidget>(GetWorld(), AnimalUIFactory);
-	
-	}
-
-	if (AnimalUI)
-	{
-		AnimalUI->AddToViewport();
-	}
-
-}
+//void AMinsu_Cow::OnTriggerEnter(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+//{
+//	if (AnimalUI == nullptr)
+//	{
+//		AnimalUI = CreateWidget<UUserWidget>(GetWorld(), AnimalUIFactory);
+//	}
+//
+//	if (AnimalUI)
+//	{
+//		AnimalUI->AddToViewport();
+//	}
+//
+//}

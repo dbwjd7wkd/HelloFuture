@@ -69,7 +69,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = UI)
 		TSubclassOf<class UUserWidget> AnimalUIFactory;
 
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly, Category = UI)
 		class UUserWidget* AnimalUI;
 
 private:
