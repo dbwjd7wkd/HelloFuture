@@ -11,10 +11,11 @@ enum class ECowState : uint8
 {
 	Idle,
 	Walk,
-	TurnLeft,
-	TurnRight,
+	/*TurnLeft,
+	TurnRight,*/
 	Sleep,
-	Feed
+	Feed,
+	//WakeUp
 };
 
 UCLASS()
@@ -50,7 +51,7 @@ public:
 		float createTime = 8;
 
 	UPROPERTY(EditAnywhere, Category = FSM)
-		float idleDelayTime = 2;
+		float idleDelayTime = 4;
 
 	UPROPERTY(EditAnywhere, Category = Time)
 		float delayTime = 9;
@@ -88,11 +89,21 @@ public:
 	UPROPERTY(EditAnywhere, Category = Setting)
 		float direction;
 
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Setting)
+	//bool isSleep = false;
+
+	/*UPROPERTY(EditAnywhere, Category = Setting, BlueprintReadWrite)
+	class UAnimMontage* sleepMontage;
+
+	UPROPERTY(EditAnywhere, Category = Setting, BlueprintReadWrite)
+	class UAnimMontage* wakUpMontage;*/
+
 private:
 	void IdleState();
 	void WalkState();
 	void SleepState();
 	void FeedState();
+	void WakeUpState();
 	void OnTriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 

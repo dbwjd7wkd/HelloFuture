@@ -11,6 +11,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <Components/BoxComponent.h>
 #include <Blueprint/UserWidget.h>
+//#include <Animation/AnimMontage.h>
 
 // Sets default values
 AMinsu_Cow::AMinsu_Cow()
@@ -49,16 +50,19 @@ void AMinsu_Cow::Tick(float DeltaTime)
 	case ECowState::Walk:
 		WalkState();
 		break;
-	case ECowState::TurnLeft:
-		break;
-	case ECowState::TurnRight:
-		break;
+	//case ECowState::TurnLeft:
+	//	break;
+	//case ECowState::TurnRight:
+	//	break;
 	case ECowState::Sleep:
 		SleepState();
 		break;
 	case ECowState::Feed:
 		FeedState();
 		break;
+	//case ECowState::WakeUp:
+	//	WakeUpState();
+	//	break;
 	}
 
 	//TArray<AActor*>objs;
@@ -92,7 +96,7 @@ void AMinsu_Cow::IdleState()
 
 		currentTime = 0;
 
-		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 1000);
+		randomPos = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), 300);
 	}
 }
 
@@ -104,28 +108,30 @@ void AMinsu_Cow::WalkState()
 
 	if (ai->MoveToLocation(randomPos) == EPathFollowingRequestResult::AlreadyAtGoal)
 	{
-		int32 ratio = FMath::RandRange(1, 100);
-		if (ratio < 10)
-		{
+		//int32 ratio = FMath::RandRange(1, 100);
+		//if (ratio < 10)
+		//{
 			m_state = ECowState::Idle;
-		}
-		else
-		{
-			m_state = ECowState::Sleep;
-		}
-
-		currentTime = 0;
+			currentTime = 0;
+		//}
+		//else
+		//{
+		//	m_state = ECowState::Sleep;
+		//	/*isSleep = true;*/
+		//	currentTime = 0;
+		//}
 	}
 }
 
 void AMinsu_Cow::SleepState()
 {
+	/*PlayAnimMontage(sleepMontage);*/
 	if (currentTime > sleepTime)
 	{
+	/*	isSleep = false;*/
 		m_state = ECowState::Idle;
 		currentTime = 0;
 	}
-
 }
 
 void AMinsu_Cow::FeedState()
@@ -136,6 +142,13 @@ void AMinsu_Cow::FeedState()
 		currentTime = 0;
 	}
 }
+
+//void AMinsu_Cow::WakeUpState()
+//{
+//		isSleep = false;
+//		/*PlayAnimMontage(wakUpMontage);*/
+//		m_state = ECowState::Idle;
+//}
 
 //void AMinsu_Cow::OnTriggerEnter(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 //{
