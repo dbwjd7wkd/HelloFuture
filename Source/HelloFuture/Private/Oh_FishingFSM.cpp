@@ -170,7 +170,7 @@ void UOh_FishingFSM::BiteState()
 	NibbleAnim = false;
 	BiteAnim =true;
 	currentTime += GetWorld()->DeltaTimeSeconds;
-	if (BiteNumber == 10 && currentTime < BiteTime)
+	if (BiteNumber == BiteNumber2 && currentTime < BiteTime)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("BiteFinish"));
 		m_state = EFishingState::fishingEnd;

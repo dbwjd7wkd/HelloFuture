@@ -89,8 +89,11 @@ public:
 		float LimitTime = 2;
 	
 
-	UPROPERTY(EditAnywhere, Category = "FSM")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 		int32 BiteNumber = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		int32 BiteNumber2 = 10;
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
 		float BiteTime = 6;
