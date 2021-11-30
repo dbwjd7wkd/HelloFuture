@@ -419,6 +419,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishingFSM")
 	class UOh_FishingFSM* FishingFSM;
 
+
+
 	
 };
 

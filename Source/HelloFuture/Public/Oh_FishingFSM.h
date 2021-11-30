@@ -36,7 +36,10 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
-	UPROPERTY(EditAnywhere, Category = "FSM")
+	UFUNCTION(BlueprintCallable, Category = "TestFunctions")
+		FString GetCurrentMapName();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 	EFishingState m_state;
 
 	UPROPERTY()
@@ -45,6 +48,9 @@ public:
 	UPROPERTY()
 	class UFishingAnimInstance* anim;
 
+
+	
+	
 	
 	void IdleState();
 	void StartState();
@@ -67,7 +73,7 @@ public:
 	UPROPERTY()
 	float currentTime = 0;
 
-	UPROPERTY(EditAnywhere, Category = "FSM")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 		float LoopTime = 2;
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
@@ -89,7 +95,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "FSM")
 		float BiteTime = 6;
 
-	UPROPERTY(EditAnywhere, Category = "FSM")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 		bool NibbleMiss = false;
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
@@ -98,5 +104,18 @@ public:
 	UPROPERTY(EditAnywhere, Category = "FSM")
 		float EndTime = 4;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool StartAnim = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool LoopAnim = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool NibbleAnim = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool BiteAnim = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool EndAnim = false;
 
 };

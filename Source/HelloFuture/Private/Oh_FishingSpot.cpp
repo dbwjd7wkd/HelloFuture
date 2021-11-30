@@ -2,6 +2,7 @@
 
 
 #include "Oh_FishingSpot.h"
+#include "HelloFutureCharacter.h"
 
 // Sets default values
 AOh_FishingSpot::AOh_FishingSpot()

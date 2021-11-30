@@ -17,7 +17,6 @@ UOh_FishingFSM::UOh_FishingFSM()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-
 	
 }
 
@@ -26,11 +25,13 @@ UOh_FishingFSM::UOh_FishingFSM()
 void UOh_FishingFSM::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	me = Cast<AHelloFutureCharacter>(GetOwner());
 	anim = Cast<UFishingAnimInstance>(me->GetMesh()->GetAnimInstance());
-	m_state = EFishingState::Idle;
 	anim->state = m_state;
+	m_state = EFishingState::Idle;
+
+	
 	
 }
 
@@ -65,10 +66,22 @@ void UOh_FishingFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 }
 
+FString UOh_FishingFSM::GetCurrentMapName()
+{
+	UWorld* MyWorld = GetWorld();
+	FString FishingMap = MyWorld->GetMapName();
+
+	return GetWorld()->GetMapName();
+	
+}
+
+
+
 void UOh_FishingFSM::IdleState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Idle"));
 	anim->state = m_state;
+	EndAnim = false;
 	/*if(me->FishingStart == false)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("111"));
@@ -87,9 +100,9 @@ void UOh_FishingFSM::StartState()
 	UE_LOG(LogTemp, Warning, TEXT("Start"));
 	
 	anim->state = m_state;
+	StartAnim = true;
 	NibbleMiss = false;
 	BiteMiss = false;
-
 	currentTime += GetWorld()->DeltaTimeSeconds;
 	if (currentTime > fishingStartTime)
 	{
@@ -105,6 +118,8 @@ void UOh_FishingFSM::LoopState()
 	//anim->isfishingLoop = true;
 	UE_LOG(LogTemp, Warning, TEXT("Roop"));
 	anim->state = m_state;
+	StartAnim = false;
+	LoopAnim = true;
 	currentTime += GetWorld()->DeltaTimeSeconds;
 
 	int32 RandomTime = FMath::RandRange(1, 4);
@@ -135,6 +150,8 @@ void UOh_FishingFSM::NibbleState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Nibble"));
 	anim->state = m_state;
+	LoopAnim = false;
+	NibbleAnim = true;
 	currentTime += GetWorld()->DeltaTimeSeconds;
 	if (currentTime > LimitTime)
 	{
@@ -150,13 +167,17 @@ void UOh_FishingFSM::BiteState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Bite"));
 	anim->state = m_state;
+	NibbleAnim = false;
+	BiteAnim =true;
 	currentTime += GetWorld()->DeltaTimeSeconds;
 	if (BiteNumber == 10 && currentTime < BiteTime)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("BiteFinish"));
 		m_state = EFishingState::fishingEnd;
+		EndAnim = true;
 		BiteNumber = 0;
 		currentTime = 0;
+		
 	}
 	else if( currentTime > BiteTime)
 	{
@@ -175,12 +196,13 @@ void UOh_FishingFSM::EndState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("End"));
 	anim->state = m_state;
+	
 	//currentTime += GetWorld()->DeltaTimeSeconds;
 
 	/*if(currentTime > EndTime)
 	{
 	m_state = EFishingState::Idle;
 	}*/
-	
+
 }
 
