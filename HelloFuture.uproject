@@ -53,6 +53,11 @@
 			"Name": "MultiplayerMasterServerList",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/185971680fb94e6d84e9c597e30445e5"
+		},
+		{
+			"Name": "MySQL",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/4a497572d1014beab577112d5a37c813"
 		}
 	]
 }
