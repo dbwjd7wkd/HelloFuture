@@ -38,4 +38,8 @@ public:
 		int32 worldTime = 1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
 		FDateTime worldTime_Structure;
+
+	// 기차 인트로 플레이 했었는지
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Train")
+		bool DidPlayTrainIntro = false;
 };
