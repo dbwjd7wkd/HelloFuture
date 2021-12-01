@@ -1,0 +1,28 @@
+{
+	"FileVersion": 3,
+	"Version": 2,
+	"VersionName": "2.0",
+	"FriendlyName": "MySQL Server Integration",
+	"Description": "This integrates MySQL Server in Unreal Engine 4",
+	"Category": "DataBase",
+	"CreatedBy": "Sameek Kundu",
+	"CreatedByURL": "https://athiangames.com",
+	"DocsURL": "https://docs.athiangames.com/Doc_MySQL.html",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/4a497572d1014beab577112d5a37c813",
+	"SupportURL": "",
+	"EngineVersion": "4.26.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "MySQL",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32",
+				"Mac"
+			]
+		}
+	]
+}
