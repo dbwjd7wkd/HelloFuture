@@ -168,7 +168,7 @@ void UOh_FishingFSM::BiteState()
 	UE_LOG(LogTemp, Warning, TEXT("Bite"));
 	anim->state = m_state;
 	NibbleAnim = false;
-	BiteAnim =true;
+		BiteAnim =true;
 	currentTime += GetWorld()->DeltaTimeSeconds;
 	if (BiteNumber == BiteNumber2 && currentTime < BiteTime)
 	{
@@ -197,12 +197,15 @@ void UOh_FishingFSM::EndState()
 	UE_LOG(LogTemp, Warning, TEXT("End"));
 	anim->state = m_state;
 	
-	//currentTime += GetWorld()->DeltaTimeSeconds;
+	currentTime += GetWorld()->DeltaTimeSeconds;
 
-	/*if(currentTime > EndTime)
+	if(currentTime > EndTime)
 	{
-	m_state = EFishingState::Idle;
-	}*/
+		EndKey = true;
+		currentTime = 0;
+		m_state =EFishingState::Idle;
+		me->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
 
 }
 

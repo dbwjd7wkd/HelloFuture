@@ -906,13 +906,17 @@ void AHelloFutureCharacter::Fishing()
 	
 	FishingStart = true;
 
-	if(FishingFSM->m_state == EFishingState::Idle)
+	if(FishingFSM->m_state == EFishingState::Idle && FishingFSM->isfishingmap == true && FishingFSM->isfishingZone == true)
 	{ 
 
 		FishingFSM->m_state = EFishingState::fishingStart;
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);
 
 	}
+
+	
+
+
 	else if (FishingFSM->m_state == EFishingState::fishingNibble)
 	{
 		FishingFSM->m_state = EFishingState::fishingBite;
@@ -922,8 +926,9 @@ void AHelloFutureCharacter::Fishing()
 		FishingFSM->BiteNumber++;
 		
 	}
-	else if (FishingFSM->m_state == EFishingState::fishingEnd)
+	else if (FishingFSM->m_state == EFishingState::fishingEnd && FishingFSM->EndKey == true)
 	{
+		
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		FishingFSM->m_state = EFishingState::Idle;
 	}

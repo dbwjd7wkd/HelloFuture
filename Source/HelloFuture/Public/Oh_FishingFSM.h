@@ -70,7 +70,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "FSM")
 		float NibbleTime = 2;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float currentTime = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
@@ -101,7 +101,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 		bool NibbleMiss = false;
 
-	UPROPERTY(EditAnywhere, Category = "FSM")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 		bool BiteMiss = false;
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
@@ -120,5 +120,14 @@ public:
 		bool BiteAnim = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 		bool EndAnim = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool EndKey = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool isfishingmap = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
+		bool isfishingZone = false;
 
 };
