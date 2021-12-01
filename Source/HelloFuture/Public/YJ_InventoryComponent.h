@@ -31,7 +31,8 @@ enum class EItemEnum : uint8
 	Fertilizer,
 	Fertilizer2,
 	MagicPowder,
-	Tonic
+	Tonic,
+	Gem
 };
 
 USTRUCT(Atomic, BlueprintType)

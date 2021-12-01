@@ -444,6 +444,7 @@ void AHelloFutureCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 void AHelloFutureCharacter::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
 	/*if (FishingFSM->BiteMiss == true)
 	{
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
