@@ -51,7 +51,7 @@ public:
 		float createTime = 8;
 
 	UPROPERTY(EditAnywhere, Category = FSM)
-		float idleDelayTime = 4;
+		float idleDelayTime = 3;
 
 	UPROPERTY(EditAnywhere, Category = Time)
 		float delayTime = 9;
