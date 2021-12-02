@@ -105,7 +105,7 @@ public:
 		bool BiteMiss = false;
 
 	UPROPERTY(EditAnywhere, Category = "FSM")
-		float EndTime = 4;
+		float EndTime = 6;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FSM")
 		bool StartAnim = false;
